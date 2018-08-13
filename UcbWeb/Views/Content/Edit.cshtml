@@ -1,0 +1,124 @@
+@model UcbWeb.ViewModels.ContentVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_CONTENT;
+}
+<h2>Maintain @Resources.ENTITYNAME_CONTENT</h2>
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty?Html.Raw("true"):Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		//;
+		var $myDialogDelete = $('<div id=\'delete_dialog_fw\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteContent").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitContent").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteContent') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitContent') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+	});
+	
+</script>
+@using (Html.BeginForm("Edit", "Content", FormMethod.Post, new { @id = "mainForm" }))
+{
+    <div class='message'>@Model.Message</div>
+	@Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+    
+    @Html.HiddenFor(model => model.ContentItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <div class="full-width clearfix">
+		    <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.ENTITYNAME_CONTENT</legend>
+				@Html.EditorFor(model => model.ContentItem.Name,"LabelLargeFieldAlign")
+				@Html.EditorFor(model => model.ContentItem.Value,"LabelFieldAlign")
+				@Html.EditorFor(model => model.ContentItem.Locale,"LabelFieldAlign")
+				<div class="full-width clearfix">
+		            @if (Model.AccessContext == UcbWeb.ViewModels.ContentAccessContext.Create)
+		            {
+		                <input id='CreateButton' type='submit' name='Edit::CreateContent' value='@Resources.LABEL_CREATEBUTTON' title='@Resources.TOOLTIP_CREATEBUTTON @Resources.ENTITYNAME_CONTENT' />
+		            }
+		            else
+		            {
+		                <input id='SaveButton' type='submit' name='Edit::SaveContent' value='@Resources.LABEL_SAVEBUTTON' title='@Resources.TOOLTIP_SAVEBUTTON @Resources.ENTITYNAME_CONTENT'/>
+						<input id='DeleteButton' class='cancel' type='submit' name='Edit::DeleteContent' value='@Resources.LABEL_DELETEBUTTON' title='@Resources.TOOLTIP_DELETEBUTTON @Resources.ENTITYNAME_CONTENT'/>	            
+		            }    
+		            <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitContent' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>
+		        </div>
+			</fieldset>
+	</div>
+}

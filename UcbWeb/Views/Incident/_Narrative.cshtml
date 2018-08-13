@@ -1,0 +1,16 @@
+﻿@model UcbWeb.ViewModels.IncidentVM
+                        
+    <div class="left-40">
+        @Html.LabelFor(model => @ViewData["MODEL"], this.ViewData["LABEL"].ToString())<span class="red-text">* </span>
+    </div>
+    <img id="IncidentNarrativeItem_NarrativeDescription_expand" class="pointer" title="Click to expand/collapse narrative box" src="~/Content/images/down_blue_24.png" alt="Expand/Collapse box" />
+    <div id="IncidentNarrativeItem_NarrativeDescription_size" class="right-60 narrative-textbox" title='@this.ViewData["TOOLTIP"].ToString()'>
+
+        @Html.TextAreaFor(model => @ViewData["MODEL"] )
+    </div>
+    <div>
+        <span id= "IncidentNarrativeItem_NarrativeDescription_counter" ></span>
+    </div>
+
+                @Html.Partial("_Narrative", Model, new ViewDataDictionary { { "MODEL", "model.IncidentNarrativeItem.NarrativeDescription" },
+                                    { "LABEL", @Resources.LABEL_INCIDENT_INCIDENTNARRATIVECODE }, { "TOOLTIP", @Resources.TOOLTIP_INCIDENT_INCIDENTNARRATIVECODE } })

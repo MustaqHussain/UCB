@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" />
+  <xs:element name="SendEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fromEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ccEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emailSubject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emailBody" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithAttachments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fromEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ccEmail" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emailSubject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emailBody" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" minOccurs="0" name="attachments" nillable="true" type="q1:ArrayOfEmailAttachment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithAttachmentsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmailRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Attachment" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AttachmentFilename" nillable="true" type="xs:string" />
+  <xs:element name="CcEmail" nillable="true" type="xs:string" />
+  <xs:element name="EmailBody" nillable="true" type="xs:string" />
+  <xs:element name="EmailSubject" nillable="true" type="xs:string" />
+  <xs:element name="FromEmail" nillable="true" type="xs:string" />
+  <xs:element name="ToEmail" nillable="true" type="xs:string" />
+</xs:schema>

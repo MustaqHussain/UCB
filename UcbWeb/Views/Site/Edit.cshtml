@@ -1,0 +1,185 @@
+@model UcbWeb.ViewModels.SiteVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_SITE;
+}
+<h2>Maintain @Resources.ENTITYNAME_SITE</h2>
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty?Html.Raw("true"):Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		//;
+		var $myDialogDelete = $('<div id=\'delete_dialog_fw\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteSite").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitSite").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteSite') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitSite') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+	});
+	
+</script>
+@using (Html.BeginForm("Edit", "Site", FormMethod.Post, new { @id = "mainForm" }))
+{
+    
+    <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+
+    @Html.HiddenFor(model => model.SiteItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <div class="full-width clearfix">
+		    <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.ENTITYNAME_SITE</legend>
+
+				@Html.EditorFor(model => model.SiteItem.SiteName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.SiteItem.PostCode, "LabelFieldAlign")
+                
+                @Html.EditorFor(model => model.NominatedManagerFirstNameSearch, "LabelFieldAlign")
+                @Html.EditorFor(model => model.NominatedManagerLastNameSearch, "LabelFieldAlign")
+
+                <div class="editor-field right-60">
+                    <input id='SearchStaffNominatedManagersButton' class='cancel' type='submit' name='Edit::SearchStaffNominatedManagers' value='Search' title='Search'/>
+                </div>
+
+		        <div class="full-width clearfix">
+		            <div class="editor-label left-40">
+		                @Html.LabelFor(model => model.NominatedManagerCode)
+		            </div>
+		            <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.NominatedManagerSearchList)'>
+		                @Html.DropDownListFor(model => model.NominatedManagerCode, new SelectList(Model.NominatedManagerSearchList, "Code", "FullName"), @String.Format(Resources.DDL_GENERIC, "Nominated Manager"))
+		            </div>
+		            <div class="full-width clearfix">
+		                @Html.ValidationMessageFor(model => model.NominatedManagerCode)
+		            </div>
+		        </div>
+
+
+                @Html.EditorFor(model => model.DeputyNominatedManagerFirstNameSearch, "LabelFieldAlign")
+                @Html.EditorFor(model => model.DeputyNominatedManagerLastNameSearch, "LabelFieldAlign")
+                
+                <div class="editor-field right-60">
+                    <input id='SearchStaffDeputyNominatedManagersButton' class='cancel' type='submit' name='Edit::SearchStaffDeputyNominatedManagers' value='Search' title='Search'/>
+                </div>
+
+                <div class="full-width clearfix">
+					<div class="editor-label left-40">
+						@Html.LabelFor(model => model.DeputyNominatedManagerSearchList)
+					</div>
+					<div class="editor-field right-60" title='@Html.ToolTipFor(model => model.DeputyNominatedManagerList)'>
+						@Html.DropDownListFor(model => model.DeputyNominatedManagerCode, new SelectList(Model.DeputyNominatedManagerSearchList, "Code", "FullName"), @String.Format(Resources.DDL_GENERIC, "Deputy Nominated Manager"))
+					</div>
+					<div class="full-width clearfix">
+						@Html.ValidationMessageFor(model => model.DeputyNominatedManagerSearchList)
+					</div>
+				</div>
+
+                <div class="editor-field right-60">
+                    <input id='AddDeputyNominatedManagerButton' class='cancel' type='submit' name='Edit::AddDeputyNominatedManager' value='Add' title='Add'/>
+                </div>
+                
+                <div class="full-width clearfix">
+					<div class="editor-label left-40">
+						@Html.LabelFor(model => model.DeputyNominatedManagerList)
+					</div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.DeputyNominatedManagerList)'>
+                        <ul>
+                        @foreach (StaffModel staffItem in Model.DeputyNominatedManagerList)
+                        {
+                            <li>@staffItem.FullName.PadRight(30) @Html.Raw("<input id='RemoveDeputyNominatedManager' class='cancel' type='submit' name='Edit::RemoveDeputyNominatedManager_" + staffItem.Code.ToString() + "' value='Remove' title='Remove'/>")</li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+
+                @Html.EditorFor(model => model.SiteItem.IsActive, "LabelCheckBoxAlign")
+
+				<div class="full-width clearfix">
+		        @if (Model.AccessContext != UcbWeb.ViewModels.SiteAccessContext.Create)
+          {
+		            <input id='DeleteButton' class='cancel' type='submit' name='Edit::DeleteSite' value='@Resources.LABEL_DELETEBUTTON' title='@Resources.TOOLTIP_DELETEBUTTON @Resources.ENTITYNAME_SITE'/>
+          }
+                    <input id='SaveButton' type='submit' name='Edit::SaveSite' value='@Resources.LABEL_SAVEBUTTON' title='@Resources.TOOLTIP_SAVEBUTTON @Resources.ENTITYNAME_SITE'/>
+
+
+
+
+		            <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitSite' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>
+		        </div>
+			</fieldset>
+	</div>
+}

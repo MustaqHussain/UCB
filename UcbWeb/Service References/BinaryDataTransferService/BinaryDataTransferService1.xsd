@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="AttachmentDC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttachmentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Code" type="ser:guid" />
+      <xs:element minOccurs="0" name="IncidentCode" type="ser:guid" />
+      <xs:element minOccurs="0" name="LoadedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoadedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowIdentifier" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AttachmentDC" nillable="true" type="tns:AttachmentDC" />
+</xs:schema>

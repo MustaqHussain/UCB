@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DirectoryService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" />
+      <xsd:import schemaLocation="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDirectoryService_GetEmailAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_GetEmailAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_GetEmailAddress_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q1:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_FindEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindEmail" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_FindEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_FindEmail_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q2:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUserByLogin" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUserByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByLogin_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q3:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_SearchUserByName_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q4:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_GetUsersInGroupMembership_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersInGroupMembership" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_GetUsersInGroupMembership_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersInGroupMembershipResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDirectoryService_GetUsersInGroupMembership_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q5:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:portType name="IDirectoryService">
+    <wsdl:operation name="GetEmailAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDirectoryService/GetEmailAddress" message="tns:IDirectoryService_GetEmailAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDirectoryService/GetEmailAddressResponse" message="tns:IDirectoryService_GetEmailAddress_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDirectoryService/GetEmailAddressServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IDirectoryService_GetEmailAddress_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDirectoryService/FindEmail" message="tns:IDirectoryService_FindEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDirectoryService/FindEmailResponse" message="tns:IDirectoryService_FindEmail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDirectoryService/FindEmailServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IDirectoryService_FindEmail_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByLogin" message="tns:IDirectoryService_SearchUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByLoginResponse" message="tns:IDirectoryService_SearchUserByLogin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByLoginServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IDirectoryService_SearchUserByLogin_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByName" message="tns:IDirectoryService_SearchUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByNameResponse" message="tns:IDirectoryService_SearchUserByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDirectoryService/SearchUserByNameServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IDirectoryService_SearchUserByName_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersInGroupMembership">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDirectoryService/GetUsersInGroupMembership" message="tns:IDirectoryService_GetUsersInGroupMembership_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDirectoryService/GetUsersInGroupMembershipResponse" message="tns:IDirectoryService_GetUsersInGroupMembership_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDirectoryService/GetUsersInGroupMembershipServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IDirectoryService_GetUsersInGroupMembership_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDirectoryService" type="tns:IDirectoryService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmailAddress">
+      <soap:operation soapAction="http://tempuri.org/IDirectoryService/GetEmailAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindEmail">
+      <soap:operation soapAction="http://tempuri.org/IDirectoryService/FindEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserByLogin">
+      <soap:operation soapAction="http://tempuri.org/IDirectoryService/SearchUserByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserByName">
+      <soap:operation soapAction="http://tempuri.org/IDirectoryService/SearchUserByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersInGroupMembership">
+      <soap:operation soapAction="http://tempuri.org/IDirectoryService/GetUsersInGroupMembership" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DirectoryService">
+    <wsdl:port name="BasicHttpBinding_IDirectoryService" binding="tns:BasicHttpBinding_IDirectoryService">
+      <soap:address location="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

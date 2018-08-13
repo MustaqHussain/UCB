@@ -1,0 +1,151 @@
+@model UcbWeb.ViewModels.CustomerVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_CUSTOMER;
+}
+<h2>Maintain @Resources.ENTITYNAME_CUSTOMER</h2>
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty?Html.Raw("true"):Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		//;
+		var $myDialogDelete = $('<div id=\'delete_dialog_fw\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteCustomer").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitCustomer").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteCustomer') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitCustomer') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+	});
+	
+</script>
+@using (Html.BeginForm("Edit", "Customer", FormMethod.Post, new { @id = "mainForm" }))
+{
+    
+    <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+
+    @Html.HiddenFor(model => model.CustomerItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <div class="full-width clearfix">
+		    <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.ENTITYNAME_CUSTOMER</legend>
+				@Html.EditorFor(model => model.CustomerItem.Title, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherTitle, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.FirstName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherNames, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.LastName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.NINO, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.IsCustomerReported, "LabelCheckBoxAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonTitle, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonOtherTitle, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonFirstName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonOtherNames, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonLastName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.OtherPersonNINO, "LabelFieldAlign")
+				<div class="full-width clearfix">
+					<div class="editor-label left-40">
+						@Html.LabelFor(model => model.CustomerItem.RelationshipToCustomerCode)
+					</div>
+					<div class="editor-field right-60" title='@Html.ToolTipFor(model => model.CustomerItem.RelationshipToCustomerCode)'>
+						@Html.DropDownListFor(model => model.CustomerItem.RelationshipToCustomerCode, new SelectList(Model.RelationshipToCustomerList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_RELATIONSHIPTOCUSTOMER))
+					</div>
+					<div class="full-width clearfix">
+						@Html.ValidationMessageFor(model => model.CustomerItem.RelationshipToCustomerCode)
+					</div>
+				</div>
+				@Html.EditorFor(model => model.CustomerItem.HouseNumberOrName, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.Street, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.Town, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.County, "LabelFieldAlign")
+				@Html.EditorFor(model => model.CustomerItem.PostCode, "LabelFieldAlign")
+				<div class="full-width clearfix">
+		            @if (Model.AccessContext == UcbWeb.ViewModels.CustomerAccessContext.Create)
+              {
+		                <input id='CreateButton' type='submit' name='Edit::CreateCustomer' value='@Resources.LABEL_CREATEBUTTON' title='@Resources.TOOLTIP_CREATEBUTTON @Resources.ENTITYNAME_CUSTOMER' />
+              }
+              else
+              {
+		                <input id='SaveButton' type='submit' name='Edit::SaveCustomer' value='@Resources.LABEL_SAVEBUTTON' title='@Resources.TOOLTIP_SAVEBUTTON @Resources.ENTITYNAME_CUSTOMER'/>
+						<input id='DeleteButton' class='cancel' type='submit' name='Edit::DeleteCustomer' value='@Resources.LABEL_DELETEBUTTON' title='@Resources.TOOLTIP_DELETEBUTTON @Resources.ENTITYNAME_CUSTOMER'/>	            
+              }    
+		            <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitCustomer' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>
+		        </div>
+			</fieldset>
+	</div>
+}

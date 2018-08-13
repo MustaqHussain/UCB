@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BinaryDataTransferService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd1" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.FaultContracts" />
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" />
+      <xsd:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UploadAttachmentRequest">
+    <wsdl:part name="parameters" element="tns:UploadAttachmentRequest" />
+  </wsdl:message>
+  <wsdl:message name="UploadAttachmentRequest_Headers">
+    <wsdl:part name="Attachment" element="tns:Attachment" />
+    <wsdl:part name="UserID" element="tns:UserID" />
+  </wsdl:message>
+  <wsdl:message name="UploadAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:UploadAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBinaryDataTransferService_UploadAttachment_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.FaultContracts" name="detail" element="q1:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="DownloadAttachmentRequest">
+    <wsdl:part name="parameters" element="tns:DownloadAttachmentRequest" />
+  </wsdl:message>
+  <wsdl:message name="DownloadAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:DownloadAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadAttachmentResponse_Headers">
+    <wsdl:part name="Messages" element="tns:Messages" />
+    <wsdl:part name="Result" element="tns:Result" />
+  </wsdl:message>
+  <wsdl:message name="IBinaryDataTransferService_DownloadAttachment_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.FaultContracts" name="detail" element="q2:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:portType name="IBinaryDataTransferService">
+    <wsdl:operation name="UploadAttachment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBinaryDataTransferService/UploadAttachment" name="UploadAttachmentRequest" message="tns:UploadAttachmentRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBinaryDataTransferService/UploadAttachmentResponse" name="UploadAttachmentResponse" message="tns:UploadAttachmentResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBinaryDataTransferService/UploadAttachmentServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IBinaryDataTransferService_UploadAttachment_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadAttachment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBinaryDataTransferService/DownloadAttachment" name="DownloadAttachmentRequest" message="tns:DownloadAttachmentRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBinaryDataTransferService/DownloadAttachmentResponse" name="DownloadAttachmentResponse" message="tns:DownloadAttachmentResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBinaryDataTransferService/DownloadAttachmentServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:IBinaryDataTransferService_DownloadAttachment_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBinaryDataTransferService" type="tns:IBinaryDataTransferService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadAttachment">
+      <soap:operation soapAction="http://tempuri.org/IBinaryDataTransferService/UploadAttachment" style="document" />
+      <wsdl:input name="UploadAttachmentRequest">
+        <soap:header message="tns:UploadAttachmentRequest_Headers" part="Attachment" use="literal" />
+        <soap:header message="tns:UploadAttachmentRequest_Headers" part="UserID" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UploadAttachmentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadAttachment">
+      <soap:operation soapAction="http://tempuri.org/IBinaryDataTransferService/DownloadAttachment" style="document" />
+      <wsdl:input name="DownloadAttachmentRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DownloadAttachmentResponse">
+        <soap:header message="tns:DownloadAttachmentResponse_Headers" part="Messages" use="literal" />
+        <soap:header message="tns:DownloadAttachmentResponse_Headers" part="Result" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BinaryDataTransferService">
+    <wsdl:port name="BasicHttpBinding_IBinaryDataTransferService" binding="tns:BasicHttpBinding_IBinaryDataTransferService">
+      <soap:address location="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

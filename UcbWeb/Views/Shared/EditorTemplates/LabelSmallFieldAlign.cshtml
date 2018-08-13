@@ -1,0 +1,24 @@
+﻿@model object
+
+<div class="full-width clearfix">
+    <div class="editor-label left-40">
+        @Html.Label("")
+    </div>
+    <div class="editor-field right-60">
+    @{
+        string tooltip="";
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Tooltip"))
+        {
+            tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];
+            @Html.TextBoxFor(x => x, new { Value = (Model == null ? "" : Model.ToString()), @title = tooltip, @class = "small text-box single-line" })
+        }
+        else
+        {
+            @Html.TextBoxFor(x => x, new { Value = (Model == null ? "" : Model.ToString()), @class = "small text-box single-line" })
+        }
+    }
+    </div>
+    <div class="full-width clearfix">
+        @Html.ValidationMessage("")
+    </div>
+</div>

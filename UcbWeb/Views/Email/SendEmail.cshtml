@@ -1,0 +1,154 @@
+﻿@model UcbWeb.ViewModels.EmailVM
+@{
+    ViewBag.Title = Resources.INCIDENT_CREATION_CONFIRMATION;
+}
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty ? Html.Raw("true") : Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		
+		var $myDialogNoLM = $('<div id=\'no_lm_dialog_fw\'></div>')
+        .html('Line Manager\'s email address not selected. Are you sure you want to send only to Nominated Manager?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "SendEmail::SendEmailToLineAndNominatedManagers").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitSystemParameter").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'SendEmail::SendEmailToLineAndNominatedManagers' && $('#LineManagerEmailAddress')[0].value == "") {
+                e.preventDefault();
+                $('#IsExitConfirmed').val("True");
+                var returnValue = $myDialogNoLM.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitSystemParameter') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+	});
+	
+</script>
+@using (Html.BeginForm("SendEmail", "Email", FormMethod.Post, new { @id = "mainForm" }))
+{
+    if (Model.IncidentItem.Code != Guid.Empty)
+    {
+        
+        <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+        <br />
+   
+        <h2 class="TextAlignCentre">
+            @Resources.INCIDENT_EMAIL_ACTION_REQUIRED
+        </h2>
+        <h4>
+            @Resources.INCIDENT_EMAIL_ACTION
+        </h4>
+        <fieldset class="ui-widget ui-widget-content ui-corner-all">
+            <div class="full-width clearfix">
+                <div>
+                    @Resources.INCIDENT_EMAIL_FINDEMAILADDRESS
+                </div>
+                <br />
+                @Html.EditorFor(model => model.ManagerFirstName, "LabelFieldAlign")
+          
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.ManagerLastName)
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.TextBoxFor(model => model.ManagerLastName, new { @title = @Html.ToolTipFor(model => model.ManagerLastName) })
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.ManagerLastName)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="right-60">
+                        <input id ='ManagerEmailAddressButton' class = "width-350" type='submit' name='SendEmail::UpdateManagerEmailAddress' value='@Resources.LABEL_FINDLINEMANAGERSEMAILBUTTON' title='@Resources.LABEL_FINDLINEMANAGERSEMAILBUTTON' />
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.LineManagerEmailAddress)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.LineManagerEmailAddress)'>
+                        @Html.DropDownListFor(model => model.LineManagerEmailAddress, new SelectList(Model.LineManagerEmailAddressList), @String.Format(Resources.DDL_GENERIC, @Resources.EMAILADDRESS), new { @class = "width-350" })
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.LineManagerEmailAddress)
+                    </div>
+                </div>
+                <br />
+                <div>
+                    @Resources.INCIDENT_EMAIL_SENDEMAIL
+                </div>
+                <div class="TextAlignCentre">
+                    
+                    <input id ='SendEmailButton' type='submit' name='SendEmail::SendEmailToLineAndNominatedManagers' value='@Html.Raw(Resources.INCIDENT_SEND_EMAIL)' title='@Html.Raw(Resources.INCIDENT_SEND_EMAIL)' />
+                </div>
+            </div>
+        </fieldset>
+    }
+}

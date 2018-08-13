@@ -1,0 +1,120 @@
+﻿
+    // 1. Add this to $(':input').change(function () - of main form:
+    //      // User input change so reset page timout and ping server to refresh session
+    //      timeoutCounter();
+    //      keepSessionAlive();
+
+    // 2. Add this to BeginForm - of main form:
+    //      <div id="timeoutCounterHolder">You will be timed out in: <span id="timeout-timer"></span></div>
+    //      <input type='hidden' id='IsTimeoutDialogueDisplayed' name='IsTimeoutDialogueDisplayed' value='' />
+
+    var SESSIONTIMEOUT = 20;
+    var DISPLAYREMINDER = 8;
+    var DISPLAYWARNING = 5;
+    var DISPLAYPOPUP = 2;
+@*
+    var SESSIONTIMEOUT = 4;
+    var DISPLAYREMINDER = 3;
+    var DISPLAYWARNING = 2;
+    var DISPLAYPOPUP = 1;
+*@
+
+    var refreshIntervalId;
+    timeoutCounter();
+
+    var $myDialogTimeoutWarning = $('<div id=\'timeout_warning_dialog\'></div>')
+        .html("You are about to be timed out of this Incident.<br/>To continue working on this Incident please click the OK button.")
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            width: 450,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                        
+                    $("#timeoutCounterHolder").slideUp("slow");
+                    $("#timeoutCounterHolder").removeClass("timeoutCritical");
+                        
+                    // Reset page timout and ping server to refresh session
+                    timeoutCounter();
+                    keepSessionAlive();
+
+                    $('#IsTimeoutDialogueDisplayed').val(''); 
+                    return true;
+                }               
+            }
+
+        });
+
+    function keepSessionAlive() {
+        $.post("KeepSessionAlive");
+    }
+
+    function abandonSession() {
+        $.post("AbandonSession");
+    }
+
+    function timeoutCounter() {
+        
+        // clear previous interval if exist
+        if ( refreshIntervalId!= null )
+        {
+            // Remove timeout div
+            $("#timeoutCounterHolder").hide();
+            clearInterval(refreshIntervalId);
+        }            
+
+        // target time = now + 20 minutes
+        var target_time = new Date().getTime() + ( SESSIONTIMEOUT * 60 * 1000);
+        var days, hours, minutes, seconds
+
+        refreshIntervalId = setInterval(function() {
+                
+            // find amount of seconds between now and target
+            var currentDateTime = new Date().getTime();
+            var seconds_left = (target_time - currentDateTime) / 1000;
+
+            days = parseInt(seconds_left / 86400);
+            seconds_left = seconds_left % 86400;
+
+            hours = parseInt(seconds_left / 3600);
+            seconds_left = seconds_left % 3600;
+                
+            minutes = parseInt(seconds_left / 60);
+            seconds = seconds_left % 60;
+            seconds = seconds.toFixed(0);
+
+            // display remaining time
+            $("#timeout-timer").html("");
+            $("#timeout-timer").html(minutes + "m " + seconds + "s  ");
+
+            // timer has expired - user timed out - display message
+            if ( minutes <= 0 && seconds < 0 ) {
+                $("#timeoutCounterHolder").addClass("timeoutCritical");
+                $("#timeout-timer").html("");
+                $("#timeoutCounterHolder").html("You have been timed out. You will need to start the application again.");
+                $("#timeoutCounterHolder").addClass("strong");
+                // stop counting
+                clearInterval(refreshIntervalId);
+                $('#timeout_warning_dialog').remove();
+                $('#IsTimeoutDialogueDisplayed').val('');
+                abandonSession();
+            }
+            // timer under 1min - display popup
+            else if ( minutes < DISPLAYPOPUP && $('#IsTimeoutDialogueDisplayed').val() == '' ) {                    
+                $('#IsTimeoutDialogueDisplayed').val('true');
+                return $myDialogTimeoutWarning.dialog('open');
+            }
+            // if user is running out of time - make red
+            else if ( minutes < DISPLAYWARNING ) {
+                $("#timeoutCounterHolder").addClass("timeoutCritical");
+            }
+            // user has 5mins left on timer - display div
+            else if ( minutes < DISPLAYREMINDER ) {
+                $("#timeoutCounterHolder").removeClass("timeoutCritical");
+                $("#timeoutCounterHolder").slideDown("slow");
+            }
+
+        }, 1000);            
+    }

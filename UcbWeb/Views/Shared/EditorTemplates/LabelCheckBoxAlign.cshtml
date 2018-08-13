@@ -1,0 +1,26 @@
+﻿@model bool
+
+<div class="full-width clearfix">
+    <div class="editor-label left-40">
+        @Html.Label("")
+    </div>
+    <div class="editor-field right-60">
+    @{
+        string tooltip="";
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Tooltip"))
+        {
+            tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];
+            //@Html.CheckBoxFor(x => x,new { value = (Model == null ? "" :  Model.ToString()), @title = tooltip })
+            @Html.CheckBoxFor(x => x, new { @title = tooltip })
+        }
+        else
+        {
+            //@Html.CheckBoxFor(x => x, new { value = (Model == null ? "" : Model.ToString()) })
+            @Html.CheckBoxFor(x=>x)
+        }
+    }
+    </div>
+    <div class="full-width clearfix">
+        @Html.ValidationMessage("")
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model UcbWeb.ViewModels.IncidentVM
+@{
+    ViewBag.Title = Resources.INCIDENT_LINEMANAGERACTIONSCOMPLETE_CONFIRMATION;
+}
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty ? Html.Raw("true") : Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+
+	});
+	
+</script>
+@using (Html.BeginForm("LineManagerCompletedActionConfirmation", "Confirmation", FormMethod.Post, new { @id = "mainForm" }))
+{
+    
+    <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+    
+    <div class="full-width clearfix">
+        <fieldset class="ui-widget ui-widget-content ui-corner-all TextAlignCentre">
+            <legend>@Resources.INCIDENT_LINEMANAGERACTIONSCOMPLETE_CONFIRMATION</legend>
+            <div class="full-width clearfix">
+                This incident has already been submitted and Line Manager actions are complete.
+            </div>
+            <div class="full-width clearfix">
+                If you need to find out more about the status of this report please contact your Nominated
+                Manager (@Model.NominatedManager) (@Model.NominatedManagerEmailAddress) quoting Incident Reference no: @Model.IncidentItem.IncidentID.
+            </div>
+            <div>
+                Please close this window.
+            </div>
+
+        </fieldset>
+    </div>
+}
+

@@ -1,0 +1,1310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57DCCAAB-A430-483A-89F4-5F6F010C3145}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dwp.Adep.Ucb.WebServices</RootNamespace>
+    <AssemblyName>Dwp.Adep.Ucb.WebServices</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/UcbWebServices</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/UcbWebServices</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SITAston|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Dwp.Adep.Ucb.WebServices.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWebServices</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoAston|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Dwp.Adep.Ucb.WebServices.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWebServices</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Accessibility|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Dwp.Adep.Ucb.WebServices.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWebServices</DeployIisAppPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.0.1\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.ExceptionHandling.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.ExceptionHandling.Logging.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database, Version=5.0.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.Database.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ServiceContracts\BinaryDataTransferService.svc" />
+    <Content Include="ServiceContracts\UcbService.svc" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Business Logic\AttachmentComponent.cs" />
+    <Compile Include="BusinessObjects\AppRoles.cs" />
+    <Compile Include="Constants\AuditConstants.cs" />
+    <Compile Include="Constants\ServiceConstants.cs" />
+    <Compile Include="DataContracts\AbuseTypeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AbuseTypeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AbuseTypeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ADRoleLookupDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ADRoleLookupSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ADRoleLookupSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ADRoleLookupSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ADRoleLookupVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AuditDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AuditSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AuditSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AuditSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AuditVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContentDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContentSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContentSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContentSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContentVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDC.cs" />
+    <Compile Include="DataContracts\IncidentLinkDC.extensions.cs" />
+    <Compile Include="DataContracts\IncidentUpdateEventDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentUpdateEventSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentUpdateEventSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentUpdateEventSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentUpdateEventVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeGroupDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeGroupSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeGroupSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeGroupSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeGroupVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\PublishedReportsByCategory.cs" />
+    <Compile Include="DataContracts\ReportCategoryDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReportCategorySearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReportCategorySearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReportCategorySearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReportCategoryVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RoleDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RoleSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RoleSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RoleSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RoleVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteVMDC.cs" />
+    <Compile Include="DataContracts\StaffNominatedManagerSearchVMDC.cs" />
+    <Compile Include="DataContracts\TransferSiteDC.cs" />
+    <Compile Include="DataContracts\TransferSiteSearchCriteriaDC.cs" />
+    <Compile Include="DataContracts\TransferSiteSearchVMDC.cs" />
+    <Compile Include="DataContracts\AbuseTypeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AbuseTypeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationAttributeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationAttributeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationAttributeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationAttributeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationAttributeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationOrganisationTypeGroupDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationOrganisationTypeGroupSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationOrganisationTypeGroupSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationOrganisationTypeGroupSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ApplicationOrganisationTypeGroupVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDataDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDataSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDataSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDataSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDataVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\AttachmentVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContingencyArrangementDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContingencyArrangementSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContingencyArrangementSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContingencyArrangementSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ContingencyArrangementVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ControlMeasureDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ControlMeasureSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ControlMeasureSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ControlMeasureSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ControlMeasureVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerContingencyArrangementDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerContingencyArrangementSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerContingencyArrangementSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerContingencyArrangementSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerContingencyArrangementVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerControlMeasureDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerControlMeasureSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerControlMeasureSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerControlMeasureSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerControlMeasureVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\CustomerSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\DataContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\EventLeadingToIncidentDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\EventLeadingToIncidentSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\EventLeadingToIncidentSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\EventLeadingToIncidentSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\EventLeadingToIncidentVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\GradeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\GradeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\GradeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\GradeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\GradeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentCategoryDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentCategorySearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentCategorySearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentCategorySearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentCategoryVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDetailDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDetailSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDetailSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDetailSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentDetailVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentInterestedPartyDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentInterestedPartySearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentInterestedPartySearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentInterestedPartySearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentInterestedPartyVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLinkDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLinkSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLinkSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLinkSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLinkVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLocationDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLocationSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLocationSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLocationSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentLocationVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSystemMarkedDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSystemMarkedSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSystemMarkedSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSystemMarkedSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentSystemMarkedVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentTypeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentTypeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentTypeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentTypeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentTypeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IncidentVMDC.cs" />
+    <Compile Include="DataContracts\InterestedPartyDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\InterestedPartySearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\InterestedPartySearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\InterestedPartySearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\InterestedPartyVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IntranetStaffProtectionResult.cs" />
+    <Compile Include="DataContracts\IntroductoryInformationDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IntroductoryInformationSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IntroductoryInformationSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IntroductoryInformationSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\IntroductoryInformationVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\JobRoleDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\JobRoleSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\JobRoleSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\JobRoleSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\JobRoleVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\LinkedCustomerDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\LinkedCustomerSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\LinkedCustomerSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\LinkedCustomerSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\LinkedCustomerVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\MessageContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\NarrativeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\NarrativeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\NarrativeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\NarrativeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\NarrativeVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationDC.extensions.cs" />
+    <Compile Include="DataContracts\OrganisationHierarchyDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationHierarchySearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationHierarchySearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationHierarchySearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationHierarchyVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationTypeSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\OrganisationVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReferrerDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReferrerSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReferrerSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReferrerSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\ReferrerVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RelationshipToCustomerDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RelationshipToCustomerSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RelationshipToCustomerSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RelationshipToCustomerSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\RelationshipToCustomerVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SearchCriteriaDataContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SearchMatchDataContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SearchVMDataContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteStaffDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteStaffSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteStaffSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteStaffSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SiteStaffVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffAttributesDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffAttributesSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffAttributesSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffAttributesSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffAttributesVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffOrganisationDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffOrganisationSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffOrganisationSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffOrganisationSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffOrganisationVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StaffVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StandardReportDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StandardReportSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StandardReportSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StandardReportSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\StandardReportVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemMarkedDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemMarkedSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemMarkedSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemMarkedSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemMarkedVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemParameterDC.cs">
+      <DependentUpon>DataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemParameterSearchCriteriaDC.cs">
+      <DependentUpon>SearchCriteriaDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemParameterSearchMatchDC.cs">
+      <DependentUpon>SearchMatchDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemParameterSearchVMDC.cs">
+      <DependentUpon>SearchVMDataContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContracts\SystemParameterVMDC.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventLogInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventLogInstaller.Designer.cs">
+      <DependentUpon>EventLogInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FaultContracts\AuthorisationFailureFault.cs" />
+    <Compile Include="FaultContracts\DataConcurrencyFault.cs" />
+    <Compile Include="FaultContracts\DataIntegrityFault.cs" />
+    <Compile Include="FaultContracts\ServiceErrorFault.cs" />
+    <Compile Include="FaultContracts\UniqueConstraintFault.cs" />
+    <Compile Include="MessageContracts\DownloadAttachmentRequest.cs" />
+    <Compile Include="MessageContracts\DownloadAttachmentResponse.cs" />
+    <Compile Include="MessageContracts\Exceptions\ExceptionManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MessageContracts\Exceptions\FailedAuthorisationException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MessageContracts\Exceptions\IExceptionManager.cs" />
+    <Compile Include="MessageContracts\UploadAttachmentRequest.cs" />
+    <Compile Include="MessageContracts\UploadAttachmentResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContracts\BinaryDataTransferService.svc.cs">
+      <DependentUpon>BinaryDataTransferService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\BinaryDataTransferService.Attachment.extensions.cs" />
+    <Compile Include="ServiceContracts\BootStrapper.cs" />
+    <Compile Include="ServiceContracts\UcbService.IncidentLink.Extensions.cs" />
+    <Compile Include="ServiceContracts\IUcbService.IncidentLink.Extensions.cs" />
+    <Compile Include="ServiceContracts\IBinaryDataTransferService.cs" />
+    <Compile Include="ServiceContracts\IUcbService.AbuseType.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ADRoleLookup.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Application.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ApplicationAttribute.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ApplicationOrganisationTypeGroup.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Attachment.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Attachment.Extensions.cs" />
+    <Compile Include="ServiceContracts\IUcbService.AttachmentData.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Audit.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Content.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ContingencyArrangement.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ControlMeasure.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.cs" />
+    <Compile Include="ServiceContracts\IUcbService.Customer.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.CustomerContingencyArrangement.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.CustomerControlMeasure.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.EventLeadingToIncident.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.GetPublishedReportsByCategory.cs" />
+    <Compile Include="ServiceContracts\IUcbService.Grade.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Incident.cs" />
+    <Compile Include="ServiceContracts\IUcbService.IncidentCategory.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentDetail.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentInterestedParty.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentLink.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentLocation.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentSystemMarked.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentType.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IncidentUpdateEvent.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.InterestedParty.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IntranetStaffProtection.cs" />
+    <Compile Include="ServiceContracts\IUcbService.IntroductoryInformation.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.IntroductoryInformation.Extensions.cs" />
+    <Compile Include="ServiceContracts\IUcbService.JobRole.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.LinkedCustomer.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Narrative.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Organisation.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Organisation.extensions.cs" />
+    <Compile Include="ServiceContracts\IUcbService.OrganisationHierarchy.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.OrganisationType.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.OrganisationTypeGroup.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Referrer.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.RelationshipToCustomer.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.ReportCategory.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Role.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Site.cs" />
+    <Compile Include="ServiceContracts\IUcbService.SiteStaff.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.Staff.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.StaffAttributes.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.StaffOrganisation.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.StandardReport.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.SystemMarked.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\IUcbService.SystemParameter.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\Service.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="ServiceContracts\ServiceContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.AbuseType.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ADRoleLookup.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Application.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ApplicationAttribute.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ApplicationOrganisationTypeGroup.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Attachment.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Attachment.extensions.cs" />
+    <Compile Include="ServiceContracts\UcbService.AttachmentData.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Audit.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Content.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ContingencyArrangement.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ControlMeasure.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Customer.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.CustomerContingencyArrangement.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.CustomerControlMeasure.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.EventLeadingToIncident.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.GetPublishedReportsByCategory.cs" />
+    <Compile Include="ServiceContracts\UcbService.Grade.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Incident.cs" />
+    <Compile Include="ServiceContracts\UcbService.IncidentCategory.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentDetail.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentInterestedParty.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentLink.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentLocation.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentSystemMarked.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentType.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IncidentUpdateEvent.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.InterestedParty.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IntranetStaffProtection.cs" />
+    <Compile Include="ServiceContracts\UcbService.IntroductoryInformation.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.IntroductoryInformation.Extensions.cs" />
+    <Compile Include="ServiceContracts\UcbService.JobRole.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.LinkedCustomer.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Narrative.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Organisation.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Organisation.extensions.cs" />
+    <Compile Include="ServiceContracts\UcbService.OrganisationHierarchy.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.OrganisationType.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.OrganisationTypeGroup.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Referrer.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.RelationshipToCustomer.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.ReportCategory.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Role.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Site.cs" />
+    <Compile Include="ServiceContracts\UcbService.SiteStaff.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.Staff.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.StaffAttributes.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.StaffOrganisation.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.StandardReport.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.svc.cs">
+      <DependentUpon>UcbService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.SystemMarked.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContracts\UcbService.SystemParameter.cs">
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeMappingConfigurator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeMappingConfigurator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataContracts\DataContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataContract.cs</LastGenOutput>
+    </None>
+    <None Include="DataContracts\MessageContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MessageContract.cs</LastGenOutput>
+    </None>
+    <None Include="DataContracts\SearchCriteriaDataContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchCriteriaDataContract.cs</LastGenOutput>
+    </None>
+    <None Include="DataContracts\SearchMatchDataContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchMatchDataContract.cs</LastGenOutput>
+    </None>
+    <None Include="DataContracts\SearchVMDataContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchVMDataContract.cs</LastGenOutput>
+    </None>
+    <Content Include="packages.config" />
+    <None Include="ServiceContracts\Service.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Service.cs</LastGenOutput>
+    </None>
+    <None Include="ServiceContracts\ServiceContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceContract.cs</LastGenOutput>
+    </None>
+    <None Include="TypeMappingConfigurator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeMappingConfigurator.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dwp.Adep.Ucb.DataServices\Dwp.Adep.Ucb.DataServices.csproj">
+      <Project>{65C38D93-A805-463C-98A1-D684CAA84268}</Project>
+      <Name>Dwp.Adep.Ucb.DataServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dwp.Adep.Ucb.Ioc\Dwp.Adep.Ucb.Ioc.csproj">
+      <Project>{3635A49B-6FE2-4FCA-B8D4-66E3E01818AC}</Project>
+      <Name>Dwp.Adep.Ucb.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dwp.Adep.Ucb.Mapping\Dwp.Adep.Ucb.Mapping.csproj">
+      <Project>{DF5E4752-AE97-427E-B10A-9AE0EB4637D1}</Project>
+      <Name>Dwp.Adep.Ucb.Mapping</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>27000</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <EnableWcfTestClientForSVCDefaultValue>True</EnableWcfTestClientForSVCDefaultValue>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

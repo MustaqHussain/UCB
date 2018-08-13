@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8c1d8b87-d13d-494e-bfdc-2ef0f2e0a177" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DirectoryService1.disco" MetadataType="Disco" ID="1d46217e-1b52-4ab9-8ecc-80ed88f43033" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?disco" />
+    <MetadataFile FileName="DirectoryService5.xsd" MetadataType="Schema" ID="b7e80b1e-2a2c-429c-9ecc-c0f45c6e3c8e" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DirectoryService1.wsdl" MetadataType="Wsdl" ID="08350f3e-7b76-49f9-af9d-4feb4c4022d9" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?wsdl" />
+    <MetadataFile FileName="DirectoryService51.xsd" MetadataType="Schema" ID="ce245af2-5450-48e1-aef4-756607d85750" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DirectoryService52.xsd" MetadataType="Schema" ID="65e96be4-c5d0-469d-ab0f-2a442dbf8610" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd4" />
+    <MetadataFile FileName="DirectoryService53.xsd" MetadataType="Schema" ID="0c9f18aa-5778-46c9-a4eb-d4c67bdaf54c" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DirectoryService54.xsd" MetadataType="Schema" ID="103d8018-eb8f-416c-9d02-f9c9fdcee4fc" SourceId="1" SourceUrl="http://localhost:22820/ServiceContracts/AD/DirectoryService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

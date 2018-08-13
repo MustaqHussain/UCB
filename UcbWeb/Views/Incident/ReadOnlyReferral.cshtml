@@ -1,0 +1,1027 @@
+@model UcbWeb.ViewModels.IncidentVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_REFERRAL;
+}
+@*<h2>
+    Maintain @Resources.ENTITYNAME_INCIDENT</h2>*@
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty ? Html.Raw("true") : Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		
+		var $myDialogDelete = $('<div id=\'delete_dialog_fw\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        var $myDialogSubmit = $('<div id=\'submit_dialog\'></div>')
+        .html('Are you sure you want to submit this report?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsSubmitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::SubmitIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteIncident') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitIncident') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::SubmitIncident') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsSubmitConfirmed').val("True");
+                    var returnValue = $myDialogSubmit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsSubmitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+
+        //Customer Other Person section - Display details only if other has been selected
+        $("#CustomerOtherPersonButton").hide();
+        //$("#CustomerOtherPersonDetails").addClass('removestuff');
+        $('input:radio[name="CustomerItem.IsCustomerReported"]').change(function(){
+            if(this.value == "False"){
+                $("#CustomerOtherPersonDetails").removeClass('removestuff')
+            }
+            else {
+                $("#CustomerOtherPersonDetails").addClass('removestuff');
+            }
+        });
+
+
+        //Incident - Display 'Others present' text box if 'Were Others Present?' is set to true
+        $("#OthersPresentButton").hide();
+        //$("#OthersPresent").addClass('hidestuff');
+        $('input:radio[name="IncidentItem.IsOthersPresent"]').change(function(){
+            if(this.value == "True"){
+                $("#OthersPresent").removeClass('hidestuff')
+            }
+            else {
+                $("#OthersPresent").addClass('hidestuff');
+            }
+        });
+
+        //Incident - Display 'RIDDOR file upload section' text box if 'Is Nominated RIDDOR?' set to true
+        $('input:radio[name="IncidentItem.IsNominatedRIDDOR"]').change(function(){
+            if(this.value == "True"){
+                $("#RIDDORFileSection").removeClass('removestuff')
+            }
+            else {
+                $("#RIDDORFileSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display 'Fast Track file upload section' text box if 'Is Nominated RIDDOR?' set to true
+        $('input:radio[name="IncidentItem.IsNominatedFastTrack"]').change(function(){
+            if(this.value == "True"){
+                $("#FastTrackFileSection").removeClass('removestuff')
+            }
+            else {
+                $("#FastTrackFileSection").addClass('removestuff');
+            }
+        });
+
+        // drop down check lists
+        $(".dropdownchecklist").dropdownchecklist({ emptyText: "Please Select...", width: 400, icon: {}, maxdropheight:250  });
+        $(".dropdownchecklistcontrolmeasure").dropdownchecklist({ emptyText: "Please Select...", width: 400, icon: {}, maxdropheight:250, onComplete: IsBannedOfficeNamedOfficerSelectionChanged });
+        IsBannedOfficeNamedOfficerSelectionChanged();
+
+        //Display or hide the publish button 
+        IsImplementControlMeasuresChanged();
+        $('input:radio[name="IncidentItem.ReferralIsImplementControlMeasures"]').change(IsImplementControlMeasuresChanged);
+
+        // systems marked
+        IsITMarkersSetChanged();
+        $('input:radio[name="IncidentItem.ReferralIsITMarkersSet"]').change(IsITMarkersSetChanged);
+
+        // interessted parties
+        IsNotifiedPartiesChanged();
+        $('input:radio[name="IncidentItem.ReferralIsPreviousPartiesNotified"]').change(IsNotifiedPartiesChanged);
+
+
+        //Refresh incident types when category is changed
+        $("#IncidentCategoryButton").hide();
+        $('#IncidentItem_IncidentCategoryCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshIncidentTypes method, passing selectedItem as the categoryCode parameter and returning incidentTypes
+                $.getJSON('@Url.Action("RefreshIncidentTypes")',{categoryCode: selectedItem}, function(incidentTypes){
+
+                    var count = incidentTypes.length;
+                    var incidentTypesSelect = $('#IncidentItem_IncidentTypeCode');
+                    incidentTypesSelect.empty();
+                    $.each(incidentTypes, function(index, incidentType) {
+                        incidentTypesSelect.append($('<option/>',{
+                            value: incidentType.value,
+                            text: incidentType.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            incidentTypesSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_IncidentTypeCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Refresh business areas when business is changed. Also clear the home office list
+        $("#BusinessButton").hide();
+        $('#IncidentItem_StaffMemberBusinessCode').change(function () {
+
+            //call ResetHomeOfficesMethod
+            $.getJSON('@Url.Action("ResetHomeOffices")', function(homeOffices){
+                 var homeOfficeSelect = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    homeOfficeSelect.empty();
+                    $.each(homeOffices, function(index, homeOffice) {
+                        homeOfficeSelect.append($('<option/>',{
+                            value: homeOffice.value,
+                            text: homeOffice.text
+                        }));
+                    });
+
+                    var selectedItem = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    selectedItem.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300});
+            });
+            
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshBusinessAreas method, passing selectedItem as the businessCode parameter and returning businessAreas
+                $.getJSON('@Url.Action("RefreshBusinessAreas")',{businessCode: selectedItem}, function(businessAreas){
+
+                    var count = businessAreas.length;
+                    var businessAreaSelect = $('#IncidentItem_StaffMemberBusinessAreaCode');
+                    businessAreaSelect.empty();
+                    $.each(businessAreas, function(index, businessArea) {
+                        businessAreaSelect.append($('<option/>',{
+                            value: businessArea.value,
+                            text: businessArea.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            businessAreaSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_StaffMemberBusinessAreaCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Refresh Home Offices when business area is changed
+        $("#BusinessAreaButton").hide();
+        $('#IncidentItem_StaffMemberBusinessAreaCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshHomeOffices method, passing selectedItem as the businessAreaCode parameter and returning businessAreaTypes
+                $.getJSON('@Url.Action("RefreshHomeOffices")',{businessAreaCode: selectedItem}, function(homeOffices){
+
+                    var count = homeOffices.length;
+                    var homeOfficeSelect = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    homeOfficeSelect.empty();
+                    $.each(homeOffices, function(index, homeOffice) {
+                        homeOfficeSelect.append($('<option/>',{
+                            value: homeOffice.value,
+                            text: homeOffice.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            homeOfficeSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_StaffMemberHomeOfficeCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Display or hide incident details/abuse type depending on the selected incident type
+        $("#IncidentTypeButton").hide();
+        $('#IncidentItem_IncidentTypeCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call ShowOrHideIncidentDetailAndAbuseType method, passing selectedItem as the incidentTypeCode parameter and returning an incidentType
+                $.getJSON('@Url.Action("ShowOrHideIncidentDetailAndAbuseType")',{incidentTypeCode: selectedItem}, function(incidentType){
+                    if(incidentType.HasAbuseType == true){
+                        $("#AbuseType").removeClass('removestuff')
+                    }
+                    else {
+                        $("#AbuseType").addClass('removestuff');
+                    }
+                    if(incidentType.HasDetails == true){
+                        $("#IncidentDetail").removeClass('removestuff')
+                    }
+                    else {
+                        $("#IncidentDetail").addClass('removestuff');
+                    }
+                });
+            }
+	    });
+
+        //Convert NINO to uppercase
+        $("#CustomerItem_NINO,#CustomerItem_OtherPersonNINO").keyup(function (e) {
+           $(this).val($(this).val().toUpperCase());
+           if (!isDirty) {
+                isDirty = true;
+            }
+        })
+
+        //Incident - Display 'Deficiencies in process narrative' text box if 'IsDeficienciesInProcess' set to true
+        $('input:radio[name="IncidentItem.IsDeficienciesInProcess"]').change(function(){
+            if(this.value == "True"){
+                $("#DeficienciesNarrativeSection").removeClass('removestuff')
+            }
+            else {
+                $("#DeficienciesNarrativeSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Oral Warning date  if 'IsOralWarning' set to true
+        $('input:radio[name="IncidentItem.IsOralWarning"]').change(function(){
+            if(this.value == "True"){
+                $("#OralWarningDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#OralWarningDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Written Warning date  if 'IsWritten' set to true
+        $('input:radio[name="IncidentItem.IsWrittenWarning"]').change(function(){
+            if(this.value == "True"){
+                $("#WrittenWarningDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#WrittenWarningDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Interviewed date  if 'IsAssailantInterviewed' set to true
+        $('input:radio[name="IncidentItem.IsAssailantInterviewed"]').change(function(){
+            if(this.value == "True"){
+                $("#AssailantInterviewedDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#AssailantInterviewedDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Solicitor letter date  if 'IsSolicitorLetter' set to true
+        $('input:radio[name="IncidentItem.IsSolicitorLetter"]').change(function(){
+            if(this.value == "True"){
+                $("#SolicitorDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#SolicitorDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Banning order date  if 'IsBanningOrder' set to true
+        $('input:radio[name="IncidentItem.IsBanningOrder"]').change(function(){
+            if(this.value == "True"){
+                $("#BanningOrderDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#BanningOrderDateSection").addClass('removestuff');
+            }
+        });
+
+        //Show/hide action required section and archive or publish buttons
+        $('input:radio[name="IncidentItem.ReferralIsControlMeasuresStillApply"]').change(function(){
+            if(this.value == "True")
+            {
+                $("#PublishButtonSection").removeClass('removestuff');
+                $("#ActionRequiredPublishSection").removeClass('removestuff');
+
+                $("#ArchiveButtonSection").addClass('removestuff');
+                $("#ActionRequiredArchiveSection").addClass('removestuff');
+
+                $("#HasControlMeasuresMessage").removeClass('removestuff');
+                $("#NoControlMeasuresMessage").addClass('removestuff');
+
+            }
+            else {
+
+                $("#PublishButtonSection").addClass('removestuff');
+                $("#ActionRequiredPublishSection").addClass('removestuff');
+
+                $("#ArchiveButtonSection").removeClass('removestuff');
+                $("#ActionRequiredArchiveSection").removeClass('removestuff');
+
+                $("#HasControlMeasuresMessage").addClass('removestuff');
+                $("#NoControlMeasuresMessage").removeClass('removestuff');
+
+            }
+        });
+       
+    });
+
+    function IsImplementControlMeasuresChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.ReferralIsImplementControlMeasures"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+
+                $("#ControlMeasuresSection").removeClass('removestuff');
+            }
+            else {
+
+                $("#ControlMeasuresSection").addClass('removestuff');
+            }
+        }
+    }
+
+    function IsBannedOfficeNamedOfficerSelectionChanged()
+    {
+        var selector = $('#IncidentItem_ReferralControlMeasureCodes')[0];
+        if(selector != null)
+        {
+            var bannedoffice = false;
+            var namedofficer = false;
+            for( i=0; i < selector.options.length; i++ ) {
+                if (selector.options[i].selected && (selector.options[i].value === '@Resources.VAL_CONTROLMEASURE_BANNEDFROMOFFICE_GUID'))
+                {
+                    bannedoffice = true;
+                }
+                if (selector.options[i].selected && (selector.options[i].value === '@Resources.VAL_CONTROLMEASURE_TOBESEENBYNAMEDOFFICER_GUID'))
+                {
+                    namedofficer = true;
+                }
+            }
+            if(bannedoffice == true)
+            {
+                $("#ControlMeasuresBannedOfficeSection").removeClass('removestuff');
+            }
+            else
+            {
+                $("#ControlMeasuresBannedOfficeSection").addClass('removestuff');
+            }
+            if(namedofficer == true)
+            {
+                $("#ControlMeasuresOfficerSection").removeClass('removestuff');
+            }
+            else
+            {
+                $("#ControlMeasuresOfficerSection").addClass('removestuff');
+            }
+        }
+    }
+
+    function IsITMarkersSetChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.ReferralIsITMarkersSet"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+                $("#SystemsMarkedSection").removeClass('removestuff');
+                $("#SystemsMarkedSection").addClass('full-width');
+            }
+            else {
+                $("#SystemsMarkedSection").addClass('removestuff');
+                $("#SystemsMarkedSection").removeClass('full-width');
+            }
+        }
+    }
+
+    function IsNotifiedPartiesChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.ReferralIsPreviousPartiesNotified"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+                $("#InterestedPartiesSection").removeClass('removestuff');
+                $("#InterestedPartiesSection").addClass('full-width');
+            }
+            else {
+                $("#InterestedPartiesSection").addClass('removestuff');
+                $("#InterestedPartiesSection").removeClass('full-width');
+            }
+        }
+    }
+	
+
+</script>
+@using (Html.BeginForm("Edit", "Incident", FormMethod.Post, new { @id = "mainForm", @enctype = "multipart/form-data" }))
+{
+    //test
+    
+    <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+    @Html.HiddenFor(model => model.IncidentItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <input type='hidden' id='IsSubmitConfirmed' name='IsSubmitConfirmed' value='@Model.IsSubmitConfirmed' />
+    <div class="full-width clearfix alternate-headers">
+        
+            @if (Model.IncidentItem.IncidentStatus == IncidentStatus.Creation)
+            {   
+                <div class="fullwidth clearfix TextAlignCentre">
+                    <h2>@Resources.LABEL_REFERRAL_REFERRALREPORTFORM</h2>
+                </div>   
+                <br />
+            }
+            else
+            {
+                <div class="fullwidth clearfix TextAlignCentre">
+                    <div class="info">@Resources.LABEL_REFERRAL_PROTECTIVEMARKING</div>
+                     <h2>@Resources.LABEL_REFERRAL_REFERRALREPORTFORMFOR @(Model.CustomerItem.Title != "Other" ? Model.CustomerItem.Title : Model.CustomerItem.OtherTitle)
+                        @Model.CustomerItem.FirstName @Model.CustomerItem.LastName
+                    </h2>
+                </div>
+            }
+        <div class="fieldset ui-widget ui-widget-content ui-corner-all">
+            <div class="legend ui-widget-header">
+                <span class="ui-corner-all">@Resources.ENTITYNAME_REFERRAL</span>
+        </div>
+            <div class="full-width clearfix">
+                <div class="editor-label left-40">
+                    @Resources.LABEL_REFERRAL_REFERRALID
+                </div>
+                <div class="editor-field right-60">
+                    @Html.DisplayFor(model => model.IncidentItem.ReferralID)
+                </div>
+            </div>
+            <div class="full-width clearfix">
+                <div class="editor-label left-40">
+                    @Resources.LABEL_REFERRAL_REFERRALSTATUS
+                </div>
+                <div class="editor-field right-60">
+                    @Html.DisplayFor(model => model.IncidentItem.ReferralStatus)
+                </div>
+            </div>
+
+            <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_REPORTSECTION</legend>
+
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_REFERRAL_REFERRERCODE
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ReferrerCode)'>
+                        @Html.DisplayFor(model => model.IncidentItem.ReferrerDescription)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_INCIDENT_STAFFMEMBERBUSINESSCODE
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberBusinessCode)'>
+                        @Html.DisplayFor(model => model.IncidentItem.StaffMemberBusinessDescription)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_INCIDENT_STAFFMEMBERBUSINESSAREACODE
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberBusinessAreaCode)'>
+                        @Html.DisplayFor(model => model.IncidentItem.StaffMemberBusinessAreaDescription)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_INCIDENT_STAFFMEMBERHOMEOFFICECODE
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberHomeOfficeCode)'>
+                        @Html.DisplayFor(model => model.IncidentItem.StaffMemberHomeOfficeDescription)
+                    </div>
+                </div>
+                
+                <h3>
+                    @Resources.INCIDENT_HEADER_CUSTOMERDETAILS</h3>
+                <div class="full-width clearfix">
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_TITLE
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.Title)
+                        </div>
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_CUSTOMER_FIRSTNAME
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.DisplayFor(model => model.CustomerItem.FirstName)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_CUSTOMER_OTHERNAMES
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.DisplayFor(model => model.CustomerItem.OtherNames)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_CUSTOMER_LASTNAME
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.DisplayFor(model => model.CustomerItem.LastName)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_CUSTOMER_NINO
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.DisplayFor(model => model.CustomerItem.NINO)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_REFERRAL_REFERRALDATE
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.DisplayFor(model => model.IncidentItem.ReferralDate)
+                    </div>
+                </div>
+
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_CUSTOMER_ISCUSTOMERREPORTED
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.CustomerItem.IsCustomerReported)'>
+                        @Html.DisplayFor(model => model.CustomerItem.IsCustomerReportedDescription)
+                    </div>
+                </div>
+
+                @if (Model.CustomerItem.IsCustomerReported)
+                {
+                    @Html.Raw("<div id='CustomerOtherPersonDetails' class = 'removestuff clearfix'>")
+                }
+                else
+                {
+                    @Html.Raw("<div id='CustomerOtherPersonDetails' class = 'clearfix'>")
+                }
+                <div class='full-width clearfix'>
+                    <h3>
+                        If not the Customer/Claimant tell us the details</h3>
+                   
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_OTHERPERSONTITLE
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.OtherPersonTitle)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_OTHERPERSONFIRSTNAME
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.OtherPersonFirstName)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_OTHERPERSONLASTNAME
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.OtherPersonLastName)
+                        </div>
+                    </div>
+
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_RELATIONSHIPTOCUSTOMERCODE
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.CustomerItem.RelationshipToCustomerCode)'>
+                            @Html.DisplayFor(model => model.CustomerItem.RelationshipToCustomerDescription)
+                        </div>
+                    </div>
+                </div>
+                @Html.Raw("</div>")
+
+                <div class="full-width clearfix">
+                    <h3>
+                        Customer/Claimant address</h3>
+
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_HOUSENUMBERORNAME
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.HouseNumberOrName)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_STREET
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.Street)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_TOWN
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.Town)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_COUNTY
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.County)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_CUSTOMER_POSTCODE
+                        </div>
+                        <div class="editor-field right-60">
+                            @Html.DisplayFor(model => model.CustomerItem.PostCode)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Resources.LABEL_INCIDENT_INCIDENTCATEGORYCODE
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.IncidentCategoryCode)'>
+                        @Html.DisplayFor(model => model.IncidentItem.IncidentCategoryDescription)
+                    </div>
+                </div>
+           
+                @*also may need business area manager*@
+                @if (User.IsInRole(AppRoles.NOMINATED_MANAGER) || User.IsInRole(AppRoles.DEPUTY_NOMINATED_MANAGER) || User.IsInRole(AppRoles.ADMIN) || User.IsInRole(AppRoles.BUSINESS_AREA_MANAGER)
+                     || User.IsInRole(AppRoles.READ_ONLY) || User.IsInRole(AppRoles.TRADE_UNION))
+                {
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_ISIMPLEMENTCONTROLMEASURES
+                        </div>
+                        <div class="editor-field right-60">
+                            @(Model.IncidentItem.ReferralIsImplementControlMeasures == null ? "" : (Model.IncidentItem.ReferralIsImplementControlMeasures == false ? "No" : "Yes")) 
+                        </div>
+                    </div>
+
+                    <div id="ControlMeasuresSection">
+
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Resources.LABEL_REFERRAL_CONTROLMEASURECODE
+                            </div>
+                            <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ReferralControlMeasureCodes)'>
+                                @Html.DisplayFor(model => model.IncidentItem.ControlMeasureDescriptions)
+                            </div>
+            
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.IncidentItem.ReferralNamedOfficer))
+                        {
+                            <div id="ControlMeasuresOfficerSection">
+                                <div class="full-width clearfix">
+                                    <div class="editor-label left-40">
+                                        @Resources.LABEL_REFERRAL_NAMEDOFFICER
+                                    </div>
+                                    <div class="editor-field right-60">
+                                        @Html.DisplayFor(model => model.IncidentItem.ReferralNamedOfficer)
+                                    </div>
+                                </div>
+                                <div class="full-width clearfix">
+                                    <div class="editor-label left-40">
+                                        @Resources.LABEL_REFERRAL_TELEPHONECONTACTNUMBER
+                                    </div>
+                                    <div class="editor-field right-60">
+                                        @Html.DisplayFor(model => model.IncidentItem.ReferralTelephoneContactNumber)
+                                    </div>
+                                </div>
+                            </div> 
+                        }
+                        @if (!string.IsNullOrEmpty(Model.IncidentItem.ReferralBannedFromOffices))
+                        {
+                            <div id="ControlMeasuresBannedOfficeSection">
+                                <div class="full-width clearfix">
+                                    <div class="editor-label left-40">
+                                        @Resources.LABEL_REFERRAL_BANNEDFROMOFFICES
+                                    </div>
+                                    <div class="editor-field right-60">
+                                        @Html.DisplayFor(model => model.IncidentItem.ReferralBannedFromOffices)
+                                    </div>
+                                </div>
+                                <div class="full-width clearfix">
+                                    <div class="editor-label left-40">
+                                        @Resources.LABEL_REFERRAL_BANNEDFROMOFFICESENDDATE
+                                    </div>
+                                    <div class="editor-field right-60">
+                                        @Html.DisplayFor(model => model.IncidentItem.ReferralBannedFromOfficesEndDate)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                  
+                    if (Model.IncidentItem.ReferralIsImplementControlMeasures.HasValue && Model.IncidentItem.ReferralIsImplementControlMeasures == false)
+                    {
+                        @Html.Raw("<div id='ActionRequiredArchiveSection' class = 'full-width clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='ActionRequiredArchiveSection' class = 'removestuff full-width clearfix'>")
+                    }
+@*    <h3>@Resources.INCIDENT_ACTIONREQUIRED</h3>
+                    <div class="editor-label notemessage">@Resources.INCIDENT_ACTIONREQUIRED_ARCHIVEMESSAGE</div>*@
+                    @Html.Raw("</div>")
+                      
+                    if (Model.IncidentItem.ReferralIsImplementControlMeasures.HasValue && Model.IncidentItem.ReferralIsImplementControlMeasures == true)
+                    {
+                        @Html.Raw("<div id='ActionRequiredPublishSection' class = 'clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='ActionRequiredPublishSection' class = 'removestuff full-width clearfix'>")
+                    }
+
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_ISITMARKERSSET
+                        </div>
+                        <div class="editor-field right-60">
+                            @(Model.IncidentItem.ReferralIsITMarkersSet == null ? "" : (Model.IncidentItem.ReferralIsITMarkersSet == false ? "No" : "Yes")) 
+                        </div>
+                    </div>
+                    
+                    <div class="full-width clearfix" id="SystemsMarkedSection">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_ITSYSTEMSMARKED
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ReferralSystemMarkedCodes)'>
+                            @Html.DisplayFor(model => model.IncidentItem.ReferralSystemMarkedCodes)
+                        </div>
+                    </div>
+                  
+                    @Html.Raw("</div>")
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_NOTES
+                        </div>
+                        <div class="editor-field right-60" title='@Resources.TOOLTIP_REFERRAL_NOTES'>
+                            @Html.DisplayFor(model => model.ReferralFurtherInfoNarrativeItem.NarrativeDescription)
+                        </div>
+                    </div>
+                    @Html.Partial("_AttachmentsReadOnly", Model.ReferralEvidenceAttachmentList)               
+                }
+            </fieldset>
+            @if (User.IsInRole(AppRoles.NOMINATED_MANAGER) || User.IsInRole(AppRoles.DEPUTY_NOMINATED_MANAGER) || User.IsInRole(AppRoles.ADMIN) || User.IsInRole(AppRoles.TRADE_UNION))
+            {
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_REVIEWSECTION</legend>
+                    <div class="full-width clearfix">
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Resources.LABEL_REFERRAL_NOMINATEDMANAGER
+                            </div>
+                            <div class="editor-field right-60">
+                                @Html.DisplayFor(model => model.ReferralNominatedManager)
+                            </div>
+                        </div>
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Resources.LABEL_REFERRAL_REVIEWDATE
+                            </div>
+                            <div class="editor-field right-60">
+                                @Html.DisplayFor(model => model.IncidentItem.ReferralReviewDate)
+                            </div>
+                        </div>
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Resources.LABEL_REFERRAL_ISPREVIOUSEVIDENCEREVIEWED
+                            </div>
+                            <div class="editor-field right-60">
+                                @Html.DisplayFor(model => model.IncidentItem.ReferralIsPreviousEvidenceReviewed)
+                            </div>
+                        </div>
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Resources.LABEL_REFERRAL_ISPREVIOUSPARTIESNOTIFIED
+                            </div>
+                            <div class="editor-field right-60">
+                                @Html.DisplayFor(model => model.IncidentItem.ReferralIsPreviousPartiesNotified)
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="full-width clearfix" id="InterestedPartiesSection">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_NOTIFIEDPARTIES
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ReferralInterestedPartyCodes)'>
+                            @Html.DisplayFor(model => model.IncidentItem.InterestedPartyDescriptions)
+                        </div>
+      
+                    </div>
+                    
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_ISREPEATBEHAVIOUR
+                        </div>
+                        <div class="editor-field right-60">
+                            @(Model.IncidentItem.ReferralIsRepeatBehaviour == null ? "" : (Model.IncidentItem.ReferralIsRepeatBehaviour == false ? "No" : "Yes")) 
+                        </div>
+                    </div>
+
+                    @if (Model.IncidentItem.ReferralIsRepeatBehaviour.HasValue && Model.IncidentItem.ReferralIsRepeatBehaviour.Value == true)
+                    {
+                        @Html.Raw("<div id='RepeatBehaviourFileSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='RepeatBehaviourFileSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    @Html.Partial("_AttachmentsReadOnly", Model.RepeatBehaviourAttachmentList)
+                    @Html.Raw("</div>")
+                     
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_ISCONTROLMEASURESSTILLAPPLY
+                        </div>
+                        <div class="editor-field right-60">
+                            @(Model.IncidentItem.ReferralIsControlMeasuresStillApply == null ? "" : (Model.IncidentItem.ReferralIsControlMeasuresStillApply == false ? "No" : "Yes")) 
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Resources.LABEL_REFERRAL_NOTES
+                        </div>
+                        <div class="editor-field right-60" title='@Resources.TOOLTIP_REFERRAL_NOTES'>
+                            @Html.DisplayFor(model => model.ReviewActionNarrativeItem.NarrativeDescription)
+                        </div>
+                    </div>
+                    @Html.Partial("_AttachmentsReadOnly", Model.GeneralEvidenceAttachmentList)
+                </fieldset>
+            }
+
+                @*Linked incidents section*@
+                @if (Model.IncidentItem.IncidentStatus != IncidentStatus.Creation)
+                {
+                    <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                        <legend class="ui-widget-header ui-corner-all">@Resources.LABEL_LI_LinkedIncidents</legend>
+                        <div class="full-width clearfix">
+                            <div class="right-90">
+                                @if (Model.LinkedIncidents.Count() > 0)
+                                {
+                                    @Html.Partial("_LinkedIncidentsResultsReadOnly", Model)
+                                }
+                            </div>
+                        </div>
+                    </fieldset>
+                }   
+            @if (User.IsInRole(AppRoles.NOMINATED_MANAGER) || User.IsInRole(AppRoles.DEPUTY_NOMINATED_MANAGER) || User.IsInRole(AppRoles.ADMIN) || User.IsInRole(AppRoles.TRADE_UNION))
+            {
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_INCIDENTHISTORY</legend>
+                    <div class="full-width clearfix">
+                        <div class="left-20">
+                            @Html.Raw(@Resources.LABEL_INCIDENTHISTORY_LASTFIVEUPDATES)
+                        </div>
+                        @foreach (var item in Model.IncidentUpdateEvents.Where(x => x.Type == "Update"))
+                        {  
+                            <div class="right-80">
+                                @Html.Raw("Updated by " + item.UpdateBy + " on " + item.DateTime.ToString("dd/MM/yyyy") + " at " + item.DateTime.ToString("HH:mm"))
+                            </div>
+                        }
+                    </div>
+                    <div />
+                    <div class="full-width clearfix">
+                        <div class="left-20">
+                            @Html.Raw(@Resources.LABEL_INCIDENTHISTORY_CREATED)
+                        </div>
+                        @foreach (var item in Model.IncidentUpdateEvents.Where(x => x.Type == "Create"))
+                        {  
+                            <div class="right-80">
+                                @Html.Raw("Created by " + item.UpdateBy + " on " + item.DateTime.ToString("dd/MM/yyyy") + " at " + item.DateTime.ToString("HH:mm"))
+                            </div>
+                        }
+                    </div>
+                </fieldset>
+            }
+            <div class="full-width clearfix" style="text-align: center">
+                @*also may need business area manager*@
+                @if (User.IsInRole(AppRoles.NOMINATED_MANAGER) || User.IsInRole(AppRoles.DEPUTY_NOMINATED_MANAGER) || User.IsInRole(AppRoles.ADMIN) || User.IsInRole(AppRoles.BUSINESS_AREA_MANAGER)
+                     || User.IsInRole(AppRoles.READ_ONLY) || User.IsInRole(AppRoles.TRADE_UNION))
+                {
+                    <div>
+                        <input id='PrintButton' class='cancel' type='submit' name='Edit::PrintIncident' value='@Resources.LABEL_PRINTBUTTON' title='@Resources.TOOLTIP_PRINTBUTTON @Resources.ENTITYNAME_INCIDENT'/>
+                        <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitIncident' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>             
+                    </div>     
+                }
+              
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,116 @@
+@model UcbWeb.ViewModels.IncidentSearchVM
+
+@{
+    ViewBag.Title = Resources.ENTITYNAME_INCIDENT + " " + Resources.LABEL_LISTNAME;
+}
+<h2>
+    @Resources.ENTITYNAME_INCIDENT @Resources.LABEL_LISTNAME</h2>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function updateGrid(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var grid = $(this).parents('.ajaxGrid');
+            var id = grid.attr('id');
+            grid.load(url + ' #' + id, function (response, status, xhr) {
+                jQueryUIStyling();
+            })
+        }
+        $('.ajaxGrid table thead tr a').live('click', updateGrid);
+        $('.ajaxGrid table tfoot tr a').live('click', updateGrid);
+
+
+    });
+
+</script>
+
+@using (Html.BeginForm("Search", "Incident", FormMethod.Post, new { @id = "mainForm" }))
+{
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+
+    <div class="webgrid-wrapper">
+        <div class="webgrid-title">
+            @Resources.LABEL_GRIDTITLE</div>
+        <div id="grid" class='ajaxGrid'>
+            @{
+    var grid = new WebGrid(null, canPage: true, rowsPerPage: Model.PageSize, defaultSort: "Code", canSort: false);
+    grid.Bind(Model.MatchList, rowCount: Model.TotalRows, autoSortAndPage: false);
+
+    string gridHtml = grid.GetHtml(
+        tableStyle: "webgrid",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        mode: WebGridPagerModes.All, firstText: Resources.PAGING_FIRSTPAGE, previousText: Resources.PAGING_PREVIOUS, nextText: Resources.PAGING_NEXT, lastText: Resources.PAGING_LASTPAGE, numericLinksCount: 5,
+        alternatingRowStyle: "webgrid-alternating-rows",
+        columns: grid.Columns(
+        grid.Column("Code", header: "", format: @<text>@Html.Raw("<input id='SelectButton_")@item.Code@Html.Raw("' type='submit' name='Search::SearchPost_")@item.Code@Html.Raw("' value='")@Html.Raw(Resources.LABEL_SELECTBUTTON)@Html.Raw("' title='")@Resources.TOOLTIP_SELECTTOEDITBUTTON @Html.Raw("' />")</text>)
+        , grid.Column("IncidentID", header: @Resources.LABEL_INCIDENT_INCIDENTID)
+        , grid.Column("IncidentStatus", header: @Resources.LABEL_INCIDENT_INCIDENTSTATUS)
+        , grid.Column("StaffMemberTitle", header: @Resources.LABEL_INCIDENT_STAFFMEMBERTITLE)
+        , grid.Column("StaffMemberOtherTitle", header: @Resources.LABEL_INCIDENT_STAFFMEMBEROTHERTITLE)
+        , grid.Column("StaffMemberFirstName", header: @Resources.LABEL_INCIDENT_STAFFMEMBERFIRSTNAME)
+        , grid.Column("StaffMemberLastName", header: @Resources.LABEL_INCIDENT_STAFFMEMBERLASTNAME)
+        , grid.Column("IsStaffHadAppropriateTraining", header: @Resources.LABEL_INCIDENT_ISSTAFFHADAPPROPRIATETRAINING)
+        , grid.Column("StaffMemberYearsInCurrentPost", header: @Resources.LABEL_INCIDENT_STAFFMEMBERYEARSINCURRENTPOST)
+        , grid.Column("StaffMemberMonthsInCurrentRole", header: @Resources.LABEL_INCIDENT_STAFFMEMBERMONTHSINCURRENTROLE)
+        , grid.Column("ManagerFirstName", header: @Resources.LABEL_INCIDENT_MANAGERFIRSTNAME)
+        , grid.Column("ManagerLastName", header: @Resources.LABEL_INCIDENT_MANAGERLASTNAME)
+        , grid.Column("IncidentDate", header: @Resources.LABEL_INCIDENT_INCIDENTDATE)
+        //,grid.Column("FiscalYear", header: @Resources.LABEL_INCIDENT_FISCALYEAR)
+        //,grid.Column("FiscalQuarter", header: @Resources.LABEL_INCIDENT_FISCALQUARTER)
+        //,grid.Column("FiscalMonth", header: @Resources.LABEL_INCIDENT_FISCALMONTH)
+        //,grid.Column("FiscalMonthAsText", header: @Resources.LABEL_INCIDENT_FISCALMONTHASTEXT)
+        , grid.Column("IncidentTime", header: @Resources.LABEL_INCIDENT_INCIDENTTIME)
+        , grid.Column("IsOthersPresent", header: @Resources.LABEL_INCIDENT_ISOTHERSPRESENT)
+        , grid.Column("OthersPresent", header: @Resources.LABEL_INCIDENT_OTHERSPRESENT)
+        , grid.Column("IsLineManageFastTrack", header: @Resources.LABEL_INCIDENT_ISLINEMANAGEFASTTRACK)
+        , grid.Column("IsLineManagerRIDDOR", header: @Resources.LABEL_INCIDENT_ISLINEMANAGERRIDDOR)
+        , grid.Column("IsPoliceCalled", header: @Resources.LABEL_INCIDENT_ISPOLICECALLED)
+        , grid.Column("HasLineManagerReadReport", header: @Resources.LABEL_INCIDENT_HASLINEMANAGERREADREPORT)
+        , grid.Column("IsNominatedFastTrack", header: @Resources.LABEL_INCIDENT_ISNOMINATEDFASTTRACK)
+        , grid.Column("IsNominatedRIDDOR", header: @Resources.LABEL_INCIDENT_ISNOMINATEDRIDDOR)
+        , grid.Column("IsOralWarning", header: @Resources.LABEL_INCIDENT_ISORALWARNING)
+        , grid.Column("OralWarningDate", header: @Resources.LABEL_INCIDENT_ORALWARNINGDATE)
+        , grid.Column("IsWrittenWarning", header: @Resources.LABEL_INCIDENT_ISWRITTENWARNING)
+        , grid.Column("WrittenWarningDate", header: @Resources.LABEL_INCIDENT_WRITTENWARNINGDATE)
+        , grid.Column("IsAssailantInterviewed", header: @Resources.LABEL_INCIDENT_ISASSAILANTINTERVIEWED)
+        , grid.Column("AssailantInterviewedDate", header: @Resources.LABEL_INCIDENT_ASSAILANTINTERVIEWEDDATE)
+        , grid.Column("IsSolicitorLetter", header: @Resources.LABEL_INCIDENT_ISSOLICITORLETTER)
+        , grid.Column("SolicitorLetterDate", header: @Resources.LABEL_INCIDENT_SOLICITORLETTERDATE)
+        , grid.Column("IsBanningOrder", header: @Resources.LABEL_INCIDENT_ISBANNINGORDER)
+        , grid.Column("BanningOrderRequestedDate", header: @Resources.LABEL_INCIDENT_BANNINGORDERREQUESTEDDATE)
+        , grid.Column("IsDeficienciesInProcess", header: @Resources.LABEL_INCIDENT_ISDEFICIENCIESINPROCESS)
+        , grid.Column("IsImplementControlMeasures", header: @Resources.LABEL_INCIDENT_ISIMPLEMENTCONTROLMEASURES)
+        , grid.Column("NamedOfficer", header: @Resources.LABEL_INCIDENT_NAMEDOFFICER)
+        , grid.Column("TelephoneContactNumber", header: @Resources.LABEL_INCIDENT_TELEPHONECONTACTNUMBER)
+        , grid.Column("IsITMarkersSet", header: @Resources.LABEL_INCIDENT_ISITMARKERSSET)
+        , grid.Column("IsPapersMarked", header: @Resources.LABEL_INCIDENT_ISPAPERSMARKED)
+        , grid.Column("IsNotifiedParties", header: @Resources.LABEL_INCIDENT_ISNOTIFIEDPARTIES)
+        , grid.Column("ReviewDate", header: @Resources.LABEL_INCIDENT_REVIEWDATE)
+        , grid.Column("IsPreviousEvidenceReviewed", header: @Resources.LABEL_INCIDENT_ISPREVIOUSEVIDENCEREVIEWED)
+        , grid.Column("IsPreviousPartiesNotified", header: @Resources.LABEL_INCIDENT_ISPREVIOUSPARTIESNOTIFIED)
+        , grid.Column("IsRepeatBehaviour", header: @Resources.LABEL_INCIDENT_ISREPEATBEHAVIOUR)
+        , grid.Column("IsControlMeasuresStillApply", header: @Resources.LABEL_INCIDENT_ISCONTROLMEASURESSTILLAPPLY)
+        , grid.Column("NumberOfRecords", header: @Resources.LABEL_INCIDENT_NUMBEROFRECORDS)
+        )
+
+    ).ToString();
+    var pager = grid.Pager().ToString();
+    var newPager = System.Text.RegularExpressions.Regex.Replace(pager, "(\\d+) ", "<span class='ui-state-highlight'>$1</span>");
+    newPager = System.Text.RegularExpressions.Regex.Replace(newPager, "<a[^>]*? href=\"([^\"]+)\"[^>]*?>(.*?)</a>", "<a href=\"$1\" title=\"Page $2\">$2</a>");
+    newPager = newPager.Replace("Page &gt;", "Next page");
+    newPager = newPager.Replace("Page &lt;", "Previous page");
+
+    gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "(<tfoot>\\s*<tr[^>]*>\\s*<td[^>]*>)([^<]*|<[^/]*|</[^t]*)*(</tfoot>)", "$1" + newPager + "</td></tr>$3");
+    gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "<caption>(.*?)</caption>", "<caption><span class='accessible'>$1</span></caption>"); //add a span (with accessible css class) to the caption so that it can be hidden in IE6 and IE7. Without the span, caption only hidden in > IE8.
+
+    System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"<td(.*?)RowHeaderColumn(.*?)>(.*?)</td>");
+    gridHtml = r.Replace(gridHtml, "<th scope=\"row\" $1$2>$3</th>"); 
+     
+                                @(new HtmlString(gridHtml))
+                        }
+                        Records Returned: @grid.TotalRowCount
+        </div>
+		<input id='NewButton' type='submit' name='Search::NewIncident' value="@Resources.LABEL_NEWBUTTON" title='@Resources.LABEL_NEWBUTTON @Resources.ENTITYNAME_INCIDENT' />
+    </div>
+}

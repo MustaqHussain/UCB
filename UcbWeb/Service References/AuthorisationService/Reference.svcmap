@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="15433e1e-5add-4167-955c-f64cb0854321" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4444/ServiceContracts/AuthorisationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="AuthorisationService.xsd" MetadataType="Schema" ID="4e6e272b-01fe-4fb8-a88a-37d04300c40f" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="AuthorisationService1.xsd" MetadataType="Schema" ID="f2b7e57a-bf57-4c21-a4a2-ca0db539a28d" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="AuthorisationService.wsdl" MetadataType="Wsdl" ID="56e27178-2c6d-4660-9945-04c79e0f5d17" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?wsdl" />
+    <MetadataFile FileName="AuthorisationService2.xsd" MetadataType="Schema" ID="c362705e-728d-45a3-8798-fdd7c74ad47b" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="AuthorisationService.disco" MetadataType="Disco" ID="36d2de1f-e1f8-446d-a3e7-3748bb90caa0" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?disco" />
+    <MetadataFile FileName="AuthorisationService3.xsd" MetadataType="Schema" ID="65f8239a-a39a-476c-8f19-e6ab5d8e85d1" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?xsd=xsd4" />
+    <MetadataFile FileName="AuthorisationService4.xsd" MetadataType="Schema" ID="917638f5-a4f9-4c43-8b0f-f51528442f6d" SourceId="1" SourceUrl="http://localhost:4444/ServiceContracts/AuthorisationService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

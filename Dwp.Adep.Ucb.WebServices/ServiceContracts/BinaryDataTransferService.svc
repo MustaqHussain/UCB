@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Dwp.Adep.Ucb.WebServices.ServiceContracts.BinaryDataTransferService" CodeBehind="BinaryDataTransferService.svc.cs" %>

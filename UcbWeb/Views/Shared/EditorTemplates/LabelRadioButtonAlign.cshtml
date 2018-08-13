@@ -1,0 +1,32 @@
+﻿@model bool?
+
+<div class="full-width clearfix">
+    <div class="editor-label left-40">
+        @Html.Label("")
+    </div>
+    <div class="editor-field right-60">
+    @{
+        string tooltip="";
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Tooltip"))
+        {
+            tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];
+  
+            @Html.RadioButtonFor(x => x, true, new { @title = tooltip })
+            @Html.Raw(" Yes ") 
+
+            @Html.RadioButtonFor(x => x, false, new { @title = tooltip })
+            @Html.Raw(" No ") 
+
+        }
+        else
+        {
+            @Html.RadioButtonFor(x => x, true, new { @title = tooltip })
+
+            @Html.RadioButtonFor(x => x, false, new { @title = tooltip })
+        }
+    }
+    </div>
+    <div class="full-width clearfix">
+        @Html.ValidationMessage("")
+    </div>
+</div>

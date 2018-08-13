@@ -1,0 +1,2333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3C73B3C-31A6-4D68-92AD-E8DEE4087FA5}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UcbWeb</RootNamespace>
+    <AssemblyName>UcbWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/UcbWeb</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/UcbWeb</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SITAston|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\UcbWeb.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWeb</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DemoAston|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\UcbWeb.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWeb</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Accessibility|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\UcbWeb.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <DeployIisAppPath>Default Web Site/UcbWeb</DeployIisAppPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.0.1\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions.ClientValidation">
+      <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.0.1\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.ExceptionHandling.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.ExceptionHandling.Logging.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.505.1\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.Database.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
+    <Compile Include="Constants\DataConstants.cs" />
+    <Compile Include="Controllers\AbuseTypeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ADRoleLookupController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ApplicationAttributeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ApplicationController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ApplicationOrganisationTypeGroupController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AttachmentController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AttachmentDataController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
+    <Compile Include="Controllers\ContentController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ContingencyArrangementController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Controller.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ControlMeasureController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\PublishedReportController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\IncidentLinkController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentUpdateEventController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IntranetStaffProtectionController.cs" />
+    <Compile Include="Controllers\OrganisationController.cs" />
+    <Compile Include="Controllers\ReportCategoryController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RoleController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SearchesController.cs" />
+    <Compile Include="Controllers\CustomerContingencyArrangementController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CustomerController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CustomerControlMeasureController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\EventLeadingToIncidentController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\GradeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentCategoryController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentController.cs" />
+    <Compile Include="Controllers\IncidentDetailController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentInterestedPartyController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentLocationController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentSystemMarkedController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IncidentTypeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\InterestedPartyController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\IntroductoryInformationController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\JobRoleController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\LinkedCustomerController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NarrativeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\OrganisationTypeController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\OrganisationTypeGroupController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ReferrerController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RelationshipToCustomerController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\SiteStaffController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SplController.cs" />
+    <Compile Include="Controllers\StaffAttributesController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\StaffController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\StaffOrganisationController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\StandardReportController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SystemMarkedController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\SystemParameterController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomAuthorizeAttribute.cs" />
+    <Compile Include="DataAnnotation\CompareDateAttribute.cs" />
+    <Compile Include="DataAnnotation\CompareDateHelper.cs" />
+    <Compile Include="DataAnnotation\ConditionalAttributeBase.cs" />
+    <Compile Include="DataAnnotation\LabelForHelper.cs" />
+    <Compile Include="DataAnnotation\RangeDefinedByFieldsAttribute.cs" />
+    <Compile Include="DataAnnotation\RenderingContextExtensions.cs" />
+    <Compile Include="DataAnnotation\RequiredEmptyForButtonAttribute.cs" />
+    <Compile Include="DataAnnotation\RequiredEmptyIfAttribute.cs" />
+    <Compile Include="DataAnnotation\RequiredForButtonAttribute.cs" />
+    <Compile Include="DataAnnotation\RequiredIfAttribute.cs" />
+    <Compile Include="DataAnnotation\TooltipAttribute.cs" />
+    <Compile Include="DataAnnotation\TooltipHelper.cs" />
+    <Compile Include="DataAnnotation\ValidationGroupExtensions.cs" />
+    <Compile Include="EventLogInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventLogInstaller.Designer.cs">
+      <DependentUpon>EventLogInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\ResolveFieldCodesException.cs" />
+    <Compile Include="Exceptions\SessionExpiredException.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AuthorisationManager.cs" />
+    <Compile Include="Helpers\CacheManager.cs" />
+    <Compile Include="Helpers\CacheManager.Generated.cs">
+      <DependentUpon>CacheManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CacheManager2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CacheManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\HttpParamSendEmailAttribute.cs" />
+    <Compile Include="Helpers\Encryptor.cs" />
+    <Compile Include="Helpers\HttpParamSiteOrganisationSearchAttribute.cs" />
+    <Compile Include="Helpers\HttpParamTransferAttribute.cs" />
+    <Compile Include="Helpers\CustomBinder.cs" />
+    <Compile Include="Helpers\ExceptionManager.cs" />
+    <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
+    <Compile Include="Helpers\HtmlTextEditorManager.cs" />
+    <Compile Include="Helpers\HttpParamAdminAttribute.cs" />
+    <Compile Include="Helpers\HttpParamEditAttribute.cs" />
+    <Compile Include="Helpers\HttpParamEditCheckAttribute.cs" />
+    <Compile Include="Helpers\HttpParamIndexAttribute.cs" />
+    <Compile Include="Helpers\HttpParamSearchAttribute.cs" />
+    <Compile Include="Helpers\ICacheManager.cs" />
+    <Compile Include="Helpers\ICacheManager.Generated.cs">
+      <DependentUpon>CacheManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ISessionManager.cs" />
+    <Compile Include="Helpers\ISessionManager.Generated.cs">
+      <DependentUpon>SessionManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\MenuHelper.cs" />
+    <Compile Include="Helpers\LanguageManager.cs" />
+    <Compile Include="Helpers\SessionManager.cs" />
+    <Compile Include="Helpers\SessionManager.Generated.cs">
+      <DependentUpon>SessionManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SessionManager2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SessionManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Urls.cs" />
+    <Compile Include="Helpers\UserManager.cs" />
+    <Compile Include="Models\AbuseTypeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbuseTypeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbuseTypeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminMenuModel.cs" />
+    <Compile Include="Models\ADRoleLookupModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ADRoleLookupSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ADRoleLookupSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationAttributeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationAttributeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationAttributeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationOrganisationTypeGroupModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationOrganisationTypeGroupSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationOrganisationTypeGroupSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentDataModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentDataSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentDataSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttachmentSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ContentModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContentSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContentSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContingencyArrangementModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContingencyArrangementSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContingencyArrangementSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ControlMeasureModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ControlMeasureSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ControlMeasureSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLinkModel.extensions.cs" />
+    <Compile Include="Models\IncidentModel.cs" />
+    <Compile Include="Models\MetaData\IncidentModel.metadata.cs" />
+    <Compile Include="Models\MetaData\SiteModel.metadata.cs" />
+    <Compile Include="Models\SiteModel.extensions.cs" />
+    <Compile Include="Models\CustomerModel.extensions.cs" />
+    <Compile Include="Models\CustomerContingencyArrangementModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerContingencyArrangementSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerContingencyArrangementSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerControlMeasureModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerControlMeasureSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerControlMeasureSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventLeadingToIncidentModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventLeadingToIncidentSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventLeadingToIncidentSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GradeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GradeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GradeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentCategoryModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentCategoryModel.extensions.cs" />
+    <Compile Include="Models\IncidentCategorySearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentCategorySearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentDetailModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentDetailSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentDetailSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentInterestedPartyModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentInterestedPartySearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentInterestedPartySearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLinkModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLinkSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLinkSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLocationModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLocationSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentLocationSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentModel.extensions.cs" />
+    <Compile Include="Models\IncidentSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSystemMarkedModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSystemMarkedSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSystemMarkedSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentTypeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentTypeModel.extensions.cs" />
+    <Compile Include="Models\IncidentTypeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentTypeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentUpdateEventModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentUpdateEventSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentUpdateEventSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InterestedPartyModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InterestedPartySearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InterestedPartySearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntranetStaffProtectionModel.cs" />
+    <Compile Include="Models\IntroductoryInformationModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntroductoryInformationSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntroductoryInformationSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobRoleModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobRoleSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobRoleSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LinkedCustomerModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LinkedCustomerSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LinkedCustomerSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\AbuseTypeModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ADRoleLookupModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ApplicationAttributeModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ApplicationModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ApplicationOrganisationTypeGroupModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\AttachmentDataModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\AttachmentModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ContentModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ContingencyArrangementModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ControlMeasureModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\CustomerContingencyArrangementModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\CustomerControlMeasureModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\CustomerModel.metadata.cs" />
+    <Compile Include="Models\MetaData\EventLeadingToIncidentModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\GradeModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentCategoryModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentDetailModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentInterestedPartyModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentLinkModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentLocationModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentSystemMarkedModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentTypeModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IncidentUpdateEventModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\InterestedPartyModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\IntroductoryInformationModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\JobRoleModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\LinkedCustomerModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ModelMetaData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\NarrativeModel.metadata.cs" />
+    <Compile Include="Models\MetaData\OrganisationHierarchyModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\OrganisationModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\OrganisationTypeGroupModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\OrganisationTypeModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ReferrerModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\RelationshipToCustomerModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\ReportCategoryModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\RoleModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\SearchCriteriaModelMetaData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchCriteriaModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\SiteStaffModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\StaffAttributesModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\StaffModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\StaffOrganisationModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\StandardReportModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\SystemMarkedModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\SystemParameterModel.metadata.cs">
+      <DependentUpon>ModelMetaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\TransferSiteSearchCriteriaModel.metadata.cs" />
+    <Compile Include="Models\ReportCategoryModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportCategorySearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportCategorySearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffModel.extensions.cs" />
+    <Compile Include="Models\TransferSiteModel.cs" />
+    <Compile Include="Models\Models.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NarrativeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NarrativeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NarrativeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationHierarchyModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationHierarchySearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationHierarchySearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationModel.extensions.cs" />
+    <Compile Include="Models\OrganisationSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppRoles.cs" />
+    <Compile Include="Models\OrganisationTypeGroupModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationTypeGroupSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationTypeGroupSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationTypeModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationTypeSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationTypeSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReferrerModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReferrerSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReferrerSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RelationshipToCustomerModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RelationshipToCustomerSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RelationshipToCustomerSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SearchCriteriaModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SearchMatchModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteStaffModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteStaffSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteStaffSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffAttributesModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffAttributesSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffAttributesSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffOrganisationModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffOrganisationSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffOrganisationSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StandardReportModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StandardReportSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StandardReportSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemMarkedModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemMarkedSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemMarkedSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemParameterModel.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemParameterSearchCriteriaModel.cs">
+      <DependentUpon>SearchCriteriaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemParameterSearchMatchModel.cs">
+      <DependentUpon>SearchMatchModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferSiteSearchCriteriaModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AuthorisationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\BinaryDataTransferService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DirectoryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SmtpEmailService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UcbService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SessionExpiryAttribute.cs" />
+    <Compile Include="TypeMappings.cs" />
+    <Compile Include="TypeMappings.Generated.cs">
+      <DependentUpon>TypeMappings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeMappings2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeMappings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AbuseTypeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AbuseTypeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AdminMenuVM.cs" />
+    <Compile Include="ViewModels\ADRoleLookupSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ADRoleLookupVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationAttributeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationAttributeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationOrganisationTypeGroupSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationOrganisationTypeGroupVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttachmentDataSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttachmentDataVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttachmentSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AttachmentVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ContentSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ContentVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ContingencyArrangementSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ContingencyArrangementVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ControlMeasureSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ControlMeasureVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EmailVM.cs" />
+    <Compile Include="ViewModels\CustomerContingencyArrangementSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CustomerContingencyArrangementVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CustomerControlMeasureSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CustomerControlMeasureVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CustomerSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CustomerVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EventLeadingToIncidentSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EventLeadingToIncidentVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\GradeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\GradeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentCategorySearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentCategoryVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentDetailSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentDetailVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentInterestedPartySearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentInterestedPartyVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentLinkSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentLinkVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentLocationSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentLocationVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentStaffProtection.metadata.cs" />
+    <Compile Include="ViewModels\IncidentSystemMarkedSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentSystemMarkedVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentTypeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentTypeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentUpdateEventSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentUpdateEventVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IncidentVM.cs" />
+    <Compile Include="ViewModels\InterestedPartySearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\InterestedPartyVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IntranetStaffProtectionVM.cs" />
+    <Compile Include="ViewModels\IntroductoryInformationSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\IntroductoryInformationVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\JobRoleSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\JobRoleVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LinkedCustomerSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LinkedCustomerVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NarrativeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NarrativeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationHierarchySearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationTypeGroupSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationTypeGroupVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationTypeSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationTypeVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrganisationVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ReferrerSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ReferrerVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RelationshipToCustomerSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RelationshipToCustomerVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ReportCategorySearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ReportCategoryVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RoleSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RoleVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SearchVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SiteSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SiteStaffSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SiteStaffVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SiteVM.cs" />
+    <Compile Include="ViewModels\StaffAttributesSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StaffAttributesVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StaffNominatedManagerSearchVM.cs" />
+    <Compile Include="ViewModels\StaffOrganisationSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StaffOrganisationVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StaffSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StaffVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StandardReportSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StandardReportVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SystemMarkedSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SystemMarkedVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SystemParameterSearchVM.cs">
+      <DependentUpon>SearchVM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SystemParameterVM.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TransferSiteSearchVM.cs" />
+    <Compile Include="ViewModels\ViewModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ReportExecution2005\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService.wsdl" />
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BinaryDataTransferService\UcbWeb.BinaryDataTransferService.AttachmentDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService1.wsdl" />
+    <None Include="Service References\DirectoryService\DirectoryService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService54.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\UcbWeb.DirectoryService.ADUser1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SmtpEmailService\SmtpEmailService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DirectoryService\DirectoryService1.disco" />
+    <Content Include="Content\IE6.css" />
+    <Content Include="Content\images\attachment_flat_24.png" />
+    <Content Include="Content\images\datepicker-icon.png" />
+    <Content Include="Content\images\delete_link_24.png" />
+    <Content Include="Content\images\delete_flat_24.png" />
+    <Content Include="Content\images\down_blue_24.png" />
+    <Content Include="Content\images\edit_flat_24.png" />
+    <Content Include="Content\images\dwp_logo.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\preview_flat_24.png" />
+    <Content Include="Content\images\rotate_red_128.GIF" />
+    <Content Include="Content\images\roundminus_white_16.png" />
+    <Content Include="Content\images\roundplus_white_16.png" />
+    <Content Include="Content\images\up_blue_24.png" />
+    <Content Include="Content\JQueryOverwrite.css" />
+    <Content Include="Content\Legacy.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.extension.css" />
+    <Content Include="Content\Site_dev.css" />
+    <Content Include="Content\themes\additionalWidgets\dropdownchecklist\ui.dropdownchecklist.css" />
+    <Content Include="Content\themes\additionalWidgets\selectmenu\jquery.ui.selectmenu.css" />
+    <Content Include="Content\themes\base\dropdownchecklist\ui.dropdownchecklist.css" />
+    <Content Include="Content\themes\base\selectmenu\jquery.ui.selectmenu.css" />
+    <Content Include="Content\themes\start\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\themes\start\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\start\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Content\themes\start\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\themes\start\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\themes\start\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\themes\start\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Content\themes\start\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Content\themes\start\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\themes\start\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\themes\start\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\themes\start\jquery-ui-1.8.18.custom.css" />
+    <Content Include="NotFound.htm" />
+    <Content Include="InternalError.htm" />
+    <Content Include="Monitor.htm" />
+    <Content Include="Scripts\custom\AutoCompleteCombo.js" />
+    <Content Include="Scripts\custom\general.extension.js" />
+    <Content Include="Scripts\custom\general.js" />
+    <Content Include="Scripts\custom\IE6.js" />
+    <Content Include="Scripts\debugVersions\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\debugVersions\jquery-1.7.1.js" />
+    <Content Include="Scripts\debugVersions\jquery-ui-1.8.17.js" />
+    <Content Include="Scripts\debugVersions\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\debugVersions\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\debugVersions\jquery.validate.js" />
+    <Content Include="Scripts\debugVersions\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\debugVersions\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\debugVersions\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\debugVersions\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\dropdownchecklist\ui.dropdownchecklist.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.17.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MenuSlider\tabSlideOut.v1.3.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\modernizr.js" />
+    <Content Include="Scripts\selectmenu\jquery.ui.core.js" />
+    <Content Include="Scripts\selectmenu\jquery.ui.position.js" />
+    <Content Include="Scripts\selectmenu\jquery.ui.selectmenu.js" />
+    <Content Include="Scripts\selectmenu\jquery.ui.widget.js" />
+    <Content Include="Scripts\validation\CompareDate.js" />
+    <Content Include="Scripts\validation\conditional-validation.js" />
+    <Content Include="Scripts\validation\validation-groups.js" />
+    <None Include="Service References\UcbService\UcbService.disco" />
+    <None Include="Service References\UcbService\configuration91.svcinfo" />
+    <None Include="Service References\UcbService\configuration.svcinfo" />
+    <None Include="Service References\UcbService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Email\SendEmail.cshtml" />
+    <Content Include="Views\Organisation\SiteOrganisationSearch.cshtml" />
+    <Content Include="Views\Referrer\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Referrer\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\ReportCategory\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\ReportCategory\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\StandardReport\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\StandardReport\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <None Include="Service References\UcbService\UcbService.wsdl" />
+    <None Include="Service References\UcbService\UcbService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UcbService\UcbService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UcbService\UcbService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UcbService\UcbService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UcbService\UcbService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AbuseTypeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AbuseTypeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AbuseTypeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ADRoleLookupDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ADRoleLookupSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ADRoleLookupVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationAttributeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationAttributeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationAttributeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationOrganisationTypeGroupDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationOrganisationTypeGroupSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationOrganisationTypeGroupVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ApplicationVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentDataDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentDataSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentDataVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AttachmentVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AuditDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AuditSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.AuditVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContentDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContentSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContentVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContingencyArrangementDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContingencyArrangementSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ContingencyArrangementVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ControlMeasureDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ControlMeasureSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ControlMeasureVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerContingencyArrangementDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerContingencyArrangementSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerContingencyArrangementVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerControlMeasureDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerControlMeasureSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerControlMeasureVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.CustomerVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.EventLeadingToIncidentDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.EventLeadingToIncidentSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.EventLeadingToIncidentVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.GradeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.GradeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.GradeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentCategoryDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentCategorySearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentCategoryVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentDetailDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentDetailSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentDetailVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentInterestedPartyDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentInterestedPartySearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentInterestedPartyVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLinkDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLinkSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLinkVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLocationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLocationSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentLocationVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentSystemMarkedDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentSystemMarkedSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentSystemMarkedVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentTypeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentTypeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentTypeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentUpdateEventDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentUpdateEventSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentUpdateEventVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IncidentVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.InterestedPartyDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.InterestedPartySearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.InterestedPartyVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IntranetStaffProtectionResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IntroductoryInformationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IntroductoryInformationSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.IntroductoryInformationVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.JobRoleDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.JobRoleSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.JobRoleVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.LinkedCustomerDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.LinkedCustomerSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.LinkedCustomerVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.NarrativeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.NarrativeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.NarrativeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationHierarchyDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationHierarchySearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationHierarchyVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeGroupDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeGroupSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeGroupVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationTypeVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.OrganisationVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.PublishedReportsByCategory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReferrerDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReferrerSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReferrerVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RelationshipToCustomerDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RelationshipToCustomerSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RelationshipToCustomerVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReportCategoryDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReportCategorySearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.ReportCategoryVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RoleDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RoleSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.RoleVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteStaffDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteStaffSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteStaffVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SiteVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffAttributesDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffAttributesSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffAttributesVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffNominatedManagerSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffOrganisationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffOrganisationSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffOrganisationVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StaffVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StandardReportDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StandardReportSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.StandardReportVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemMarkedDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemMarkedSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemMarkedVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemParameterDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemParameterSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.SystemParameterVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UcbService\UcbWeb.UcbService.TransferSiteSearchVMDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Views\IncidentLink\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </None>
+    <Content Include="Views\Shared\TimeoutException.cshtml" />
+    <Content Include="Views\Shared\CommunicationException.cshtml" />
+    <Content Include="Views\Shared\InvalidOperationException.cshtml" />
+    <Content Include="Views\Shared\FaultException.cshtml" />
+    <Content Include="Views\Shared\MultipleSessionsError.cshtml" />
+    <Content Include="Views\Incident\_Timeout.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NoLabelYesNoDontKnowAlign.cshtml" />
+    <Content Include="Views\Incident\_LinkedIncidentsResults.cshtml" />
+    <Content Include="Views\Incident\_Attachments.cshtml" />
+    <Content Include="Views\Incident\_Narrative.cshtml" />
+    <Content Include="Views\Incident\_LinkedIncidentsResultsReadOnly.cshtml" />
+    <Content Include="Views\Incident\_AttachmentsReadOnly.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelFieldAlignAsterisk.cshtml" />
+    <Content Include="Views\Shared\ResolveFieldCodesException.cshtml" />
+    <None Include="Web References\ReportExecution2005\DocumentMapNode.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution2005\ExecutionInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution2005\ExecutionInfo2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution2005\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution2005\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportExecution2005\ReportExecution2005.wsdl" />
+    <None Include="Web References\ReportExecution2005\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\delete_icon.jpg" />
+    <Content Include="Content\images\file_icon.jpg" />
+    <Content Include="Content\images\getacro.gif" />
+    <Content Include="Content\images\pdf_icon.gif" />
+    <Content Include="Global.asax" />
+    <Content Include="Reports\Reports.aspx" />
+    <None Include="Service References\DirectoryService\configuration91.svcinfo" />
+    <None Include="Service References\DirectoryService\configuration.svcinfo" />
+    <None Include="Service References\DirectoryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SmtpEmailService\SmtpEmailService.disco" />
+    <None Include="Service References\SmtpEmailService\configuration91.svcinfo" />
+    <None Include="Service References\SmtpEmailService\configuration.svcinfo" />
+    <None Include="Service References\SmtpEmailService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\custom\conditional-validation.js" />
+    <Content Include="Scripts\custom\validation-groups.js" />
+    <None Include="Service References\BinaryDataTransferService\BinaryDataTransferService.disco" />
+    <None Include="Service References\BinaryDataTransferService\configuration91.svcinfo" />
+    <None Include="Service References\BinaryDataTransferService\configuration.svcinfo" />
+    <None Include="Service References\BinaryDataTransferService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Admin\AdminMenu.cshtml" />
+    <None Include="Service References\SmtpEmailService\SmtpEmailService.wsdl" />
+    <None Include="Service References\SmtpEmailService\SmtpEmailService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SmtpEmailService\SmtpEmailService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SmtpEmailService\SmtpEmailService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\ApplicationAttribute\Edit.cshtml" />
+    <Content Include="Views\ApplicationAttribute\Search.cshtml" />
+    <Content Include="Views\ApplicationOrganisationTypeGroup\Edit.cshtml" />
+    <Content Include="Views\ApplicationOrganisationTypeGroup\Search.cshtml" />
+    <Content Include="Views\Application\Edit.cshtml" />
+    <Content Include="Views\Application\Search.cshtml" />
+    <Content Include="Views\Attachment\Edit.cshtml" />
+    <Content Include="Views\Attachment\Search.cshtml" />
+    <Content Include="Views\ContingencyArrangement\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\ContingencyArrangement\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\ControlMeasure\Edit.cshtml" />
+    <Content Include="Views\ControlMeasure\Search.cshtml" />
+    <Content Include="Views\CustomerControlMeasure\Edit.cshtml" />
+    <Content Include="Views\CustomerControlMeasure\Search.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Search.cshtml" />
+    <Content Include="Views\AbuseType\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\AbuseType\Edit.cshtml">
+      <SubType>Code</SubType>
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\CustomerContingencyArrangement\Edit.cshtml" />
+    <Content Include="Views\CustomerContingencyArrangement\Search.cshtml" />
+    <Content Include="Views\Confirmation\EmailConfirmation.cshtml" />
+    <Content Include="Views\Confirmation\LineManagerUpdateConfirmation.cshtml" />
+    <Content Include="Views\Incident\EditReferral.cshtml" />
+    <Content Include="Views\Incident\ReadOnlyReferral.cshtml" />
+    <Content Include="Views\Incident\SearchReferral.cshtml" />
+    <Content Include="Views\Incident\Transfer_Referral.cshtml" />
+    <Content Include="Views\Confirmation\LineManagerCompletedActionConfirmation.cshtml" />
+    <Content Include="Views\Content\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Content\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\EventLeadingToIncident\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\EventLeadingToIncident\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Grade\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Grade\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentCategory\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentCategory\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentDetail\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentDetail\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentInterestedParty\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentInterestedParty\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentLocation\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentLocation\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentSystemMarked\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentSystemMarked\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IncidentType\Edit.cshtml" />
+    <Content Include="Views\IncidentType\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Incident\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Incident\Search.cshtml" />
+    <Content Include="Views\InterestedParty\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\InterestedParty\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\JobRole\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\JobRole\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\LinkedCustomer\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\LinkedCustomer\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Narrative\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Narrative\Search.cshtml" />
+    <Content Include="Views\OrganisationHierarchy\Edit.cshtml" />
+    <Content Include="Views\OrganisationHierarchy\Search.cshtml" />
+    <Content Include="Views\OrganisationTypeGroup\Edit.cshtml" />
+    <Content Include="Views\OrganisationTypeGroup\Search.cshtml" />
+    <Content Include="Views\OrganisationType\Edit.cshtml" />
+    <Content Include="Views\OrganisationType\Search.cshtml" />
+    <Content Include="Views\Organisation\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Organisation\Search.cshtml" />
+    <Content Include="Views\RelationshipToCustomer\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\RelationshipToCustomer\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IntroductoryInformation\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IntroductoryInformation\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\IntranetStaffProtection\Search.cshtml" />
+    <Content Include="Views\Incident\Transfer.cshtml" />
+    <Content Include="Views\Incident\ReadOnly.cshtml" />
+    <Content Include="Views\EditView.cshtml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <None Include="Controllers\Controller.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Controller.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService.wsdl" />
+    <None Include="Service References\AuthorisationService\AuthorisationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthorisationService\UcbWeb.AuthorisationService.AuthorisationDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AuthorisationService\UcbWeb.AuthorisationService.StaffAccessDC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AuthorisationService\AuthorisationService.disco" />
+    <None Include="Service References\AuthorisationService\configuration91.svcinfo" />
+    <None Include="Service References\AuthorisationService\configuration.svcinfo" />
+    <None Include="Service References\AuthorisationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\custom\CompareDate.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\About.cshtml" />
+    <Content Include="Views\Shared\About_CY.cshtml" />
+    <Content Include="Views\Shared\Accessibility.cshtml" />
+    <Content Include="Views\Shared\Accessibility_CY.cshtml" />
+    <Content Include="Views\Shared\ChangeSite.cshtml" />
+    <Content Include="Views\Shared\ChangeSite_CY.cshtml" />
+    <Content Include="Views\Shared\Feedback.cshtml" />
+    <Content Include="Views\Shared\Feedback_CY.cshtml" />
+    <Content Include="Views\Shared\Help.cshtml" />
+    <Content Include="Views\Shared\Help_CY.cshtml" />
+    <Content Include="Views\Shared\UnAuthorized.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelCheckBoxAlign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelDateAlign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelFieldAlign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelLargeFieldAlign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelMultiLineTextAlign.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelSmallFieldAlign.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LabelCheckBoxAlign.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LabelDateAlign.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LabelFieldAlign.cshtml" />
+    <Content Include="Views\Site\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Site\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Staff\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Staff\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\SiteStaff\Edit.cshtml" />
+    <Content Include="Views\SiteStaff\Search.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LabelRadioButtonAlign.cshtml" />
+    <Content Include="Views\SystemMarked\Edit.cshtml">
+      <DependentUpon>EditView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\SystemMarked\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\SystemParameter\Edit.cshtml" />
+    <Content Include="Views\SystemParameter\Search.cshtml">
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <Content Include="Views\Shared\SessionExpired.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Attachment\" />
+    <Folder Include="Views\Searches\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\EditView.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EditView.cshtml</LastGenOutput>
+    </None>
+    <None Include="Helpers\CacheManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CacheManager2.cs</LastGenOutput>
+    </None>
+    <None Include="Helpers\SessionManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SessionManager2.cs</LastGenOutput>
+    </None>
+    <None Include="Models\MetaData\ModelMetaData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelMetaData.cs</LastGenOutput>
+    </None>
+    <None Include="Models\MetaData\SearchCriteriaModelMetaData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchCriteriaModelMetaData.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Models.cs</LastGenOutput>
+    </None>
+    <None Include="Models\SearchCriteriaModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchCriteriaModels.cs</LastGenOutput>
+    </None>
+    <None Include="Models\SearchMatchModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchMatchModels.cs</LastGenOutput>
+    </None>
+    <Content Include="packages.config" />
+    <Content Include="Views\SearchView.cshtml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchView.tt</DependentUpon>
+    </Content>
+    <None Include="Views\SearchView.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchView.cshtml</LastGenOutput>
+    </None>
+    <None Include="TypeMappings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeMappings2.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModels\SearchVM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchVM.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModels\ViewModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModels.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dwp.Adep.Ucb.Mapping\Dwp.Adep.Ucb.Mapping.csproj">
+      <Project>{DF5E4752-AE97-427E-B10A-9AE0EB4637D1}</Project>
+      <Name>Dwp.Adep.Ucb.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dwp.Adep.Ucb.ResourceLibrary\Dwp.Adep.Ucb.ResourceLibrary.csproj">
+      <Project>{77B79ED1-24DC-4C6C-B6B5-37CFBBCBC6B2}</Project>
+      <Name>Dwp.Adep.Ucb.ResourceLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AuthorisationService\" />
+    <WCFMetadataStorage Include="Service References\BinaryDataTransferService\" />
+    <WCFMetadataStorage Include="Service References\DirectoryService\" />
+    <WCFMetadataStorage Include="Service References\SmtpEmailService\" />
+    <WCFMetadataStorage Include="Service References\UcbService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.21.34.166/ReportServer_ADEPDEV/ReportExecution2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportExecution2005\</RelPath>
+      <UpdateFromURL>http://10.21.34.166/ReportServer_ADEPDEV/ReportExecution2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>UcbWeb_ReportExecution2005_ReportExecutionService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>42880</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/UcbWeb</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

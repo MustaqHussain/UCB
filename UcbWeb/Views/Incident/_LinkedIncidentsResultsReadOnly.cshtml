@@ -1,0 +1,54 @@
+﻿@model UcbWeb.ViewModels.IncidentVM
+
+
+<div class="fieldset ui-widget-content" >
+    <h3 class="accessible">Linked Incidents</h3>        
+    <div id="workflowGrid" class="webgrid-wrapper gridHeight gridWidth">            
+        @{
+            var grid = new WebGrid(null, canPage: true, rowsPerPage: 100, defaultSort: "IncidentDate", canSort: false);
+            grid.Bind(Model.LinkedIncidents, rowCount: 100, autoSortAndPage: false);
+
+            string gridHtml = grid.GetHtml(
+                tableStyle: "webgrid",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                htmlAttributes: new { id = "search-results-content" },
+                rowStyle: "webgrid-row-style",
+                displayHeader:true,
+                mode: WebGridPagerModes.All, firstText: Resources.PAGING_FIRSTPAGE, previousText: Resources.PAGING_PREVIOUS, nextText: Resources.PAGING_NEXT, lastText: Resources.PAGING_LASTPAGE, numericLinksCount: 5,
+                alternatingRowStyle: "webgrid-alternetrow-style",
+                columns: grid.Columns(
+                    grid.Column("IncidentId", header: "ID", style: "text-align-left"),
+                    grid.Column("IncidentStatus", header: "Status"),
+                    grid.Column("Name", header: "Customer/Claimant"),
+                    grid.Column("IncidentDate", header: "Incident Date", format: (item) => item.IncidentDate.ToString("dd/MM/yyyy") ),
+                    grid.Column("NINO", header: "NINO"),
+                    grid.Column("OtherPersonNINO", header: "Other's NINO"),
+                    grid.Column("IsImplementControlMeasures", header: "Control Measures Apply?", format: (item) =>  {  return (item.IsImplementControlMeasures == null) ? Html.Raw("") : 
+                                                                                                                            ( (item.IsImplementControlMeasures == true) ? Html.Raw("Yes") : Html.Raw("No") );
+                                                                                                                    } )
+                )
+            ).ToString();
+            gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "<caption>(.*?)</caption>", "<caption><span class='accessible'>$1</span></caption>"); //add a span (with accessible css class) to the caption so that it can be hidden in IE6 and IE7. Without the span, caption only hidden in > IE8.
+            System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"<td(.*?)RowHeaderColumn(.*?)>(.*?)</td>");
+            gridHtml = r.Replace(gridHtml, "<th scope=\"row\" $1$2>$3</th>");
+            @(new HtmlString(gridHtml))
+        }
+        Number of Linked Incidents: @Model.LinkedIncidents.Count
+    </div>
+</div>
+
+@foreach (var item in Model.LinkedIncidents)
+{
+    <script type="text/javascript">
+        $(document).ready(function () 
+        {
+            $('@string.Format("#LinkedIncidentReadOnlyPreview{0}", item.LinkedIncidentCode)').click(function (e) {
+                // User input change: Reset page timeout and ping server to refresh session timeout
+                timeoutCounter();
+                keepSessionAlive();
+                ReadOnlyPreview(this.name);
+            });
+        });
+    </script>
+}

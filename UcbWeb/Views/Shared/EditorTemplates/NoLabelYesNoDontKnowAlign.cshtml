@@ -1,0 +1,66 @@
+﻿@model string
+
+<div class="full-width clearfix">
+    <div class="editor-label left-40">
+        @Html.Label("")
+    </div>
+    <div class="editor-field right-60">
+    @{
+        string tooltip="";
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Tooltip"))
+        {
+            if (Model == null)
+            {
+                tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];                
+                @Html.DropDownListFor(x => x, new[] { new SelectListItem { Text = Resources.LABEL_PLEASESELECT, Value = "", Selected = true },
+                                                      new SelectListItem { Text = "Yes", Value = "Yes" },
+                                                      new SelectListItem { Text = "No", Value = "No" }, 
+                                                      new SelectListItem { Text = "Don't Know", Value = "Don't Know" }
+                },
+                                                    new { @title = tooltip })
+            }
+            else if (Model.ToString() == "Yes")
+            {
+                tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];                
+                @Html.DropDownListFor(x => x, new[] { new SelectListItem { Text = Resources.LABEL_PLEASESELECT, Value = "" },
+                                                      new SelectListItem { Text = "Yes", Value = "Yes", Selected = true },
+                                                      new SelectListItem { Text = "No", Value = "No" }, 
+                                                      new SelectListItem { Text = "Don't Know", Value = "Don't Know" }
+                },
+                                                    new { @title = tooltip })
+            }
+            else if (Model.ToString() == "No")
+            {
+                tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];                
+                @Html.DropDownListFor(x => x, new[] { new SelectListItem { Text = Resources.LABEL_PLEASESELECT, Value = "" },
+                                                      new SelectListItem { Text = "Yes", Value = "Yes" },
+                                                      new SelectListItem { Text = "No", Value = "No", Selected = true }, 
+                                                      new SelectListItem { Text = "Don't Know", Value = "Don't Know" }
+                },
+                                                    new { @title = tooltip })
+            }
+            else
+            {
+                tooltip = (string)ViewData.ModelMetadata.AdditionalValues["Tooltip"];                
+                @Html.DropDownListFor(x => x, new[] { new SelectListItem { Text = Resources.LABEL_PLEASESELECT, Value = "" },
+                                                      new SelectListItem { Text = "Yes", Value = "Yes" },
+                                                      new SelectListItem { Text = "No", Value = "No" }, 
+                                                      new SelectListItem { Text = "Don't Know", Value = "Don't Know", Selected = true }
+                },
+                                                    new { @title = tooltip })
+            }
+        }
+        else
+        { 
+            @Html.DropDownListFor(x => x, new[] { new SelectListItem { Text = Resources.LABEL_PLEASESELECT, Value = "" },
+                                                  new SelectListItem { Text = "Yes", Value = "Yes" },
+                                                  new SelectListItem { Text = "No", Value = "No" }, 
+                                                  new SelectListItem { Text = "Don't Know", Value = "Don't Know" }
+       })
+        }
+    }
+    </div>
+    <div class="full-width clearfix">
+        @Html.ValidationMessage("")
+    </div>
+</div>

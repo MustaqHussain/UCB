@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfEmailAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmailAttachment" nillable="true" type="tns:EmailAttachment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmailAttachment" nillable="true" type="tns:ArrayOfEmailAttachment" />
+  <xs:complexType name="EmailAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailAttachment" nillable="true" type="tns:EmailAttachment" />
+</xs:schema>

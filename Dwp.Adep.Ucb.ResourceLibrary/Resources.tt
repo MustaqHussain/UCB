@@ -1,0 +1,1753 @@
+﻿<#
+//*********************************************************
+//
+//    Copyright (c) Microsoft. All rights reserved.
+//    This code is licensed under the Microsoft Public License.
+//    THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+//    ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+//    IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+//    PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+#>
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#><#@ 
+ output extension=".resx"#><#
+
+// List of entities not to generate code for
+string ignoreList = ",StaffOrganisation,OrganisationHierarchy,Audit,StaffAttributes,Incident,Customer,Site,Narrative,";
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"..\Dwp.Adep.Ucb.DataServices\Models\Model1.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+fileManager.StartNewFile("ResourcesTemplate.resx");
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+<data name="SYS_NAME" xml:space="preserve">
+    <value>Unacceptable Customer and Claimant Behaviour System</value>
+</data>
+<data name="SYS_WELCOME_MESSAGE" xml:space="preserve">
+	<value>Welcome to UCB</value>
+</data>
+<data name="SYS_MENUTEXT" xml:space="preserve">
+	<value>Please choose an option:</value>
+</data>
+<data name="ERROR_SUMMARY_TITLE" xml:space="preserve">
+	<value>The following errors have been detected</value>
+</data>
+
+<data name="PAGING_FIRSTPAGE" xml:space="preserve">
+	<value>First</value>
+</data>
+<data name="PAGING_LASTPAGE" xml:space="preserve">
+	<value>Last</value>
+</data>
+<data name="PAGING_NEXT" xml:space="preserve">
+	<value>Next</value>
+</data>
+<data name="PAGING_PREVIOUS" xml:space="preserve">
+	<value>Prev</value>
+</data>
+<data name="LABEL_WELCOME" xml:space="preserve">
+	<value>Welcome</value>
+</data>
+<data name="LABEL_PAGECREATED" xml:space="preserve">
+	<value>Page created on</value>
+</data>
+<data name="TOOLTIP_MAINTAIN" xml:space="preserve">
+	<value>Select to maintain</value>
+</data>
+<data name="LABEL_SCREENTITLE_ADMINMENU" xml:space="preserve">
+	<value>Maintain Reference Data</value>
+</data>
+<data name="LABEL_GRIDTITLE_ADMINMENU" xml:space="preserve">
+	<value>Please select:</value>
+</data>
+<data name="LABEL_SELECTBUTTON" xml:space="preserve">
+    <value>Select</value>
+</data>
+<data name="ENTITYNAME_SITEGUIDANCE" xml:space="preserve">
+    <value>Site Guidance</value>
+</data>
+<data name="PAGE_TITLE_INCIDENT_REPORT_FORM" xml:space="preserve">
+	<value>Incident report form</value>
+</data>
+<data name="PAGE_TITLE_TP_INCIDENT_REPORT_FORM" xml:space="preserve">
+	<value>Third party incident report form</value>
+</data>
+<data name="MESSAGE_DELETECONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to delete? Press delete again to confirm.</value>
+</data>
+<data name="MESSAGE_PUBLISHCONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to publish the report? Press publish again to confirm.</value>
+</data>
+<data name="MESSAGE_ARCHIVECONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to archive the report? Press archive again to confirm.</value>
+</data>
+<data name="MESSAGE_SAVECONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to save the report? Press save again to confirm.</value>
+</data>
+<data name="MESSAGE_DELETE_SUCCEEDED" xml:space="preserve">
+	<value>Delete successful.</value>
+</data>
+<data name="MESSAGE_EXITCONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to exit? Press exit again to confirm.</value>
+</data>
+<data name="MESSAGE_EXITCONFIRMATIONPOPUP" xml:space="preserve">
+	<value>Are you sure you want to exit?<![CDATA[<br/>]]>Click OK to confirm.  Click Cancel to stop this action.</value>
+</data>
+<data name="MESSAGE_RETRIEVAL_FAILED" xml:space="preserve">
+	<value>Are you sure you wish to exit? Press exit again to confirm.</value>
+</data>
+<data name="MESSAGE_UNIQUEKEYCONSTRAINT" xml:space="preserve">
+	<value>A record already exists with these details.</value>
+</data>
+<data name="MESSAGE_UPDATE_SUCCEEDED" xml:space="preserve">
+	<value>The update was successful.</value>
+</data>
+<data name="MESSAGE_DATACANNOTDELETE" xml:space="preserve">
+	<value>It has not been possible to delete this item. Please set to inactive.</value>
+</data>
+<data name="MESSAGE_DATACONCURRENCYFAILURE" xml:space="preserve">
+	<value>This record has been updated since you retrieved it. Please return to the list and reselect the item.</value>
+</data>
+<data name="LINKTEXT_ABOUT" xml:space="preserve">
+	<value>About</value>
+</data>
+<data name="LINKTEXT_ADMIN" xml:space="preserve">
+	<value>Admin</value>
+</data>
+<data name="LINKTEXT_HOME" xml:space="preserve">
+	<value>Home</value>
+</data>
+<data name="LINKTEXT_YOURAPPS" xml:space="preserve">
+	<value>Your Apps</value>
+</data>
+<data name="LINKTEXT_STAFFADMIN" xml:space="preserve">
+	<value>Staff Admin</value>
+</data>
+<data name="TOOLTIP_ENTERINTRODUCTORYINFORMATION" xml:space="preserve">
+	<value>Please enter information you would like to see</value>
+</data>
+<data name="TOOLTIP_ABOUT" xml:space="preserve">
+	<value>Displays the about screen</value>
+</data>
+<data name="TOOLTIP_ADMINBUTTON" xml:space="preserve">
+	<value>Admin</value>
+</data>
+<data name="TOOLTIP_HOMEBUTTON" xml:space="preserve">
+	<value>Home</value>
+</data>
+<data name="TOOLTIP_CREATEBUTTON" xml:space="preserve">
+	<value>Create</value>
+</data>
+<data name="TOOLTIP_DELETEBUTTON" xml:space="preserve">
+	<value>Delete</value>
+</data>
+<data name="TOOLTIP_EXITBUTTON" xml:space="preserve">
+	<value>Leave this page</value>
+</data>
+<data name="TOOLTIP_SAVEBUTTON" xml:space="preserve">
+	<value>Save</value>
+</data>
+<data name="TOOLTIP_SAVEANDCLOSEBUTTON" xml:space="preserve">
+	<value>Save and Close</value>
+</data>
+<data name="TOOLTIP_ARCHIVEBUTTON" xml:space="preserve">
+	<value>Archive</value>
+</data>
+<data name="TOOLTIP_PUBLISHBUTTON" xml:space="preserve">
+	<value>Publish</value>
+</data>
+<data name="TOOLTIP_TRANSFERBUTTON" xml:space="preserve">
+	<value>Transfer to new Nominated Manager</value>
+</data>
+<data name="TOOLTIP_EDITBUTTON" xml:space="preserve">
+	<value>Save</value>
+</data>
+<data name="LABEL_CREATEBUTTON" xml:space="preserve">
+	<value>Create</value>
+</data>
+<data name="LABEL_DELETEBUTTON" xml:space="preserve">
+	<value>Delete</value>
+</data>
+<data name="LABEL_EXITBUTTON" xml:space="preserve">
+	<value>Exit</value>
+</data>
+<data name="LABEL_SAVEBUTTON" xml:space="preserve">
+	<value>Save</value>
+</data>
+<data name="LABEL_SAVEANDCLOSEBUTTON" xml:space="preserve">
+	<value>Save and Close</value>
+</data>
+<data name="LABEL_ARCHIVEBUTTON" xml:space="preserve">
+	<value>Archive</value>
+</data>
+<data name="LABEL_PUBLISHBUTTON" xml:space="preserve">
+	<value>Publish</value>
+</data>
+<data name="LABEL_TRANSFERBUTTON" xml:space="preserve">
+	<value>Transfer to New NM</value>
+</data>
+<data name="LABEL_NEWBUTTON" xml:space="preserve">
+    <value>Create</value>
+</data>
+<data name="LABEL_LISTNAME" xml:space="preserve">
+	<value>List</value>
+</data>
+<data name="LABEL_GRIDTITLE" xml:space="preserve">
+    <value>Please select:</value>
+</data>
+<data name="HTML_LANG" xml:space="preserve">
+    <value>en</value>
+</data>
+<data name="LINKTEXT_ACCESSIBILITY" xml:space="preserve">
+    <value>Accessibility</value>
+</data>
+<data name="LINKTEXT_FEEDBACK" xml:space="preserve">
+	<value>Feedback</value>
+</data>
+<data name="LINKTEXT_HELP" xml:space="preserve">
+	<value>Help</value>
+</data>
+<data name="LINKTEXT_SITEMAP" xml:space="preserve">
+	<value>Site Map</value>
+</data>
+<data name="LINKTEXT_TOPMENU" xml:space="preserve">
+	<value>Your Apps</value>
+</data>	
+<data name="TOOLTIP_TOPMENU" xml:space="preserve">
+	<value>Main Menu</value>
+</data>	
+<data name="TOOLTIP_ACCESSIBILITY" xml:space="preserve">
+	<value>Displays the accessibility page</value>
+</data>
+<data name="TOOLTIP_ADMIN" xml:space="preserve">
+	<value>Displays the admin screen</value>
+</data>
+<data name="TOOLTIP_FEEDBACK" xml:space="preserve">
+	<value>Displays the feedback/contact us screen</value>
+</data>
+<data name="TOOLTIP_HELP" xml:space="preserve">
+	<value>Displays the help screen</value>
+</data>
+<data name="TOOLTIP_HOME" xml:space="preserve">
+	<value>Displays the home screen</value>
+</data>
+<data name="TOOLTIP_SITEMAP" xml:space="preserve">
+	<value>Displays the site map screen</value>
+</data>
+<data name="TOOLTIP_SELECTTOEDITBUTTON" xml:space="preserve">
+    <value>Select to edit</value>
+</data>
+<data name="DDL_GENERIC" xml:space="preserve">
+	<value>Select {0}</value>
+</data>
+<data name="LEGEND_REPORTERSECTION" xml:space="preserve">
+	<value>Reporter Section</value>
+</data>
+<data name="LEGEND_LINEMANAGERSECTION" xml:space="preserve">
+	<value>Line Manager Section</value>
+</data>
+<data name="LEGEND_NOMINATEDMANAGERSECTION" xml:space="preserve">
+	<value>Nominated Manager Section</value>
+</data>
+<data name="LEGEND_REVIEWSECTION" xml:space="preserve">
+	<value>Review Action</value>
+</data>
+<data name="LABEL_TOP" xml:space="preserve">
+	<value>Top</value>
+</data>
+<data name="LABEL_REPORTER" xml:space="preserve">
+	<value>Reporter</value>
+</data>
+<data name="LABEL_LINEMANAGER" xml:space="preserve">
+	<value>Line Manager</value>
+</data>
+<data name="LABEL_NM" xml:space="preserve">
+	<value>NM</value>
+</data>
+<data name="LABEL_BUTTONS" xml:space="preserve">
+	<value>Buttons</value>
+</data>
+<data name="LABEL_UPDATEBUTTON" xml:space="preserve">
+	<value>Select</value>
+</data>
+<data name="LABEL_UPDATEBUTTON" xml:space="preserve">
+	<value>Update</value>
+</data>
+<data name="LABEL_EDITBUTTON" xml:space="preserve">
+	<value>Edit</value>
+</data>
+<data name="TOOLTIP_CREATEINCIDENT" xml:space="preserve">
+	<value>Link to the create new incident screen</value>
+</data>
+<data name="LINKTEXT_CREATEINCIDENT" xml:space="preserve">
+	<value>Create a new incident</value>
+</data>
+<data name="ENTITYNAME_INCIDENT" xml:space="preserve">
+	<value>Incident</value>
+</data>
+<data name="LABEL_INCIDENT_CODE" xml:space="preserve">
+	<value>Code</value>
+</data>
+<data name="TOOLTIP_INCIDENT_CODE" xml:space="preserve">
+	<value>Please enter a value for Code</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTID" xml:space="preserve">
+	<value>Incident ID</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTID" xml:space="preserve">
+	<value>Please enter a value for Incident ID</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTSTATUS" xml:space="preserve">
+	<value>Incident Status</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTSTATUS" xml:space="preserve">
+	<value>Please enter a value for Incident Status</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERTITLE" xml:space="preserve">
+	<value>Title</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERTITLE" xml:space="preserve">
+	<value>Please enter a value for title</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBEROTHERTITLE" xml:space="preserve">
+	<value>Other Title</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBEROTHERTITLE" xml:space="preserve">
+	<value>Please enter a value for Other Title</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERFIRSTNAME" xml:space="preserve">
+	<value>First Name</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERFIRSTNAME" xml:space="preserve">
+	<value>Please enter a value for First Name</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERLASTNAME" xml:space="preserve">
+	<value>Last Name</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERLASTNAME" xml:space="preserve">
+	<value>Please enter a value for Last Name</value>
+</data>
+<data name="LABEL_INCIDENT_JOBROLECODE" xml:space="preserve">
+	<value>Your Job Role</value>
+</data>
+<data name="TOOLTIP_INCIDENT_JOBROLECODE" xml:space="preserve">
+	<value>Please enter a value for Your Job Role</value>
+</data>	
+<data name="LABEL_INCIDENT_STAFFMEMBERBUSINESSCODE" xml:space="preserve">
+	<value>Business</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERBUSINESSCODE" xml:space="preserve">
+	<value>Please enter a value for Business</value>
+</data>	
+<data name="LABEL_INCIDENT_STAFFMEMBERBUSINESSAREACODE" xml:space="preserve">
+	<value>Business Area</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERBUSINESSAREACODE" xml:space="preserve">
+	<value>Please enter a value for Business Area</value>
+</data>	
+<data name="LABEL_INCIDENT_STAFFMEMBERHOMEOFFICECODE" xml:space="preserve">
+	<value>Home Office/Usual place of work</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERHOMEOFFICECODE" xml:space="preserve">
+	<value>Please enter a value for Home Office/Usual place of work</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERHOMEOFFICESITECODE" xml:space="preserve">
+	<value>Home Office/Usual place of work</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERHOMEOFFICESITECODE" xml:space="preserve">
+	<value>Please enter a value for Home Office/Usual place of work</value>
+</data>
+<data name="LABEL_INCIDENT_ISSTAFFHADAPPROPRIATETRAINING" xml:space="preserve">
+	<value>Have you had the appropriate levels of keeping safe training?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISSTAFFHADAPPROPRIATETRAINING" xml:space="preserve">
+	<value>Please enter a value for Have you had the appropriate levels of keeping safe training</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERYEARSINCURRENTPOST" xml:space="preserve">
+	<value>Years In Post</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERYEARSINCURRENTPOST" xml:space="preserve">
+	<value>Please enter a value for Years In Post</value>
+</data>
+<data name="LABEL_INCIDENT_STAFFMEMBERMONTHSINCURRENTROLE" xml:space="preserve">
+	<value>Months In Post</value>
+</data>
+<data name="TOOLTIP_INCIDENT_STAFFMEMBERMONTHSINCURRENTROLE" xml:space="preserve">
+	<value>Please enter a value for  Months In Post</value>
+</data>
+<data name="LABEL_INCIDENT_MANAGERFIRSTNAME" xml:space="preserve">
+	<value>Your DWP Line Manager's First Name</value>
+</data>
+<data name="TOOLTIP_INCIDENT_MANAGERFIRSTNAME" xml:space="preserve">
+	<value>Please enter a value for Your DWP Line Manager's First Name</value>
+</data>
+<data name="LABEL_INCIDENT_MANAGERLASTNAME" xml:space="preserve">
+	<value>Your DWP Line Manager's Last Name</value>
+</data>
+<data name="TOOLTIP_INCIDENT_MANAGERLASTNAME" xml:space="preserve">
+	<value>Please enter a value for Your DWP Line Manager's Last Name</value>
+</data>
+<data name="LABEL_INCIDENT_MANAGERTELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>Your DWP Line Manager's Telephone Contact Number</value>
+</data>
+<data name="TOOLTIP_INCIDENT_MANAGERTELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>Please enter a value for Your DWP Line Manager's Telephone Contact Number</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTDATE" xml:space="preserve">
+	<value>Incident Date (dd/mm/yyyy)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTDATE" xml:space="preserve">
+	<value>Please enter a value for Incident Date</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTTIME" xml:space="preserve">
+	<value>Incident Time (hh:mm)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTTIME" xml:space="preserve">
+	<value>Please enter a value for Incident Time</value>
+</data>
+<data name="LABEL_INCIDENT_CUSTOMERCODE" xml:space="preserve">
+	<value>Customer</value>
+</data>
+<data name="TOOLTIP_INCIDENT_CUSTOMERCODE" xml:space="preserve">
+	<value>Please enter a value for Customer</value>
+</data>	
+<data name="LABEL_INCIDENT_ISOTHERSPRESENT" xml:space="preserve">
+	<value>Were Others Present?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISOTHERSPRESENT" xml:space="preserve">
+	<value>Please enter a value for Were Others Present</value>
+</data>
+<data name="LABEL_INCIDENT_OTHERSPRESENT" xml:space="preserve">
+	<value>Other People Who Were Present</value>
+</data>
+<data name="TOOLTIP_INCIDENT_OTHERSPRESENT" xml:space="preserve">
+	<value>Please enter a value for Other People Who Were Present</value>
+</data>
+<data name="LABEL_INCIDENT_EVENTLEADINGTOINCIDENTCODE" xml:space="preserve">
+	<value>Event Leading To Incident</value>
+</data>
+<data name="TOOLTIP_INCIDENT_EVENTLEADINGTOINCIDENTCODE" xml:space="preserve">
+	<value>Please enter a value for Event Leading To Incident</value>
+</data>	
+<data name="LABEL_INCIDENT_INCIDENTLOCATIONCODE" xml:space="preserve">
+	<value>Incident Location</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTLOCATIONCODE" xml:space="preserve">
+	<value>Please enter a value for Incident Location</value>
+</data>	
+<data name="LABEL_INCIDENT_INCIDENTCATEGORYCODE" xml:space="preserve">
+	<value>Incident Category</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTCATEGORYCODE" xml:space="preserve">
+	<value>Please enter a value for Incident Category</value>
+</data>	
+<data name="LABEL_INCIDENT_INCIDENTTYPECODE" xml:space="preserve">
+	<value>Incident Type</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTTYPECODE" xml:space="preserve">
+	<value>Please enter a value for Incident Type</value>
+</data>	
+<data name="LABEL_INCIDENT_INCIDENTDETAILSCODE" xml:space="preserve">
+	<value>Incident Details</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTDETAILSCODE" xml:space="preserve">
+	<value>Please enter a value for Incident Details</value>
+</data>	
+<data name="LABEL_INCIDENT_ABUSETYPECODE" xml:space="preserve">
+	<value>Abuse Type</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ABUSETYPECODE" xml:space="preserve">
+	<value>Please enter a value for Abuse Type</value>
+</data>	
+<data name="LABEL_INCIDENT_INCIDENTNARRATIVECODE" xml:space="preserve">
+	<value>Incident Narrative (Brief and factual description)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_INCIDENTNARRATIVECODE" xml:space="preserve">
+	<value>Please give a brief outline of what happened, what led up to the incident and who was involved. Please record the exact words used (including obscenitites or blasphemy) and do not user jargon. Under Data Protection this record must be accurate, relevant and not excessive. It may be used by our solicitors.</value>
+</data>	
+<data name="LABEL_INCIDENT_ISLINEMANAGEFASTTRACK" xml:space="preserve">
+	<value>Is this a Fast Track incident?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISLINEMANAGEFASTTRACK" xml:space="preserve">
+	<value>Please enter a value for Is this a Fast Track incident?</value>
+</data>
+<data name="LABEL_INCIDENT_ISLINEMANAGERRIDDOR" xml:space="preserve">
+	<value>Is RIDDOR appropriate?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISLINEMANAGERRIDDOR" xml:space="preserve">
+	<value>Please enter a value for Is RIDDOR appropriate?</value>
+</data>
+<data name="LABEL_INCIDENT_ISPOLICECALLED" xml:space="preserve">
+	<value>Were Police called to the incident?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISPOLICECALLED" xml:space="preserve">
+	<value>Please enter a value for Were Police called to the incident?</value>
+</data>
+<data name="LABEL_INCIDENT_HASLINEMANAGERREADREPORT" xml:space="preserve">
+	<value>Please confirm that you have read this report</value>
+</data>
+<data name="TOOLTIP_INCIDENT_HASLINEMANAGERREADREPORT" xml:space="preserve">
+	<value>Please confirm that you have read this report</value>
+</data>
+<data name="LABEL_INCIDENT_LINEMANAGERNARRATIVECODE" xml:space="preserve">
+	<value>Your comments and any other information for the Nominated Manager</value>
+</data>
+<data name="TOOLTIP_INCIDENT_LINEMANAGERNARRATIVECODE" xml:space="preserve">
+	<value>Your comments and any other information for the Nominated Manager. Please specify exactly what you did to either manage the incident or did in immediate reponse to the incident. Details should record whether you removed the employee from their normal role for any period of time, identified training needs, applied the IMP (Incident Management Plan), provided EAP (Employment Assistance Programme), consulted Sales Representative, etc.</value>
+</data>	
+<data name="LABEL_INCIDENT_ISNOMINATEDFASTTRACK" xml:space="preserve">
+	<value>1.0 Is this a Fast Track incident?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISNOMINATEDFASTTRACK" xml:space="preserve">
+	<value>Please enter a value for 1.0 Is this a Fast Track incident?</value>
+</data>
+<data name="LABEL_INCIDENT_ISNOMINATEDRIDDOR" xml:space="preserve">
+	<value>2.0 Is RIDDOR appropriate?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISNOMINATEDRIDDOR" xml:space="preserve">
+	<value>Please enter a value for 2.0 Is RIDDOR appropriate?</value>
+</data>
+<data name="LABEL_INCIDENT_ISORALWARNING" xml:space="preserve">
+	<value>3.0 Was an oral warning issued?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISORALWARNING" xml:space="preserve">
+	<value>Please enter a value for 3.0 Was an oral warning issued?</value>
+</data>
+<data name="LABEL_INCIDENT_ORALWARNINGDATE" xml:space="preserve">
+	<value>3.1 Date oral warning issued</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ORALWARNINGDATE" xml:space="preserve">
+	<value>Please enter a value for 3.1 Date oral warning issued</value>
+</data>
+<data name="LABEL_INCIDENT_ISWRITTENWARNING" xml:space="preserve">
+	<value>4.0 Was a written warning issued?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISWRITTENWARNING" xml:space="preserve">
+	<value>Please enter a value for 4.0 Was a written warning issued?</value>
+</data>
+<data name="LABEL_INCIDENT_WRITTENWARNINGDATE" xml:space="preserve">
+	<value>4.1 Date written warning issued</value>
+</data>
+<data name="TOOLTIP_INCIDENT_WRITTENWARNINGDATE" xml:space="preserve">
+	<value>Please enter a value for 4.1 Date written warning issued</value>
+</data>
+<data name="LABEL_INCIDENT_ISASSAILANTINTERVIEWED" xml:space="preserve">
+	<value>5.0 Was the assailant interviewed?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISASSAILANTINTERVIEWED" xml:space="preserve">
+	<value>Please enter a value for 5.0 Was the assailant interviewed?</value>
+</data>
+<data name="LABEL_INCIDENT_ASSAILANTINTERVIEWEDDATE" xml:space="preserve">
+	<value>5.1 Date assailant interviewed</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ASSAILANTINTERVIEWEDDATE" xml:space="preserve">
+	<value>Please enter a value for 5.1 Date assailant interviewed</value>
+</data>
+<data name="LABEL_INCIDENT_ISSOLICITORLETTER" xml:space="preserve">
+	<value>6.0 Requested solicitor to write to assailant?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISSOLICITORLETTER" xml:space="preserve">
+	<value>Please enter a value for 6.0 Requested solicitor to write to assailant?</value>
+</data>
+<data name="LABEL_INCIDENT_SOLICITORLETTERDATE" xml:space="preserve">
+	<value>6.1 Request made on</value>
+</data>
+<data name="TOOLTIP_INCIDENT_SOLICITORLETTERDATE" xml:space="preserve">
+	<value>Please enter a value for 6.1 Request made on</value>
+</data>
+<data name="LABEL_INCIDENT_ISBANNINGORDER" xml:space="preserve">
+	<value>7.0 Requested solicitor for banning order?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISBANNINGORDER" xml:space="preserve">
+	<value>Please enter a value for 7.0 Requested solicitor for banning order?</value>
+</data>
+<data name="LABEL_INCIDENT_BANNINGORDERREQUESTEDDATE" xml:space="preserve">
+	<value>7.1 Request made on</value>
+</data>
+<data name="TOOLTIP_INCIDENT_BANNINGORDERREQUESTEDDATE" xml:space="preserve">
+	<value>Please enter a value for 7.1 Request made on</value>
+</data>
+<data name="LABEL_INCIDENT_FURTHERINFONARRATIVECODE" xml:space="preserve">
+	<value>8.0 Is there any further information regarding this incident or action taken against the customer and the outcome?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_FURTHERINFONARRATIVECODE" xml:space="preserve">
+	<value>Please enter any further infomation</value>
+</data>
+<data name="LABEL_INCIDENT_ISDEFICIENCIESINPROCESS" xml:space="preserve">
+	<value>9.0 Do you consider the incident shows deficiencies in procedures or a need for new instructions?</value>
+</data>
+<data name="LABEL_INCIDENT_DEFICIENCIESNARRATIVECODE" xml:space="preserve">
+	<value>9.1 If Yes, please explain what they are</value>
+</data>
+<data name="TOOLTIP_INCIDENT_DEFICIENCIESNARRATIVECODE" xml:space="preserve">
+	<value>Please explain what they are</value>
+</data>
+<data name="LABEL_INCIDENT_CONTINGENCYARRANGEMENTCODE" xml:space="preserve">
+	<value>What contingency arrangements have been made to continue service delivery to the customer?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_CONTINGENCYARRANGEMENTCODE" xml:space="preserve">
+	<value>Please select the contingency arrangements</value>
+</data>
+
+<data name="TOOLTIP_INCIDENT_ISDEFICIENCIESINPROCESS" xml:space="preserve">
+	<value>Please enter a value for 9.0 Do you consider the incident shows deficiencies in procedures or a need for new instructions?</value>
+</data>
+<data name="LABEL_INCIDENT_ISIMPLEMENTCONTROLMEASURES" xml:space="preserve">
+	<value>10.0 Do you intend to implement control measures for the customer?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISIMPLEMENTCONTROLMEASURES" xml:space="preserve">
+	<value>Please enter a value for 10.0 Do you intend to implement control measures for the customer?</value>
+</data>
+<data name="LABEL_INCIDENT_CONTROLMEASURECODE" xml:space="preserve">
+	<value>10.1 What control measures have you applied? Select all that apply? (Published to Staff Protection List)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_CONTROLMEASURECODE" xml:space="preserve">
+	<value>Please select control measures applied</value>
+</data>
+<data name="LABEL_INCIDENT_NAMEDOFFICER" xml:space="preserve">
+	<value>10.1 Name of Named Officer</value>
+</data>
+<data name="TOOLTIP_INCIDENT_NAMEDOFFICER" xml:space="preserve">
+	<value>Please enter a value for 10.1 Name of Named Officer</value>
+</data>
+<data name="LABEL_INCIDENT_TELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>10.2 Telephone Contact Number</value>
+</data>
+<data name="TOOLTIP_INCIDENT_TELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>Please enter a value for 10.2 Telephone Contact Number</value>
+</data>
+<data name="LABEL_INCIDENT_BANNEDFROMOFFICES" xml:space="preserve">
+	<value>10.3 Banned from Office(s)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_BANNEDFROMOFFICES" xml:space="preserve">
+	<value>Please enter a value for 10.3 Banned from Office(s)</value>
+</data>
+<data name="LABEL_INCIDENT_BANNEDFROMOFFICESENDDATE" xml:space="preserve">
+	<value>10.4 Banned from Office(s) end date</value>
+</data>
+<data name="TOOLTIP_INCIDENT_BANNEDFROMOFFICESENDDATE" xml:space="preserve">
+	<value>Please enter a value for 10.4 Banned from Office(s) end date</value>
+</data>
+<data name="LABEL_INCIDENT_ISITMARKERSSET" xml:space="preserve">
+	<value>11.0 Have you set marker on IT system?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISITMARKERSSET" xml:space="preserve">
+	<value>Please enter a value for 11.0 Have you set marker on IT system?</value>
+</data>
+<data name="LABEL_INCIDENT_ITSYSTEMSMARKED" xml:space="preserve">
+	<value>11.1 IT system marked</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ITSYSTEMSMARKED" xml:space="preserve">
+	<value>Please select one or more IT systems</value>
+</data>
+<data name="LABEL_INCIDENT_ISPAPERSMARKED" xml:space="preserve">
+	<value>12.0 Have you marked clerical papers?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISPAPERSMARKED" xml:space="preserve">
+	<value>Please enter a value for 12.0 Have you marked clerical papers?</value>
+</data>
+<data name="LABEL_INCIDENT_ISNOTIFIEDPARTIES" xml:space="preserve">
+	<value>13.0 Have you notified all interested parties?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISNOTIFIEDPARTIES" xml:space="preserve">
+	<value>Please enter a value 13.0 Have you notified all interested parties?</value>
+</data>
+<data name="LABEL_INCIDENT_NOTIFIEDPARTIES" xml:space="preserve">
+	<value>13.1 Which interested parties have you notified?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_NOTIFIEDPARTIES" xml:space="preserve">
+	<value>Please select one or more interested parties</value>
+</data>
+
+<data name="LABEL_INCIDENT_NOMINATEDMANAGERCODE" xml:space="preserve">
+	<value>Nominated Manager</value>
+</data>
+<data name="TOOLTIP_INCIDENT_NOMINATEDMANAGERCODE" xml:space="preserve">
+	<value>Please enter a value for Nominated Manager</value>
+</data>	
+<data name="LABEL_INCIDENT_REVIEWDATE" xml:space="preserve">
+	<value>15.0 Date of next review (select new date for the review)</value>
+</data>
+<data name="TOOLTIP_INCIDENT_REVIEWDATE" xml:space="preserve">
+	<value>Please enter a value for 15.0 Review Date</value>
+</data>
+<data name="LABEL_INCIDENT_ISPREVIOUSEVIDENCEREVIEWED" xml:space="preserve">
+	<value>16.0 Have you reviewed all previous evidence?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISPREVIOUSEVIDENCEREVIEWED" xml:space="preserve">
+	<value>Please enter a value for 16.0 Have you reviewed all previous evidence?</value>
+</data>
+<data name="LABEL_INCIDENT_ISPREVIOUSPARTIESNOTIFIED" xml:space="preserve">
+	<value>17.0 Have you checked with all previously notified interested parties?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISPREVIOUSPARTIESNOTIFIED" xml:space="preserve">
+	<value>Please enter a value for 17.0 Have you checked with all previously notified interested parties?</value>
+</data>
+<data name="LABEL_INCIDENT_ISREPEATBEHAVIOUR" xml:space="preserve">
+	<value>18.0 Do you need to attach a Repeat Behaviour form?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISREPEATBEHAVIOUR" xml:space="preserve">
+	<value>Please enter a value for 18.0 Do you need to attach a Repeat Behaviour form?</value>
+</data>
+<data name="LABEL_INCIDENT_ISCONTROLMEASURESSTILLAPPLY" xml:space="preserve">
+	<value>19.0 Are control measures still applicable?</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ISCONTROLMEASURESSTILLAPPLY" xml:space="preserve">
+	<value>Please enter a value for 19.0 Are control measures still applicable?</value>
+</data>
+<data name="LABEL_INCIDENT_REVIEWACTIONNARRATIVECODE" xml:space="preserve">
+	<value>20.0 Review Action information</value>
+</data>
+<data name="TOOLTIP_INCIDENT_REVIEWACTIONNARRATIVECODE" xml:space="preserve">
+	<value>Please enter a value for 20.0 Review Action information</value>
+</data>
+<data name="LABEL_INCIDENT_SITECODE" xml:space="preserve">
+	<value>Site</value>
+</data>
+<data name="TOOLTIP_INCIDENT_SITECODE" xml:space="preserve">
+	<value>Please enter a value for Site</value>
+</data>	
+<data name="LABEL_INCIDENT_NUMBEROFRECORDS" xml:space="preserve">
+	<value>Number Of Records</value>
+</data>
+<data name="TOOLTIP_INCIDENT_NUMBEROFRECORDS" xml:space="preserve">
+	<value>Please enter a value for Number Of Records</value>
+</data>
+<data name="LABEL_INCIDENT_ROWIDENTIFIER" xml:space="preserve">
+	<value>Row Identifier</value>
+</data>
+<data name="TOOLTIP_INCIDENT_ROWIDENTIFIER" xml:space="preserve">
+	<value>Please enter a value for Row Identifier</value>
+</data>
+<data name="LABEL_INCIDENT_PROTECTIVEMARKING" xml:space="preserve">
+	<value>Protective Marking:- OFFICIAL - SENSITIVE</value>
+</data>
+<data name="LABEL_INCIDENT_SUBMITWITHIN20MINUTES" xml:space="preserve">
+	<value>This form must be completed and submitted within 20 minutes to avoid system timeouts</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTREPORTFORMFOR" xml:space="preserve">
+	<value>This is the Incident Report Form For:</value>
+</data>
+<data name="LABEL_INCIDENT_INCIDENTREPORTFORM" xml:space="preserve">
+	<value>This is the Incident Report Form</value>
+</data>
+<data name="INCIDENT_HEADER_CUSTOMERDETAILS" xml:space="preserve">
+	<value>Details of Customer/Claimant</value>
+</data>
+<data name="INCIDENT_HEADER_NOMINATEDMANAGERINSTRUCTIONS" xml:space="preserve">
+	<value>Please complete parts 1 - 10 and the "Action Required For Decision" section when displayed.</value>
+</data>
+
+<data name="INCIDENT_CONTROLMEASURE_WARNING" xml:space="preserve">
+	<value>Please ensure you have entered a NINO</value>
+</data>
+<data name="INCIDENT_CONTROLMEASURE_NOTE" xml:space="preserve">
+	<value>Note - If you have decided that control measures are appropriate you must select the "Publish" button below.</value>
+</data>
+
+<data name="LABEL_SUBMITREPORT" xml:space="preserve">
+	<value>Press Here To Continue</value>
+</data>
+<data name="EMAIL_ADDASITE" xml:space="preserve">
+	<value>Add A Site Request</value>
+</data>
+<data name="EMAIL_TELLUSSITEDETAILS" xml:space="preserve">
+	<value>Please tell us the details of the site</value>
+</data>
+<data name="EMAIL_COMMENTSONFORM" xml:space="preserve">
+	<value>Comments on the report form</value>
+</data>
+<data name="EMAIL_TELLUSDETAILS" xml:space="preserve">
+	<value>Please tell us the details</value>
+</data>
+
+<data name="ENTITYNAME_CUSTOMER" xml:space="preserve">
+	<value>Customer</value>
+</data>
+<data name="LABEL_CUSTOMER_CODE" xml:space="preserve">
+	<value>Code</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_CODE" xml:space="preserve">
+	<value>Please enter a value for Code</value>
+</data>
+<data name="LABEL_CUSTOMER_TITLE" xml:space="preserve">
+	<value>Customer/Claimant Title</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_TITLE" xml:space="preserve">
+	<value>Please enter a value for Customer/Claimant Title</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERTITLE" xml:space="preserve">
+	<value>Other Title</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERTITLE" xml:space="preserve">
+	<value>Please enter a value for Other Title</value>
+</data>
+<data name="LABEL_CUSTOMER_FIRSTNAME" xml:space="preserve">
+	<value>First Name</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_FIRSTNAME" xml:space="preserve">
+	<value>Please enter a value for First Name</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERNAMES" xml:space="preserve">
+	<value>Other Names</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERNAMES" xml:space="preserve">
+	<value>Please enter a value for Other Names</value>
+</data>
+<data name="LABEL_CUSTOMER_LASTNAME" xml:space="preserve">
+	<value>Last Name</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_LASTNAME" xml:space="preserve">
+	<value>Please enter a value for Last Name</value>
+</data>
+<data name="LABEL_CUSTOMER_NINO" xml:space="preserve">
+	<value>NINO</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_NINO" xml:space="preserve">
+	<value>Please enter a value for NINO</value>
+</data>
+<data name="LABEL_CUSTOMER_ISCUSTOMERREPORTED" xml:space="preserve">
+	<value>Are you reporting the customer?</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_ISCUSTOMERREPORTED" xml:space="preserve">
+	<value>Please enter a value for Are you reporting the customer?</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONTITLE" xml:space="preserve">
+	<value>Other Person Title</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONTITLE" xml:space="preserve">
+	<value>Please enter a value for Other Person Title</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONOTHERTITLE" xml:space="preserve">
+	<value>Other Title</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONOTHERTITLE" xml:space="preserve">
+	<value>Please enter a value for Other Title</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONFIRSTNAME" xml:space="preserve">
+	<value>Other Person First Name</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONFIRSTNAME" xml:space="preserve">
+	<value>Please enter a value for Other Person First Name</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONOTHERNAMES" xml:space="preserve">
+	<value>Other Person Other Names</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONOTHERNAMES" xml:space="preserve">
+	<value>Please enter a value for Other Person Other Names</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONLASTNAME" xml:space="preserve">
+	<value>Other Person Last Name</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONLASTNAME" xml:space="preserve">
+	<value>Please enter a value for Other Person Last Name</value>
+</data>
+<data name="LABEL_CUSTOMER_OTHERPERSONNINO" xml:space="preserve">
+	<value>Other Person NINO</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_OTHERPERSONNINO" xml:space="preserve">
+	<value>Please enter a value for Other Person NINO</value>
+</data>
+<data name="LABEL_CUSTOMER_RELATIONSHIPTOCUSTOMERCODE" xml:space="preserve">
+	<value>Relationship To Customer</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_RELATIONSHIPTOCUSTOMERCODE" xml:space="preserve">
+	<value>Please enter a value for Relationship To Customer</value>
+</data>	
+<data name="LABEL_CUSTOMER_HOUSENUMBERORNAME" xml:space="preserve">
+	<value>House Number Or Name</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_HOUSENUMBERORNAME" xml:space="preserve">
+	<value>Please enter a value for House Number Or Name</value>
+</data>
+<data name="LABEL_CUSTOMER_STREET" xml:space="preserve">
+	<value>Street</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_STREET" xml:space="preserve">
+	<value>Please enter a value for Street</value>
+</data>
+<data name="LABEL_CUSTOMER_TOWN" xml:space="preserve">
+	<value>Town</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_TOWN" xml:space="preserve">
+	<value>Please enter a value for Town</value>
+</data>
+<data name="LABEL_CUSTOMER_COUNTY" xml:space="preserve">
+	<value>County</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_COUNTY" xml:space="preserve">
+	<value>Please enter a value for County</value>
+</data>
+<data name="LABEL_CUSTOMER_POSTCODE" xml:space="preserve">
+	<value>Postcode</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_POSTCODE" xml:space="preserve">
+	<value>Please enter a value for Postcode</value>
+</data>
+<data name="LABEL_CUSTOMER_ROWIDENTIFIER" xml:space="preserve">
+	<value>Row Identifier</value>
+</data>
+<data name="TOOLTIP_CUSTOMER_ROWIDENTIFIER" xml:space="preserve">
+	<value>Please enter a value for Row Identifier</value>
+</data>
+<data name="LABEL_ADMINMENU_ABUSE_TYPE" xml:space="preserve">
+	<value>Abuse Type</value>	
+</data>
+<data name="LABEL_ADMINMENU_CONTINGENCY_ARRANGEMENTS_MADE" xml:space="preserve">
+	<value>Contingency Arrangements Made</value>	
+</data>
+<data name="LABEL_ADMINMENU_CONTROL_MEASURES" xml:space="preserve">
+	<value>Control Measures</value>	
+</data>
+<data name="LABEL_ADMINMENU_CONTENT" xml:space="preserve">
+	<value>Content Management</value>
+</data>
+<data name="LABEL_ADMINMENU_EVENT_LEADING_UP_TO_INCIDENT" xml:space="preserve">
+	<value>Event Leading up to incident</value>	
+</data>
+<data name="LABEL_ADMINMENU_INCIDENT_CATEGORY" xml:space="preserve">
+	<value>Incident Category</value>	
+</data>
+<data name="LABEL_ADMINMENU_INCIDENT_DETAILS" xml:space="preserve">
+	<value>Incident Details</value>	
+</data>
+<data name="LABEL_ADMINMENU_INCIDENT_LOCATION" xml:space="preserve">
+	<value>Incident Location</value>	
+</data>
+<data name="LABEL_ADMINMENU_INCIDENT_TYPE" xml:space="preserve">
+	<value>Incident Type</value>	
+</data>
+<data name="LABEL_ADMINMENU_INTERESTED_PARTIES" xml:space="preserve">
+	<value>Interested Parties</value>	
+</data>
+<data name="LABEL_ADMINMENU_IT_SYSTEMS_MARKED" xml:space="preserve">
+	<value>IT Systems Marked</value>	
+</data>
+<data name="LABEL_ADMINMENU_JOB_ROLE" xml:space="preserve">
+	<value>Job Role</value>	
+</data>
+<data name="LABEL_ADMINMENU_REFERRER" xml:space="preserve">
+	<value>Referrer</value>	
+</data>
+<data name="LABEL_ADMINMENU_RELATIONSHIP_TO_CUSTOMER" xml:space="preserve">
+	<value>Relationship to Customer</value>	
+</data>
+<data name="LABEL_ADMINMENU_SYSTEM_PARAMETER" xml:space="preserve">
+	<value>System Parameters</value>	
+</data>
+<data name="LABEL_ADMINMENU_SITE" xml:space="preserve">
+	<value>Site</value>	
+</data>
+<data name="LABEL_ADMINMENU_REPORT_CATEGORY" xml:space="preserve">
+	<value>Report Category</value>	
+</data>
+<data name="LABEL_ADMINMENU_STANDARD_REPORT" xml:space="preserve">
+	<value>Standard Report</value>	
+</data>
+<data name="VAL_CHARS_NOT_ALLOWED" xml:space="preserve">
+	<value>Invalid characters not allowed in {0}.</value>	
+</data>
+<data name="VAL_NI_NUMBER_INVALID" xml:space="preserve">
+    <value>This is not a valid National Insurance Number.</value>
+</data>
+<data name="INCIDENT_CREATION_CONFIRMATION" xml:space="preserve">
+    <value>Incident successfully created.</value>
+</data>
+<data name="INCIDENT_LINEMANAGERUPDATE_CONFIRMATION" xml:space="preserve">
+    <value>Thank you for submitting this report.</value>
+</data>
+<data name="INCIDENT_LINEMANAGERACTIONSCOMPLETE_CONFIRMATION" xml:space="preserve">
+    <value>Line manager actions completed.</value>
+</data>
+<data name="ENTITYNAME_NARRATIVE" xml:space="preserve">
+	<value>Narrative</value>
+</data>
+<data name="LABEL_NARRATIVE_CODE" xml:space="preserve">
+	<value>Code</value>
+</data>
+<data name="TOOLTIP_NARRATIVE_CODE" xml:space="preserve">
+	<value>Please enter a value for Code</value>
+</data>
+<data name="LABEL_NARRATIVE_NARRATIVETYPE" xml:space="preserve">
+	<value>Narrative Type</value>
+</data>
+<data name="TOOLTIP_NARRATIVE_NARRATIVETYPE" xml:space="preserve">
+	<value>Please enter a value for Narrative Type</value>
+</data>
+<data name="LABEL_NARRATIVE_NARRATIVEDESCRIPTION" xml:space="preserve">
+	<value>Narrative</value>
+</data>
+<data name="TOOLTIP_NARRATIVE_NARRATIVEDESCRIPTION" xml:space="preserve">
+	<value>Please enter a value for Narrative</value>
+</data>
+<data name="LABEL_NARRATIVE_ROWIDENTIFIER" xml:space="preserve">
+	<value>Row Identifier</value>
+</data>
+<data name="TOOLTIP_NARRATIVE_ROWIDENTIFIER" xml:space="preserve">
+	<value>Please enter a value for Row Identifier</value>
+</data>
+<data name="EMAILADDRESS" xml:space="preserve">
+	<value>email address</value>
+</data>
+<data name="LABEL_INCIDENT_LINEMANAGEREMAIL" xml:space="preserve">
+	<value>Your Line Manager's Email Address</value>
+</data>
+<data name="TOOLTIP_INCIDENT_LINEMANAGEREMAIL" xml:space="preserve">
+	<value>Please enter a value for your Line Manager's Email Address</value>
+</data>
+<data name="LABEL_FINDLINEMANAGERSEMAILBUTTON" xml:space="preserve">
+	<value>Please Click Here To Search For Your Line Manager's Email Address</value>
+</data>
+<data name="VAL_DATE_AFTER" xml:space="preserve">
+	<value>{0} should be after {1}.</value>
+</data>
+<data name="VAL_DATE_AFTER_EQUAL" xml:space="preserve">
+	<value>{0} should be after or equal to {1}.</value>
+</data>
+<data name="VAL_DATE_BEFORE" xml:space="preserve">
+	<value>{0} should be before {1}.</value>
+</data>
+<data name="VAL_DATE_BEFORE_EQUAL" xml:space="preserve">
+	<value>{0} should be before or equal to {1}.</value>
+</data>
+<data name="VAL_INCIDENTDATE_FUTURE" xml:space="preserve">
+	<value>Incident date cannot be in the future</value>
+</data>
+<data name="VAL_INCIDENTDATE_TOOEARLY" xml:space="preserve">
+	<value>Incident date cannot be prior to 01/01/2000</value>
+</data>
+<data name="VAL_REQUIRED" xml:space="preserve">
+	<value>The {0} field is required.</value>
+</data>
+	
+<data name="LABEL_LINK_VIEWMYNEWREPORTS" xml:space="preserve">
+	<value>View My New Reports</value>
+</data>
+
+<data name="LABEL_LINK_VIEWMYREVIEWS" xml:space="preserve">
+	<value>View My Reviews</value>
+</data>
+
+<data name="LABEL_LINK_VIEWMYFORWARDLOOK" xml:space="preserve">
+	<value>View My Forward Look</value>
+</data>
+<data name="LABEL_LINK_SPLBYALLCASES" xml:space="preserve">
+	<value>View SPL By All Cases</value>
+</data>
+<data name="LABEL_LINK_SPLBYARCHIVED" xml:space="preserve">
+	<value>View SPL By Archived</value>
+</data>
+<data name="LABEL_LINK_SPLBYBUSINESSUNIT" xml:space="preserve">
+	<value>View SPL By Business Unit</value>
+</data>
+<data name="LABEL_LINK_SPLBYCONTROLMEASURE" xml:space="preserve">
+	<value>View SPL By Control Measure</value>
+</data>
+<data name="LABEL_LINK_SPLBYDISTRICT" xml:space="preserve">
+	<value>View SPL By District</value>
+</data>
+<data name="LABEL_LINK_SPLBYNAME" xml:space="preserve">
+	<value>View SPL By Last Name (By All Cases)</value>
+</data>
+<data name="LABEL_LINK_SPLBYNINO" xml:space="preserve">
+	<value>View SPL By NINO (By All Cases)</value>
+</data>
+<data name="LABEL_LINK_SPLBYINCIDENTID" xml:space="preserve">
+	<value>View SPL By Incident ID (By All Cases)</value>
+</data>
+<data name="LABEL_LINK_SPLBYPOSTCODE" xml:space="preserve">
+	<value>View SPL By Postcode (By All Cases)</value>
+</data>
+<data name="LABEL_LINK_SPLBYREGION" xml:space="preserve">
+	<value>View SPL By Region</value>
+</data>
+<data name="LABEL_LINK_SPLBYSITE" xml:space="preserve">
+	<value>View SPL By Site (By All Cases)</value>
+</data>
+<data name="LABEL_LINK_SPLBY3RDPARTYREFERRALS" xml:space="preserve">
+	<value>View SPL By 3rd Party Referrals</value>
+</data>
+
+<data name="LABEL_ISP_SearchButton" xml:space="preserve">
+	<value>Search</value>
+</data>
+
+<data name="LABEL_ISP_BannedOfficeOfficeEndDate" xml:space="preserve">
+	<value>Banned from Office(s) and end date of ban if appropriate</value>
+</data>
+
+<data name="LABEL_ISP_NamedOfficerNameContact" xml:space="preserve">
+	<value>Name and contact number of Named Officer if appropriate</value>
+</data>
+
+<data name="LABEL_ISP_Relationship" xml:space="preserve">
+	<value>If the control measure has been applied for someone linked to customer the relationship will be shown here</value>
+</data>
+
+<data name="LABEL_ISP_FirstName" xml:space="preserve">
+	<value>Customer first name</value>
+</data>
+
+<data name="LABEL_ISP_ControlMeasures" xml:space="preserve">
+	<value>Control Measures in place</value>
+</data>
+
+<data name="LABEL_ISP_Nino" xml:space="preserve">
+	<value>Please enter FULL NINO then click Search.</value>
+</data>
+
+<data name="LABEL_ISP_Nino_Other" xml:space="preserve">
+	<value>If a Control Measure exists for that NINO it will be shown below the input box together with first name for validation purposes</value>
+</data>
+	
+<data name="LABEL_ISP_No_data_found" xml:space="preserve">
+	<value>No Control Measures held for this NINO</value>
+</data>
+	
+<data name="LABEL_LI_LinkedIncidents" xml:space="preserve">
+	<value>Linked Incidents</value>
+</data>	
+	
+<data name="BUTTON_LI_LinkedIncidents" xml:space="preserve">
+	<value>Copy Link</value>
+</data>	
+
+<data name="BUTTON_LI_LinkedIncidentsTooltip" xml:space="preserve">
+	<value>To creat a link to this {0} click the "Copy Link", open another incident and click "paste link"</value>
+</data>	
+
+<data name="BUTTON_LI_PasteIncidents" xml:space="preserve">
+	<value>Paste Link</value>
+</data>	
+
+<data name="BUTTON_LI_PasteIncidentsTooltip" xml:space="preserve">
+	<value>To link this {0} ID:{1} to the current {0} click "Paste Link"</value>
+</data>	
+
+<data name="INCIDENT_NEWMANAGER_NOTE" xml:space="preserve">
+	<value>Note - If you need to change the Nominated Manager responsible for this review then please use the 'Transfer to New NM' button at the bottom of this form.
+	Remember to change the review to a future date.</value>
+</data>
+
+<data name="VAL_CONFIRMREADREPORT" xml:space="preserve">
+	<value>Please confirm that you have read the report</value>
+</data>
+<data name="MESSAGE_SUBMITCONFIRMATION" xml:space="preserve">
+	<value>Are you sure you wish to submit this report? Press again to confirm</value>
+</data>
+<data name="TITLE_TRANSFER_INCIDENT" xml:space="preserve">
+	<value>Transfer Incident Report</value>
+</data>
+<data name="LABEL_TRANSFER_INCIDENT" xml:space="preserve">
+	<value>Please select the Nominated Officer</value>
+</data>
+<data name="LABEL_TRANSFER_FILTER" xml:space="preserve">
+	<value>Starts With</value>
+</data>
+<data name="LABEL_TRANSFER_SITENAME" xml:space="preserve">
+	<value>Site</value>
+</data>
+<data name="LABEL_TRANSFER_NOMMGR" xml:space="preserve">
+	<value>Nominated Manager</value>
+</data>
+<data name="LABEL_TRANSFER_DEPNOMMGR" xml:space="preserve">
+	<value>Deputy Nominated Managers</value>
+</data>
+<data name="LABEL_TRANSFER_TRANSFERBUTTON" xml:space="preserve">
+	<value>Transfer</value>
+</data>
+<data name="TOOLTIP_TRANSFER_TRANSFERBUTTON" xml:space="preserve">
+	<value>Click here to transfer incident</value>
+</data>
+<data name="LABEL_CANCELBUTTON" xml:space="preserve">
+	<value>Cancel</value>
+</data>
+<data name="TOOLTIP_CANCELBUTTON" xml:space="preserve">
+	<value>Cancel</value>
+</data>
+<data name="LABEL_REMOVEATTACHMENTBUTTON" xml:space="preserve">
+	<value>Remove Attachment</value>
+</data>
+<data name="LABEL_INCIDENT_NOMINATEDMANAGER" xml:space="preserve">
+	<value>14.0 Nominated Manager Responsible For Review</value>
+</data>
+<data name="TOOLTIP_INCIDENT_NOMINATEDMANAGER" xml:space="preserve">
+	<value>14.0 Nominated Manager Responsible For Review</value>
+</data>
+<data name="LABEL_INCIDENT_DEPUTYNOMINATEDMANAGERS" xml:space="preserve">
+	<value>14.0(b) Deputy Nominated Managers Responsible For Review</value>
+</data>
+<data name="TOOLTIP_INCIDENT_DEPUTYNOMINATEDMANAGERS" xml:space="preserve">
+	<value>14.0(b) Deputy Nominated Managers Responsible For Review</value>
+</data>
+<data name="LABEL_SEARCHSITEBUTTON" xml:space="preserve">
+	<value>Search For Site</value>
+</data>
+<data name="TOOLTIP_SEARCHSITEBUTTON" xml:space="preserve">
+	<value>Select to search for site</value>
+</data>
+<data name="LABEL_PRINTBUTTON" xml:space="preserve">
+	<value>Print</value>
+</data>
+<data name="TOOLTIP_PRINTBUTTON" xml:space="preserve">
+	<value>Print</value>
+</data>
+<data name="LABEL_TRANSFERSITESEARCH_SITENAME" xml:space="preserve">
+	<value>Site Name</value>
+</data>
+<data name="LEGEND_INCIDENTHISTORY" xml:space="preserve">
+	<value>Incident History</value>
+</data>
+<data name="LABEL_INCIDENTHISTORY_LASTFIVEUPDATES" xml:space="preserve">
+	<value>Last 5 edits:</value>
+</data>
+<data name="LABEL_INCIDENTHISTORY_CREATED" xml:space="preserve">
+	<value>Created:</value>
+</data>
+<data name="INCIDENT_ACTIONREQUIRED" xml:space="preserve">
+	<value>Action Required For Decision</value>
+</data>
+<data name="INCIDENT_ACTIONREQUIRED_PUBLISHMESSAGE" xml:space="preserve">
+	<value>Note - If you have decided that control measures are appropriate you must select the "Publish" button below after completing parts 11 to 13.</value>
+</data>
+<data name="INCIDENT_ACTIONREQUIRED_ARCHIVEMESSAGE" xml:space="preserve">
+	<value>Note - If Control Measures are not appropriate, select the 'Archive' button below.</value>
+</data>
+
+<data name="ENTITYNAME_REFERRAL" xml:space="preserve">
+	<value>Referral</value>
+</data>
+
+<data name="LABEL_REFERRAL_PROTECTIVEMARKING" xml:space="preserve">
+	<value>Protective Marking:- OFFICIAL - SENSITIVE</value>
+</data>
+<data name="LABEL_REFERRAL_REFERRALREPORTFORMFOR" xml:space="preserve">
+	<value>This is the Third Party Referral Report Form For:</value>
+</data>
+<data name="LABEL_REFERRAL_REFERRALREPORTFORM" xml:space="preserve">
+	<value>This is the Third Party Referral Report Form</value>
+</data>
+<data name="LABEL_REFERRAL_REFERRALID" xml:space="preserve">
+	<value>Referral ID</value>
+</data>
+<data name="TOOLTIP_REFERRAL_REFERRALID" xml:space="preserve">
+	<value>Please enter a value for Referral ID</value>
+</data>
+<data name="LABEL_REFERRAL_REFERRALSTATUS" xml:space="preserve">
+	<value>Referral Status</value>
+</data>
+<data name="TOOLTIP_REFERRAL_REFERRALSTATUS" xml:space="preserve">
+	<value>Please enter a value for Referral Status</value>
+</data>
+<data name="LEGEND_REPORTSECTION" xml:space="preserve">
+	<value>Report Section</value>
+</data>
+<data name="LABEL_REFERRAL_REFERRERCODE" xml:space="preserve">
+	<value>Referrer</value>
+</data>
+<data name="TOOLTIP_REFERRAL_REFERRERCODE" xml:space="preserve">
+	<value>Please enter a value for Referrer</value>
+</data>	
+<data name="LABEL_REFERRAL_REFERRALDATE" xml:space="preserve">
+	<value>Date Referral Made (dd/mm/yyyy)</value>
+</data>          
+<data name="TOOLTIP_REFERRAL_REFERRALDATE" xml:space="preserve">
+	<value>Please enter a value for Date Referral Made</value>
+</data>
+<data name="LABEL_REFERRAL_ISIMPLEMENTCONTROLMEASURES" xml:space="preserve">
+	<value>Do you intend to implement control measures for the customer?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISIMPLEMENTCONTROLMEASURES" xml:space="preserve">
+	<value>Please enter a value for Do you intend to implement control measures for the customer?</value>
+</data>
+<data name="LABEL_REFERRAL_CONTROLMEASURECODE" xml:space="preserve">
+	<value>What control measures have you applied? Select all that apply? (Published to Staff Protection List)</value>
+</data>
+<data name="TOOLTIP_REFERRAL_CONTROLMEASURECODE" xml:space="preserve">
+	<value>Please select control measures applied</value>
+</data>
+            
+<data name="LABEL_REFERRAL_ISITMARKERSSET" xml:space="preserve">
+	<value>Have you set markers on IT system?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISITMARKERSSET" xml:space="preserve">
+	<value>Please enter a value for.0 Have you set markers on IT system?</value>
+</data>
+<data name="LABEL_REFERRAL_ITSYSTEMSMARKED" xml:space="preserve">
+	<value>IT systems marked</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ITSYSTEMSMARKED" xml:space="preserve">
+	<value>Please select one or more IT systems</value>
+</data>
+<data name="LABEL_REFERRAL_NOMINATEDMANAGER" xml:space="preserve">
+	<value>Nominated Manager Responsible For Review</value>
+</data>
+<data name="TOOLTIP_REFERRAL_NOMINATEDMANAGER" xml:space="preserve">
+	<value>Nominated Manager Responsible For Review</value>
+</data>
+<data name="LABEL_REFERRAL_REVIEWDATE" xml:space="preserve">
+	<value>Date of next review (select new date for the review)</value>
+</data>
+<data name="TOOLTIP_REFERRAL_REVIEWDATE" xml:space="preserve">
+	<value>Please enter a value for Review Date</value>
+</data>
+<data name="LABEL_REFERRAL_ISPREVIOUSEVIDENCEREVIEWED" xml:space="preserve">
+	<value>Have you reviewed all previous evidence?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISPREVIOUSEVIDENCEREVIEWED" xml:space="preserve">
+	<value>Please enter a value for Have you reviewed all previous evidence?</value>
+</data>
+
+<data name="LABEL_REFERRAL_ISPREVIOUSPARTIESNOTIFIED" xml:space="preserve">
+	<value>Have you checked with all previously notified interested parties?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISPREVIOUSPARTIESNOTIFIED" xml:space="preserve">
+	<value>Have you checked with all previously notified interested parties?</value>
+</data>
+<data name="LABEL_REFERRAL_ISREPEATBEHAVIOUR" xml:space="preserve">
+	<value>Do you need to attach a Repeat Behaviour form?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISREPEATBEHAVIOUR" xml:space="preserve">
+	<value>Please enter a value for Do you need to attach a Repeat Behaviour form?</value>
+</data>
+<data name="LABEL_REFERRAL_ISCONTROLMEASURESSTILLAPPLY" xml:space="preserve">
+	<value>Are control measures still applicable?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_ISCONTROLMEASURESSTILLAPPLY" xml:space="preserve">
+	<value>Please enter a value for Are control measures still applicable?</value>
+</data>
+
+<data name="LABEL_REFERRAL_NOTIFIEDPARTIES" xml:space="preserve">
+	<value>Which interested parties have you notified?</value>
+</data>
+<data name="TOOLTIP_REFERRAL_NOTIFIEDPARTIES" xml:space="preserve">
+	<value>Please select one or more interested parties</value>
+</data>
+<data name="REFERRAL_CONTROLMEASURESMESSAGE" xml:space="preserve">
+	<value>Note - If the control measures need to be changed please amend them above and then select the "Publish" button. If the control measures remain unchanged please also select "Publish".</value>
+</data>
+<data name="REFERRAL_NOCONTROLMEASURESMESSAGE" xml:space="preserve">
+	<value>Note - Please select the "Archive" button below. This will remove all control measures and archive the incident report.</value>
+</data>
+<data name="LABEL_REFERRAL_NAMEDOFFICER" xml:space="preserve">
+	<value>Name of Named Officer</value>
+</data>
+<data name="TOOLTIP_REFERRAL_NAMEDOFFICER" xml:space="preserve">
+	<value>Please enter a value for  Name of Named Officer</value>
+</data>
+<data name="LABEL_REFERRAL_TELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>Telephone Contact Number</value>
+</data>
+<data name="TOOLTIP_REFERRAL_TELEPHONECONTACTNUMBER" xml:space="preserve">
+	<value>Please enter a value for Telephone Contact Number</value>
+</data>
+<data name="LABEL_REFERRAL_BANNEDFROMOFFICES" xml:space="preserve">
+	<value>Banned from Office(s)</value>
+</data>
+<data name="TOOLTIP_REFERRAL_BANNEDFROMOFFICES" xml:space="preserve">
+	<value>Please enter a value for Banned from Office(s)</value>
+</data>
+<data name="LABEL_REFERRAL_BANNEDFROMOFFICESENDDATE" xml:space="preserve">
+	<value>Banned from Office(s) end date</value>
+</data>
+<data name="TOOLTIP_REFERRAL_BANNEDFROMOFFICESENDDATE" xml:space="preserve">
+	<value>Please enter a value for Banned from Office(s) end date</value>
+</data>
+<data name="LABEL_REFERRAL_NOTES" xml:space="preserve">
+	<value>Notes</value>
+</data>
+<data name="TOOLTIP_REFERRAL_NOTES" xml:space="preserve">
+	<value>Please enter any notes</value>
+</data>
+<data name="VAL_INCIDENT_CONTROLMEASUREINCONSISTENCY" xml:space="preserve">
+	<value>Please re-assess the inconsistency between 'Do you intend to implement control measures for the customer?' and 'Are control measures still applicable?'</value>
+</data>
+	<data name="VAL_POSTCODE" xml:space="preserve">
+	<value>Invalid Postcode</value>
+</data>
+<data name="VAL_NOMINATEDMANAGER_IN_DEPUTY_LIST" xml:space="preserve">
+	<value>The Nominated Manager is already in the deputy nominated manager list</value>
+</data>
+<data name="VAL_CHANGESTATUSWITHCONTROLMEASURES" xml:space="preserve">
+	<value>The status cannot be changed back with control measure attached</value>
+</data>
+<data name="ENTITYNAME_SITE" xml:space="preserve">
+	<value>Site</value>
+</data>
+<data name="LABEL_SITE_CODE" xml:space="preserve">
+	<value>Code</value>
+</data>
+<data name="TOOLTIP_SITE_CODE" xml:space="preserve">
+	<value>Please enter a value for Code</value>
+</data>
+<data name="LABEL_SITE_ORGANISATIONCODE" xml:space="preserve">
+	<value>Organisation</value>
+</data>
+<data name="TOOLTIP_SITE_ORGANISATIONCODE" xml:space="preserve">
+	<value>Please enter a value for Organisation</value>
+</data>	
+<data name="LABEL_SITE_SITENAME" xml:space="preserve">
+	<value>Site Name</value>
+</data>
+<data name="TOOLTIP_SITE_SITENAME" xml:space="preserve">
+	<value>Please enter a value for Site Name</value>
+</data>
+<data name="LABEL_SITE_POSTCODE" xml:space="preserve">
+	<value>Postcode</value>
+</data>
+<data name="TOOLTIP_SITE_POSTCODE" xml:space="preserve">
+	<value>Please enter a value for Postcode</value>
+</data>
+<data name="LABEL_SITE_ISACTIVE" xml:space="preserve">
+	<value>Is Active</value>
+</data>
+<data name="TOOLTIP_SITE_ISACTIVE" xml:space="preserve">
+	<value>Please enter a value for Is Active</value>
+</data>
+<data name="LABEL_SITE_NOMINATEDMANAGER" xml:space="preserve">
+	<value>Nominated Manager</value>
+</data>
+<data name="TOOLTIP_SITE_NOMINATEDMANAGER" xml:space="preserve">
+	<value>Please enter a value for Nominated Manager</value>
+</data>
+<data name="LABEL_SITE_NOMINATEDMANAGERFIRSTNAMESEARCH" xml:space="preserve">
+	<value>Nominated Manager First Name Search</value>
+</data>
+<data name="TOOLTIP_SITE_NOMINATEDMANAGERFIRSTNAMESEARCH" xml:space="preserve">
+	<value>Please enter a value for Nominated Manager First Name</value>
+</data>
+	<data name="LABEL_SITE_NOMINATEDMANAGERLASTNAMESEARCH" xml:space="preserve">
+	<value>Nominated Manager Last Name Search</value>
+</data>
+<data name="TOOLTIP_SITE_NOMINATEDMANAGERLASTNAMESEARCH" xml:space="preserve">
+	<value>Please enter a value for Nominated Manager Last Name</value>
+</data>	
+	<data name="LABEL_SITE_DEPUTYNOMINATEDMANAGERFIRSTNAMESEARCH" xml:space="preserve">
+	<value>Deputy Nominated Manager First Name Search</value>
+</data>
+<data name="TOOLTIP_SITE_DEPUTYNOMINATEDMANAGERFIRSTNAMESEARCH" xml:space="preserve">
+	<value>Please enter a value for Deputy Nominated Manager First Name</value>
+</data>
+	<data name="LABEL_SITE_DEPUTYNOMINATEDMANAGERLASTNAMESEARCH" xml:space="preserve">
+	<value>Deputy Nominated Manager Last Name Search</value>
+</data>
+<data name="TOOLTIP_SITE_DEPUTYNOMINATEDMANAGERLASTNAMESEARCH" xml:space="preserve">
+	<value>Please enter a value for Deputy Nominated Manager Last Name</value>
+</data>	
+<data name="LABEL_SITE_DEPUTYNOMINATEDMANAGERSELECTLIST" xml:space="preserve">
+	<value>Available Deputy Nominated Manager(s)</value>
+</data>
+<data name="TOOLTIP_SITE_DEPUTYNOMINATEDMANAGERSELECTLIST" xml:space="preserve">
+	<value>Select a Deputy Nominated Manager to add</value>
+</data>	
+<data name="LABEL_SITE_DEPUTYNOMINATEDMANAGERLIST" xml:space="preserve">
+	<value>Deputy Nominated Managers for the Site</value>
+</data>
+<data name="TOOLTIP_SITE_DEPUTYNOMINATEDMANAGERLIST" xml:space="preserve">
+	<value>List of Deputy Nominated Managers for the Site</value>
+</data>	
+<data name="LABEL_SITE_ROWIDENTIFIER" xml:space="preserve">
+	<value>Row Identifier</value>
+</data>
+<data name="TOOLTIP_SITE_ROWIDENTIFIER" xml:space="preserve">
+	<value>Please enter a value for Row Identifier</value>
+</data>
+<data name="LABEL_MENU_INCIDENT" xml:space="preserve">
+	<value>Incident</value>
+</data>
+<data name="LABEL_MENU_SPL" xml:space="preserve">
+	<value>Staff Protection List</value>
+</data>
+<data name="LABEL_SITE_ORGANISATION_SEARCH" xml:space="preserve">
+	<value>Search</value>
+</data>
+<data name="TOOLTIP_SITE_ORGANISATION_SEARCH" xml:space="preserve">
+	<value>Search for Site Organisations</value>
+</data>
+<data name="LEGEND_SITE_ORGANISATION_SEARCH" xml:space="preserve">
+	<value>Site Organisation Search</value>
+</data>
+<data name="LABEL_RESULTS" xml:space="preserve">
+	<value>Results</value>
+</data>
+
+<data name="LABEL_MENU_NM_Views" xml:space="preserve">
+	<value>Nominated Manager Views</value>
+</data>
+<data name="LABEL_MENU_DNM_Views" xml:space="preserve">
+	<value>Deputy Nominated Manager Views</value>
+</data>
+
+<data name="LABEL_MENU_AdHocReporting" xml:space="preserve">
+	<value>Ad Hoc Reporting</value>
+</data>
+<data name="MESSAGE_MAXATTACHMENTSIZEEXCEEDED" xml:space="preserve">
+	<value>Maximum attachment size exceeded. File not uploaded.</value>
+</data>
+
+<data name="LABEL_MENU_PublishedReports" xml:space="preserve">
+	<value>Published Reports</value>
+</data>
+
+<data name="INCIDENT_EMAIL_SENT" xml:space="preserve">
+	<value>Email Sent</value>
+</data>
+
+<data name="INCIDENT_SEND_EMAIL" xml:space="preserve">
+	<value>Send Email</value>
+</data>
+
+<data name="INCIDENT_EMAIL_ACTION_REQUIRED" xml:space="preserve">
+	<value>EMAIL ACTION REQUIRED</value>
+</data>
+
+<data name="INCIDENT_EMAIL_ACTION" xml:space="preserve">
+	<value>Thank you for completing the incident report. You need to email this report to your Line Manager and Nominated Manager for their action.</value>
+</data>
+
+<data name="INCIDENT_EMAIL_FINDEMAILADDRESS" xml:space="preserve">
+	<value>Find and select your Line Manager's email address using the search fields below and send an email to the selected address.</value>
+</data>
+
+<data name="INCIDENT_EMAIL_SENDEMAIL" xml:space="preserve">
+	<value>If you click on the Send Email button without selecting your Line Manager's Email Address, the email will only go to your Nominated Manager.</value>
+</data>
+
+<data name="INCIDENT_FILE_ATTACHMENT_SIZE" xml:space="preserve">
+	<value>The maximum file attachment size is 4MB. Please select a smaller attachment or try to reduce the file size using a zip utility</value>
+</data>
+
+<data name="LABEL_CONTROLMEASURE_REVIEWPERIOD" xml:space="preserve">
+	<value>Review Period</value>
+</data>
+
+<data name="TOOLTIP_CONTROLMEASURE_REVIEWPERIOD" xml:space="preserve">
+	<value>Please enter a value for Review Period</value>
+</data>
+
+<data name="LABEL_INCIDENT_OTHERINCIDENTLOCATION" xml:space="preserve">
+    <value>Additional 'Other' location Information</value>
+</data>
+
+<data name="TOOLTIP_INCIDENT_OTHERINCIDENTLOCATION" xml:space="preserve">
+    <value>Please enter additional information about the 'Other' location here</value>
+</data>
+
+<data name="LABEL_INCIDENT_CURRENTOWNERSTAFFCODE" xml:space="preserve">
+    <value>Tick this box if you want to handle this case</value>
+</data>
+
+<data name="TOOLTIP_INCIDENT_CURRENTOWNERSTAFFCODE" xml:space="preserve">
+    <value>Tick to handle this case. Untick to revert to Nominated Manager</value>
+</data>
+
+<data name="ENTITYNAME_Search" xml:space="preserve">
+    <value>Search</value>
+</data>
+
+<data name="LABEL_STATUSCHANGEDTO" xml:space="preserve">
+	<value>Status Changed To</value>
+</data>
+
+<data name="TOOLTIP_STATUSCHANGEDTO" xml:space="preserve">
+	<value>Please enter a value for Status Changed To</value>
+</data>
+
+<data name="LABEL_PLEASESELECT" xml:space="preserve">
+	<value>Please select...</value>
+</data>
+
+<data name="LABEL_NATTATIVEBOX_EXPANDCOLLAPSE" xml:space="preserve">
+	<value>Click to expand/collapse narrative box</value>
+</data>
+
+<data name="VAL_INCIDENT_CATEGORY_TYPE_INCONSISTENT" xml:space="preserve">
+	<value>Incident Category and Incident Type are inconsistent, please re-select</value>
+</data> 
+
+<data name="LABEL_INCIDENT_WITNESSREPORT_COMPLETE" xml:space="preserve">
+	<value>NOTE: If you witnessed the incident you should complete a WITNESS REPORT form.</value>
+</data>
+
+<data name="LABEL_INCIDENT_WITNESSREPORT_FORMLOCATION" xml:space="preserve">
+	<value>This can be found on the UCB site on the Health and Safety webpage. (On the left side panel go to A to Z > U > Unacceptable Customer Behaviour - DWP Guidance > Witness Report Form (right panel))</value>
+</data>
+
+<data name="VAL_CONTROLMEASURE_TOBESEENBYNAMEDOFFICER_GUID" xml:space="preserve">
+	<value>d1a51d64-466d-4f77-9e90-ca65e561fc48</value>
+</data>  
+
+<data name="VAL_CONTROLMEASURE_BANNEDFROMOFFICE_GUID" xml:space="preserve">
+	<value>050cf9f8-1514-41a9-9728-9a92964923bb</value>
+</data>  
+<#
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	// Do not generate code for entities in the ignore list
+	if (ignoreList.Contains("," + entity.Name + ",")) continue;
+
+	string entityNameValue = entity.Name.Replace("1", "");
+	entityNameValue = System.Text.RegularExpressions.Regex.Replace(entityNameValue, @"[A-Z]Code",  m => m.ToString().Replace("Code", ""));
+	entityNameValue = System.Text.RegularExpressions.Regex.Replace(entityNameValue, @"[A-Z][A-Z][a-z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().Substring(1,2));
+	entityNameValue = System.Text.RegularExpressions.Regex.Replace(entityNameValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+	entityNameValue = System.Text.RegularExpressions.Regex.Replace(entityNameValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+	entityNameValue = System.Text.RegularExpressions.Regex.Replace(entityNameValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+#>
+<data name="LABEL_GRIDTITLE_<#=entity.Name.ToUpper()#>LIST" xml:space="preserve">
+	<value>Please select</value>
+</data>
+<data name="ENTITYNAME_<#=entity.Name.ToUpper()#>" xml:space="preserve">
+	<value><#=entityNameValue#></value>
+</data>
+<#
+	foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+	{
+		bool isForeignKey = entity.NavigationProperties.Any(np=>np.GetDependentProperties().Contains(edmProperty));
+		bool isDefaultValueDefinedInModel = (edmProperty.DefaultValue != null);
+		if (edmProperty.Name == "SecurityLabel") continue;
+		string propValue = edmProperty.Name.Replace("1", "");
+		propValue = System.Text.RegularExpressions.Regex.Replace(propValue, @"[A-Z]Code",  m => m.ToString().Replace("Code", ""));
+		propValue = System.Text.RegularExpressions.Regex.Replace(propValue, @"[A-Z][A-Z][a-z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().Substring(1,2));
+		propValue = System.Text.RegularExpressions.Regex.Replace(propValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+		propValue = System.Text.RegularExpressions.Regex.Replace(propValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+		propValue = System.Text.RegularExpressions.Regex.Replace(propValue, @"[a-z][A-Z]", m => m.ToString().ToCharArray()[0] + " " + m.ToString().ToCharArray()[1]);
+		
+		if (isForeignKey)
+		{
+#>
+<data name="LABEL_<#=entity.Name.ToUpper()#>_<#=edmProperty.Name.ToUpper()#>" xml:space="preserve">
+	<value><#=propValue.Replace("Code","")#></value>
+</data>
+<data name="TOOLTIP_<#=entity.Name.ToUpper()#>_<#=edmProperty.Name.ToUpper()#>" xml:space="preserve">
+	<value>Please enter a value for <#=propValue.Replace("Code","")#></value>
+</data>	
+<#
+		}
+		else
+		{
+#>
+<data name="LABEL_<#=entity.Name.ToUpper()#>_<#=edmProperty.Name.ToUpper()#>" xml:space="preserve">
+	<value><#=propValue#></value>
+</data>
+<data name="TOOLTIP_<#=entity.Name.ToUpper()#>_<#=edmProperty.Name.ToUpper()#>" xml:space="preserve">
+	<value>Please enter a value for <#=propValue#></value>
+</data>
+<#
+		}
+	}
+}
+#>
+
+</root>

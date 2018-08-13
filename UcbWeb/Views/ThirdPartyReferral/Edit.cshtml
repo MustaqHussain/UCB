@@ -1,0 +1,1451 @@
+﻿@model UcbWeb.ViewModels.IncidentVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_INCIDENT;
+}
+@*<h2>
+    Maintain @Resources.ENTITYNAME_INCIDENT</h2>*@
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty ? Html.Raw("true") : Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		
+		var $myDialogDelete = $('<div id=\'confirm\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'confirm\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        var $myDialogSubmit = $('<div id=\'confirm\'></div>')
+        .html('Are you sure you want to submit this report?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsSubmitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::SubmitIncident").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteIncident') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitIncident') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::SubmitIncident') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsSubmitConfirmed').val("True");
+                    var returnValue = $myDialogSubmit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsSubmitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+
+       //Staff member - Display 'other title' options if a title of 'other' is selected
+       $("#StaffMemberTitleButton").hide();
+       //$("#StaffOtherTitle").addClass('hidestuff');
+       $('input:radio[name="IncidentItem.StaffMemberTitle"]').change(function(){
+
+            if(this.value == "Other"){
+                $("#StaffOtherTitle").removeClass('hidestuff')
+            }
+            else {
+                $("#StaffOtherTitle").addClass('hidestuff');
+            }
+        });
+
+        //Customer - Display 'other title' options if a title of 'other' is selected
+        $("#CustomerTitleButton").hide();
+        //$("#CustomerOtherTitle").addClass('hidestuff');
+        $('input:radio[name="CustomerItem.Title"]').change(function(){
+            if(this.value == "Other"){
+                $("#CustomerOtherTitle").removeClass('hidestuff')
+            }
+            else {
+                $("#CustomerOtherTitle").addClass('hidestuff');
+            }
+        });
+
+        //Customer Other Person section - Display details only if other has been selected
+        $("#CustomerOtherPersonButton").hide();
+        //$("#CustomerOtherPersonDetails").addClass('removestuff');
+        $('input:radio[name="CustomerItem.IsCustomerReported"]').change(function(){
+            if(this.value == "False"){
+                $("#CustomerOtherPersonDetails").removeClass('removestuff')
+            }
+            else {
+                $("#CustomerOtherPersonDetails").addClass('removestuff');
+            }
+        });
+
+        //Customer - Display 'other title' options if a title of 'other' is selected
+        $("#CustomerOtherPersonTitleButton").hide();
+        //$("#CustomerOtherPersonOtherTitle").addClass('hidestuff');
+        $('input:radio[name="CustomerItem.OtherPersonTitle"]').change(function(){
+            if(this.value == "Other"){
+                $("#CustomerOtherPersonOtherTitle").removeClass('hidestuff')
+            }
+            else {
+                $("#CustomerOtherPersonOtherTitle").addClass('hidestuff');
+            }
+        });
+
+        //Incident - Display 'Others present' text box if 'Were Others Present?' is set to true
+        $("#OthersPresentButton").hide();
+        //$("#OthersPresent").addClass('hidestuff');
+        $('input:radio[name="IncidentItem.IsOthersPresent"]').change(function(){
+            if(this.value == "True"){
+                $("#OthersPresent").removeClass('hidestuff')
+            }
+            else {
+                $("#OthersPresent").addClass('hidestuff');
+            }
+        });
+
+        //Incident - Display 'RIDDOR file upload section' text box if 'Is Nominated RIDDOR?' set to true
+        $('input:radio[name="IncidentItem.IsNominatedRIDDOR"]').change(function(){
+            if(this.value == "True"){
+                $("#RIDDORFileSection").removeClass('removestuff')
+            }
+            else {
+                $("#RIDDORFileSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display 'Fast Track file upload section' text box if 'Is Nominated RIDDOR?' set to true
+        $('input:radio[name="IncidentItem.IsNominatedFastTrack"]').change(function(){
+            if(this.value == "True"){
+                $("#FastTrackFileSection").removeClass('removestuff')
+            }
+            else {
+                $("#FastTrackFileSection").addClass('removestuff');
+            }
+        });
+
+        // drop down check lists
+        $(".dropdownchecklist").dropdownchecklist({ emptyText: "Please Select...", width: 400, icon: {}, maxdropheight:250  });
+        $(".dropdownchecklistcontrolmeasure").dropdownchecklist({ emptyText: "Please Select...", width: 400, icon: {}, maxdropheight:250, onComplete: IsNamedOfficerSelectionChanged });
+        IsNamedOfficerSelectionChanged();
+
+        //Display or hide the publish button 
+        IsImplementControlMeasuresChanged();
+        $('input:radio[name="IncidentItem.IsImplementControlMeasures"]').change(IsImplementControlMeasuresChanged);
+
+        // systems marked
+        IsITMarkersSetChanged();
+        $('input:radio[name="IncidentItem.IsITMarkersSet"]').change(IsITMarkersSetChanged);
+
+        // interessted parties
+        IsNotifiedPartiesChanged();
+        $('input:radio[name="IncidentItem.IsNotifiedParties"]').change(IsNotifiedPartiesChanged);
+
+
+        //Refresh incident types when category is changed
+        $("#IncidentCategoryButton").hide();
+        $('#IncidentItem_IncidentCategoryCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshIncidentTypes method, passing selectedItem as the categoryCode parameter and returning incidentTypes
+                $.getJSON('@Url.Action("RefreshIncidentTypes")',{categoryCode: selectedItem}, function(incidentTypes){
+
+                    var count = incidentTypes.length;
+                    var incidentTypesSelect = $('#IncidentItem_IncidentTypeCode');
+                    incidentTypesSelect.empty();
+                    $.each(incidentTypes, function(index, incidentType) {
+                        incidentTypesSelect.append($('<option/>',{
+                            value: incidentType.value,
+                            text: incidentType.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            incidentTypesSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_IncidentTypeCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Refresh business areas when business is changed. Also clear the home office list
+        $("#BusinessButton").hide();
+        $('#IncidentItem_StaffMemberBusinessCode').change(function () {
+
+            //call ResetHomeOfficesMethod
+            $.getJSON('@Url.Action("ResetHomeOffices")', function(homeOffices){
+                 var homeOfficeSelect = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    homeOfficeSelect.empty();
+                    $.each(homeOffices, function(index, homeOffice) {
+                        homeOfficeSelect.append($('<option/>',{
+                            value: homeOffice.value,
+                            text: homeOffice.text
+                        }));
+                    });
+
+                    var selectedItem = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    selectedItem.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300});
+            });
+            
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshBusinessAreas method, passing selectedItem as the businessCode parameter and returning businessAreas
+                $.getJSON('@Url.Action("RefreshBusinessAreas")',{businessCode: selectedItem}, function(businessAreas){
+
+                    var count = businessAreas.length;
+                    var businessAreaSelect = $('#IncidentItem_StaffMemberBusinessAreaCode');
+                    businessAreaSelect.empty();
+                    $.each(businessAreas, function(index, businessArea) {
+                        businessAreaSelect.append($('<option/>',{
+                            value: businessArea.value,
+                            text: businessArea.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            businessAreaSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_StaffMemberBusinessAreaCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Refresh Home Offices when business area is changed
+        $("#BusinessAreaButton").hide();
+        $('#IncidentItem_StaffMemberBusinessAreaCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call RefreshHomeOffices method, passing selectedItem as the businessAreaCode parameter and returning businessAreaTypes
+                $.getJSON('@Url.Action("RefreshHomeOffices")',{businessAreaCode: selectedItem}, function(homeOffices){
+
+                    var count = homeOffices.length;
+                    var homeOfficeSelect = $('#IncidentItem_StaffMemberHomeOfficeCode');
+                    homeOfficeSelect.empty();
+                    $.each(homeOffices, function(index, homeOffice) {
+                        homeOfficeSelect.append($('<option/>',{
+                            value: homeOffice.value,
+                            text: homeOffice.text
+                        }
+                        )
+                        );
+                        //only after last update rebind the selectmenu
+                        if(--count ==0) {
+                            homeOfficeSelect.selectmenu('destroy').selectmenu({width: 200, style: 'dropdown', menuWidth: 300}).change(function(){
+                                $('#mainForm').validate().element('select#IncidentItem_StaffMemberHomeOfficeCode');
+                            });
+                        }
+                    });     
+                });
+            }
+	    });
+
+        //Display or hide incident details/abuse type depending on the selected incident type
+        $("#IncidentTypeButton").hide();
+        $('#IncidentItem_IncidentTypeCode').change(function () {
+            var selectedItem = $(this).val();
+            if(selectedItem !=null && selectedItem !=''){
+                //call ShowOrHideIncidentDetailAndAbuseType method, passing selectedItem as the incidentTypeCode parameter and returning an incidentType
+                $.getJSON('@Url.Action("ShowOrHideIncidentDetailAndAbuseType")',{incidentTypeCode: selectedItem}, function(incidentType){
+                    if(incidentType.HasAbuseType == true){
+                        $("#AbuseType").removeClass('removestuff')
+                    }
+                    else {
+                        $("#AbuseType").addClass('removestuff');
+                    }
+                    if(incidentType.HasDetails == true){
+                        $("#IncidentDetail").removeClass('removestuff')
+                    }
+                    else {
+                        $("#IncidentDetail").addClass('removestuff');
+                    }
+                });
+            }
+	    });
+
+        //Convert NINO to uppercase
+        $("#CustomerItem_NINO").keyup(function (e) {
+           $(this).val($(this).val().toUpperCase());
+           if (!isDirty) {
+                isDirty = true;
+            }
+        })
+
+        //Incident - Display 'Deficiencies in process narrative' text box if 'IsDeficienciesInProcess' set to true
+        $('input:radio[name="IncidentItem.IsDeficienciesInProcess"]').change(function(){
+            if(this.value == "True"){
+                $("#DeficienciesNarrativeSection").removeClass('removestuff')
+            }
+            else {
+                $("#DeficienciesNarrativeSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Oral Warning date  if 'IsOralWarning' set to true
+        $('input:radio[name="IncidentItem.IsOralWarning"]').change(function(){
+            if(this.value == "True"){
+                $("#OralWarningDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#OralWarningDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Written Warning date  if 'IsWritten' set to true
+        $('input:radio[name="IncidentItem.IsWrittenWarning"]').change(function(){
+            if(this.value == "True"){
+                $("#WrittenWarningDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#WrittenWarningDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Interviewed date  if 'IsAssailantInterviewed' set to true
+        $('input:radio[name="IncidentItem.IsAssailantInterviewed"]').change(function(){
+            if(this.value == "True"){
+                $("#AssailantInterviewedDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#AssailantInterviewedDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Solicitor letter date  if 'IsSolicitorLetter' set to true
+        $('input:radio[name="IncidentItem.IsSolicitorLetter"]').change(function(){
+            if(this.value == "True"){
+                $("#SolicitorDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#SolicitorDateSection").addClass('removestuff');
+            }
+        });
+
+        //Incident - Display Banning order date  if 'IsBanningOrder' set to true
+        $('input:radio[name="IncidentItem.IsBanningOrder"]').change(function(){
+            if(this.value == "True"){
+                $("#BanningOrderDateSection").removeClass('removestuff')
+            }
+            else {
+                $("#BanningOrderDateSection").addClass('removestuff');
+            }
+        });
+       
+    });
+
+    function IsImplementControlMeasuresChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.IsImplementControlMeasures"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+                $("#PublishButton").removeClass('removestuff');
+                $("#PublishButton").addClass('ui-button');
+                $("#ControlMeasuresSection").removeClass('removestuff');
+            }
+            else {
+                $("#PublishButton").addClass('removestuff');
+                $("#PublishButton").removeClass('ui-button');
+                $("#ControlMeasuresSection").addClass('removestuff');
+            }
+        }
+    }
+
+    function IsNamedOfficerSelectionChanged()
+    {
+        var selector = $('#IncidentItem_ControlMeasureCodes')[0];
+        if(selector != null)
+        {
+            var namedofficer = false;
+            for( i=0; i < selector.options.length; i++ ) {
+                if (selector.options[i].selected && (selector.options[i].text == "To be seen by named officer")) 
+                {
+                    namedofficer = true;
+                }
+            }
+            if(namedofficer == true)
+            {
+                $("#ControlMeasuresOfficerSection").removeClass('removestuff');
+            }
+            else
+            {
+                $("#ControlMeasuresOfficerSection").addClass('removestuff');
+            }
+        }
+    }
+
+    function IsITMarkersSetChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.IsITMarkersSet"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+                $("#SystemsMarkedSection").removeClass('removestuff');
+                $("#SystemsMarkedSection").addClass('full-width');
+            }
+            else {
+                $("#SystemsMarkedSection").addClass('removestuff');
+                $("#SystemsMarkedSection").removeClass('full-width');
+            }
+        }
+    }
+
+    function IsNotifiedPartiesChanged()
+    {
+        var chkbox = $('input:radio[name="IncidentItem.IsNotifiedParties"]')[0];
+        if(chkbox != null)
+        {
+            if(chkbox.checked == true){
+                $("#InterestedPartiesSection").removeClass('removestuff');
+                $("#InterestedPartiesSection").addClass('full-width');
+            }
+            else {
+                $("#InterestedPartiesSection").addClass('removestuff');
+                $("#InterestedPartiesSection").removeClass('full-width');
+            }
+        }
+    }
+	
+
+</script>
+@using (Html.BeginForm("Edit", "Incident", FormMethod.Post, new { @id = "mainForm", @enctype = "multipart/form-data" }))
+{
+    //test
+    @Html.ValidationSummary(true)
+    <div class='message'>@Model.Message</div>
+    @Html.HiddenFor(model => model.IncidentItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <input type='hidden' id='IsSubmitConfirmed' name='IsSubmitConfirmed' value='@Model.IsSubmitConfirmed' />
+    <div class="full-width clearfix">
+        <fieldset class="ui-widget ui-widget-content ui-corner-all">
+            @if (Model.IncidentItem.IncidentStatus == IncidentStatus.Creation)
+            {   
+                <div class="fullwidth clearfix TextAlignCentre">
+                    <h2>@Resources.LABEL_INCIDENT_INCIDENTREPORTFORM</h2>
+                </div>
+                <div class="fullwidth clearfix">
+                    @*****THIS WOULD BE BETTER-->@Html.Raw(@HtmlTextEditorManager.ConvertTaggedTextToHtml(Model.AdvisoryNote.ToString()))*@
+                    Please note cases given Special Customer Record status by Special Section D, HM
+                    Revenue and Customs must not be included on the UCB database. These cases were formerly
+                    known as Nationally Sensitive Records. Any Special Customer Record should be processed
+                    clerically
+                </div>    
+                <br />
+            }
+            else
+            {
+                <div class="fullwidth clearfix TextAlignCentre">
+                    <h4>@Resources.LABEL_INCIDENT_PROTECTIVEMARKING</h4>
+                    <h2>@Resources.LABEL_INCIDENT_INCIDENTREPORTFORMFOR @Model.CustomerItem.Title
+                        @Model.CustomerItem.FirstName @Model.CustomerItem.LastName
+                    </h2>
+                </div>
+            }
+            <legend class="ui-widget-header ui-corner-all">@Resources.ENTITYNAME_INCIDENT</legend>
+            @Html.DisplayFor(model => model.IncidentItem.IncidentID, "LabelFieldAlign")
+            @Html.DisplayFor(model => model.IncidentItem.IncidentStatus, "LabelFieldAlign")
+
+            <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_REPORTERSECTION</legend>
+                <span style="color: red;">* Required Field</span>
+
+                <!-- Report type -->
+
+                <!-- Referrer -->
+
+
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.StaffMemberBusinessCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberBusinessCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.StaffMemberBusinessCode, new SelectList(Model.StaffMemberBusinessList, "Code", "Name"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_ORGANISATION))
+                        <input id ='BusinessButton' type='submit' class='cancel' name='Edit::UpdateBusinessAreas' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.StaffMemberBusinessCode)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.StaffMemberBusinessAreaCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberBusinessAreaCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.StaffMemberBusinessAreaCode, new SelectList(Model.StaffMemberBusinessAreaList, "Code", "Name"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_ORGANISATION))
+                        <input id ='BusinessAreaButton' type='submit' class='cancel' name='Edit::UpdateHomeOffices' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.StaffMemberBusinessAreaCode)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.StaffMemberHomeOfficeCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberHomeOfficeCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.StaffMemberHomeOfficeCode, new SelectList(Model.StaffMemberHomeOfficeList, "Code", "Name"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_ORGANISATION))
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.StaffMemberHomeOfficeCode)
+                    </div>
+                </div>
+               
+                
+                <div class="full-width clearfix">
+                    <div class="right-60">
+                        <a href="mailto:@Model.AdminEmailAddress? cc=@Model.DeputyAdminEmailAddress&subject=@Resources.EMAIL_ADDASITE&body=@Resources.EMAIL_TELLUSSITEDETAILS">
+                            Email us if you cannot find the office location</a>
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.IsStaffHadAppropriateTraining)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.StaffMemberHomeOfficeCode)'>
+                        @Html.RadioButtonFor(model => model.IncidentItem.IsStaffHadAppropriateTraining, "Yes", new { @title = Html.ToolTipFor(model => model.IncidentItem.IsStaffHadAppropriateTraining) })
+                        Yes
+                        @Html.RadioButtonFor(model => model.IncidentItem.IsStaffHadAppropriateTraining, "No", new { @title = Html.ToolTipFor(model => model.IncidentItem.IsStaffHadAppropriateTraining) })
+                        No
+                        @Html.RadioButtonFor(model => model.IncidentItem.IsStaffHadAppropriateTraining, "Don't Know", new { @title = Html.ToolTipFor(model => model.IncidentItem.IsStaffHadAppropriateTraining) })
+                        Don't Know
+                    </div>
+                     <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.IsStaffHadAppropriateTraining)
+                    </div>
+                </div>
+
+                <h5 style="text-decoration: underline;">
+                    @Resources.INCIDENT_HEADER_CUSTOMERDETAILS</h5>
+                <div class="full-width clearfix">
+                    <div class="editor-field left-40">
+                        @Html.LabelFor(model => model.CustomerItem.Title)
+                    </div>
+                    <div class="right-60">
+                        @Html.RadioButtonFor(model => model.CustomerItem.Title, "Miss", new { @title = Html.ToolTipFor(model => model.CustomerItem.Title) })
+                        Miss
+                        @Html.RadioButtonFor(model => model.CustomerItem.Title, "Mr", new { @title = Html.ToolTipFor(model => model.CustomerItem.Title) })
+                        Mr
+                        @Html.RadioButtonFor(model => model.CustomerItem.Title, "Mrs", new { @title = Html.ToolTipFor(model => model.CustomerItem.Title) })
+                        Mrs
+                        @Html.RadioButtonFor(model => model.CustomerItem.Title, "Ms", new { @title = Html.ToolTipFor(model => model.CustomerItem.Title) })
+                        Ms
+                        @Html.RadioButtonFor(model => model.CustomerItem.Title, "Other", new { @title = Html.ToolTipFor(model => model.CustomerItem.Title) })
+                        Other
+                        <input id ='CustomerTitleButton' type='submit' class='cancel' name='Edit::UpdateCustomerTitle' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    @Html.ValidationMessageFor(model => model.CustomerItem.Title)
+                </div>
+                @*if (Model.IsCustomerOtherTitleHidden)*@
+                @if (Model.CustomerItem.Title != "Other")
+                {
+                    @Html.Raw("<div id='CustomerOtherTitle' class = 'hidestuff fullwidth clearfix'>")
+                }
+                else
+                {
+                    @Html.Raw("<div id='CustomerOtherTitle' class = 'fullwidth clearfix'>")
+                }
+                <div class="editor-field left-40">
+                    @Html.LabelFor(model => model.CustomerItem.OtherTitle)
+                </div>
+                <div class="right-60">
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Doctor", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Doctor
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Reverend", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Reverend
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Master", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Master
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Professor", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Professor
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Sister", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Sister
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Father", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Father
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Lady", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Lady
+                    @Html.RadioButtonFor(model => model.CustomerItem.OtherTitle, "Lord", new { @title = Html.ToolTipFor(model => model.CustomerItem.OtherTitle) })
+                    Lord
+                </div>
+                <div class="full-width clearfix">
+                    @Html.ValidationMessageFor(model => model.CustomerItem.OtherTitle)
+                </div>
+                @Html.Raw("</div>")
+                @Html.EditorFor(model => model.CustomerItem.FirstName, "LabelFieldAlign")
+                @Html.EditorFor(model => model.CustomerItem.OtherNames, "LabelFieldAlign")
+                @Html.EditorFor(model => model.CustomerItem.LastName, "LabelFieldAlign")
+                 <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.CustomerItem.NINO)
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.TextBoxFor(model => model.CustomerItem.NINO, new { @title = @Html.ToolTipFor(model => model.CustomerItem.NINO) })
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.CustomerItem.NINO)
+                    </div>
+                </div>
+
+                <!-- Date referral made -->
+
+                <div class="editor-field left-40">
+                    @Html.LabelFor(model => model.CustomerItem.IsCustomerReported)
+                </div>
+                <div class="right-60">
+                    @Html.RadioButtonFor(model => model.CustomerItem.IsCustomerReported, true, new { @title = Html.ToolTipFor(model => model.CustomerItem.IsCustomerReported) })
+                    Customer
+                    @Html.RadioButtonFor(model => model.CustomerItem.IsCustomerReported, false, new { @title = Html.ToolTipFor(model => model.CustomerItem.IsCustomerReported) })
+                    Other
+                    <input id ='CustomerOtherPersonButton' type='submit' class='cancel' name='Edit::UpdateCustomerOtherPerson' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                </div>
+                <div class="full-width clearfix">
+                    @Html.ValidationMessageFor(model => model.CustomerItem.IsCustomerReported)
+                </div>
+                
+                <div class="full-width clearfix">
+                    <h5 style="text-decoration: underline;">
+                        Customer/Claimant address</h5>
+                    @Html.EditorFor(model => model.CustomerItem.HouseNumberOrName, "LabelFieldAlign")
+                    @Html.EditorFor(model => model.CustomerItem.Street, "LabelFieldAlign")
+                    @Html.EditorFor(model => model.CustomerItem.Town, "LabelFieldAlign")
+                    @Html.EditorFor(model => model.CustomerItem.County, "LabelFieldAlign")
+                    @Html.EditorFor(model => model.CustomerItem.PostCode, "LabelFieldAlign")
+                </div>
+
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.EventLeadingToIncidentCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.EventLeadingToIncidentCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.EventLeadingToIncidentCode, new SelectList(Model.EventLeadingToIncidentList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_EVENTLEADINGTOINCIDENT))
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.EventLeadingToIncidentCode)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.IncidentLocationCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.IncidentLocationCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.IncidentLocationCode, new SelectList(Model.IncidentLocationList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_INCIDENTLOCATION))
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.IncidentLocationCode)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.IncidentCategoryCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.IncidentCategoryCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.IncidentCategoryCode, new SelectList(Model.IncidentCategoryList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_INCIDENTCATEGORY))
+                        <input id ='IncidentCategoryButton' type='submit' class='cancel' name='Edit::UpdateIncidentTypes' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.IncidentCategoryCode)
+                    </div>
+                </div>
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.IncidentTypeCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.IncidentTypeCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.IncidentTypeCode, new SelectList(Model.IncidentTypeList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_INCIDENTTYPE))
+                        <input id ='IncidentTypeButton' type='submit' class='cancel' name='Edit::ChooseIncidentType' value='@Html.Raw(Resources.LABEL_UPDATEBUTTON)' />
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.IncidentTypeCode)
+                    </div>
+                </div>
+                @if (!Model.ShowIncidentDetail.HasValue || !Model.ShowIncidentDetail.Value == true)
+                {
+                    @Html.Raw("<div id='IncidentDetail' class = 'removestuff fullwidth clearfix'>")
+                }
+                else
+                {
+                    @Html.Raw("<div id='IncidentDetail' class = 'fullwidth clearfix'>")
+                }
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.IncidentDetailsCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.IncidentDetailsCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.IncidentDetailsCode, new SelectList(Model.IncidentDetailsList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_INCIDENTDETAIL))
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.IncidentDetailsCode)
+                    </div>
+                </div>
+                @Html.Raw("</div>")
+                @if (!Model.ShowAbuseType.HasValue || !Model.ShowAbuseType.Value == true)
+                {
+                    @Html.Raw("<div id='AbuseType' class = 'removestuff fullwidth clearfix'>")
+                }
+                else
+                {
+                    @Html.Raw("<div id='AbuseType' class = 'fullwidth clearfix'>")
+                }
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentItem.AbuseTypeCode)
+                    </div>
+                    <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.AbuseTypeCode)'>
+                        @Html.DropDownListFor(model => model.IncidentItem.AbuseTypeCode, new SelectList(Model.AbuseTypeList, "Code", "Description"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_ABUSETYPE))
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.IncidentItem.AbuseTypeCode)
+                    </div>
+                </div>
+                @Html.Raw("</div>")
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.IncidentNarrativeItem.NarrativeDescription, Resources.LABEL_INCIDENT_INCIDENTNARRATIVECODE)
+                        <span style="color:red;"> * </span>
+                     </div>
+                     <div class="editor-field right-60" title='@Resources.TOOLTIP_INCIDENT_INCIDENTNARRATIVECODE'>
+                            @Html.TextAreaFor(model => model.IncidentNarrativeItem.NarrativeDescription)
+                     </div>
+                     <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentNarrativeItem.NarrativeDescription)
+                     </div>
+                        @*@Html.EditorFor(model => model.IncidentNarrativeItem.NarrativeDescription, "LabelMultiLineTextAlign")*@
+                 </div>
+            </fieldset>
+
+            @*Linked incidents section*@
+            @if (Model.IncidentItem.IncidentStatus != IncidentStatus.Creation)
+            {
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LABEL_LI_LinkedIncidents</legend>
+                    <div class="full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Resources.LABEL_LI_LinkedIncidents
+                            @*copy and paste functionality*@
+                            @if (User.IsInRole(AppRoles.EDIT))
+                            {
+                                <input id ='CopyButton' type='submit' class='cancel' name='Edit::Copy' title='@string.Format(Resources.BUTTON_LI_LinkedIncidentsTooltip, "Incident")' value='@Resources.BUTTON_LI_LinkedIncidents' />
+
+                                if (!string.IsNullOrEmpty(Model.Copy) && !Model.Copy.Contains(Model.IncidentItem.Code.ToString()) && !Model.LinkedIncidents.Any(x => Model.Copy.Contains(x.LinkedIncidentCode.ToString())))
+                                {
+                                    <input id ='PateButton' type='submit' class='cancel' title='@string.Format(Resources.BUTTON_LI_PasteIncidentsTooltip, "Incident", Model.Copy.Split(';')[2])' name='Edit::Paste' value='@Resources.BUTTON_LI_PasteIncidents' />
+                                }
+                            }
+                        </div>
+                        <div class="right-60">
+                            <table>
+                                <tr>
+                                    @foreach (var item in Model.LinkedIncidents)
+                                    {
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <a href='@string.Format("FindIncident?Code={0}", item.LinkedIncidentCode)' title='@string.Format("IncidentId:{0}, {1}", item.IncidentId, item.CustomerName)'><img style=" border:none; vertical-align:top;" alt='@item.CustomerName' src='@Html.Raw(Url.Content("~/Content/images/file_icon.jpg"))' /></a>
+                                                    </td>
+                                                </tr>
+                                                    
+                                                <tr>
+                                                    <td style=" text-align:center; vertical-align:middle;">
+                                                        <a href='@string.Format("DeleteLinkIncident?Code={0};{1}", item.Code, item.RowIdentifier)' title='@string.Format("Delete {0} link", item.CustomerName)'>
+                                                            <img style=" border:none; vertical-align:top;" alt="Linked Incident icon" src='@Html.Raw(Url.Content("~/Content/images/delete_icon.jpg"))' /></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>                                
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="full-width clearfix">
+                    
+                        </div>
+                    </div>
+                </fieldset>       
+            }     
+            @*Only show reporter section if in create mode*@
+            @if (Model.AccessContext != UcbWeb.ViewModels.IncidentAccessContext.Create)
+            {
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_LINEMANAGERSECTION</legend>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsLineManageFastTrack)
+                            <span style="color:red;"> * </span>
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsLineManageFastTrack, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsLineManageFastTrack) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsLineManageFastTrack, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsLineManageFastTrack) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsLineManageFastTrack)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsLineManagerRIDDOR)
+                            <span style="color:red;"> * </span>
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsLineManagerRIDDOR, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsLineManagerRIDDOR) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsLineManagerRIDDOR, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsLineManagerRIDDOR) })
+                            No  
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsLineManagerRIDDOR)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsPoliceCalled)
+                            <span style="color:red;"> * </span>
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPoliceCalled, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPoliceCalled) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPoliceCalled, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPoliceCalled) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsPoliceCalled)
+                        </div>
+                    </div>
+                   <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.HasLineManagerReadReport)
+                            <span style="color:red;"> * </span>
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.HasLineManagerReadReport, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.HasLineManagerReadReport) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.HasLineManagerReadReport, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.HasLineManagerReadReport) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.HasLineManagerReadReport)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.LineManagerNarrativeItem.NarrativeDescription, Resources.LABEL_INCIDENT_LINEMANAGERNARRATIVECODE)
+                        </div>
+                        <div class="editor-field right-60" title='@Resources.TOOLTIP_INCIDENT_LINEMANAGERNARRATIVECODE'>
+                            @Html.TextAreaFor(model => model.LineManagerNarrativeItem.NarrativeDescription)
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.LineManagerNarrativeItem.NarrativeDescription)
+                        </div>
+                    </div>
+                </fieldset>
+            }
+            @if ((Model.IncidentItem.IncidentStatus == IncidentStatus.New || Model.IncidentItem.IncidentStatus == IncidentStatus.Submitted
+                || Model.IncidentItem.IncidentStatus == IncidentStatus.Live || Model.IncidentItem.IncidentStatus == IncidentStatus.Archived) && User.IsInRole(AppRoles.NOMINATED_MANAGER))
+            {
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_NOMINATEDMANAGERSECTION</legend>
+                                        <h5 style="text-decoration: underline;">
+                    @Resources.INCIDENT_HEADER_NOMINATEDMANAGERINSTRUCTIONS</h5>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsNominatedFastTrack)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNominatedFastTrack, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNominatedFastTrack) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNominatedFastTrack, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNominatedFastTrack) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsNominatedFastTrack)
+                        </div>
+                    </div>
+                 
+                    @if (Model.IncidentItem.IsNominatedFastTrack.HasValue && Model.IncidentItem.IsNominatedFastTrack.Value == true)
+                    {
+                        @Html.Raw("<div id='FastTrackFileSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='FastTrackFileSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    <div class ="full-width clearfix">         
+                        <div class ="right-60">
+                            <input type="file" name="FastTrackFile" id="FastTrackFile" /><input type="submit" name="Edit::FastTrackFile" value="Upload file" class='cancel' />
+                        </div>
+                    </div>
+                    <div class ="full-width clearfix">
+                        <div class="right-60">
+                         
+                            @foreach (var item in Model.FastTrackAttachmentList)
+                            {
+                                <div class ="left-40">
+                                    <a href=@Url.Action("DownloadAttachment", "Incident", new { @Code = @item.Code, @FileName = @item.Name.Substring(item.Name.LastIndexOf('\\') + 1) }) title='@Html.Raw("Open ")@item.Name.Substring(@item.Name.LastIndexOf('\\') + 1)'>
+                                        <img style=" border:none; vertical-align:middle;" alt='@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)' src='@Html.Raw(Url.Content("~/Content/images/file_icon.jpg"))' />
+                                    </a>
+                                    <label>@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)</label>
+
+                                    <input id='@Html.Raw("Edit::RemoveAttachment_")@item.Code'
+                                        class='cancel IgnoreJQueryStyling' 
+                                        style="vertical-align:middle;width:16px;height:16px;border:none;background-image:url(@Url.Content("~/Content/images/delete_icon.jpg"))"
+                                        type='submit' 
+                                        name='@Html.Raw("Edit::RemoveAttachment_")@item.Code'
+                                        value=''
+                                        title='@Resources.LABEL_REMOVEATTACHMENTBUTTON'/>
+                                    
+                                    @*<a href=@Url.Action("RemoveAttachment", "Incident", new { @Code = item.Code, @Type="FastTrack" }) title='Remove Attachment')>
+                                        <img style=" border:none;" alt='@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)' src='@Html.Raw(Url.Content("~/Content/images/delete_icon.jpg"))' />
+                                    </a>*@
+                                    
+                                    
+                                </div>
+                           
+                                
+                            }
+               
+                        </div>
+                    </div>
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsNominatedRIDDOR)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNominatedRIDDOR, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNominatedRIDDOR) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNominatedRIDDOR, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNominatedRIDDOR) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsNominatedRIDDOR)
+                        </div>
+                    </div>
+                    
+                    @if (Model.IncidentItem.IsNominatedRIDDOR.HasValue && Model.IncidentItem.IsNominatedRIDDOR.Value == true)
+                    {
+                        @Html.Raw("<div id='RIDDORFileSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='RIDDORFileSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    <div class ="full-width clearfix">
+                        <div class ="right-60">
+                            <input type="file" name="RIDDORFile" id="RIDDORFile" /><input type="submit" name="Edit::RIDDORFile" value="Upload file" class='cancel' />
+                        </div>
+                    </div>
+                    <div class ="full-width clearfix">
+                        <div class="right-60">
+                       
+                            @foreach (var item in Model.RIDDORAttachmentList)
+                            {
+                                <div class ="left-40">
+                                    <a href=@Url.Action("DownloadAttachment", "Incident", new { @Code = @item.Code, @FileName = @item.Name.Substring(item.Name.LastIndexOf('\\') + 1) }) title='@Html.Raw("Open ")@item.Name.Substring(@item.Name.LastIndexOf('\\') + 1)'>
+                                        <img style=" border:none; vertical-align:middle;" alt='@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)' src='@Html.Raw(Url.Content("~/Content/images/file_icon.jpg"))' />
+                                    </a>
+                                    <label>@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)</label>
+                                    
+                                         <input id='@Html.Raw("Edit::RemoveAttachment_")@item.Code'
+                                        class='cancel IgnoreJQueryStyling' 
+                                        style="vertical-align:middle;width:16px;height:16px;border:none;background-image:url(@Url.Content("~/Content/images/delete_icon.jpg"));"
+                                        type='submit' 
+                                        name='@Html.Raw("Edit::RemoveAttachment_")@item.Code'
+                                        value=''
+                                        title='@Resources.LABEL_REMOVEATTACHMENTBUTTON'/>
+
+                @*                                    <a href=@Url.Action("RemoveAttachment", "Incident", new { @Code = item.Code, @Type="RIDDOR" }) title='Remove Attachment')>
+                                        <img style=" border:none;" alt='@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)' src='@Html.Raw(Url.Content("~/Content/images/delete_icon.jpg"))' />
+                                    </a>*@
+                                </div>
+                           
+                                
+                            }
+               
+                        </div>
+                    </div>
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsOralWarning)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsOralWarning, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsOralWarning) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsOralWarning, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsOralWarning) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsOralWarning)
+                        </div>
+                    </div> 
+                    @if (Model.IncidentItem.IsOralWarning.HasValue && Model.IncidentItem.IsOralWarning.Value == true)
+                    {
+                        @Html.Raw("<div id='OralWarningDateSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='OralWarningDateSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    @Html.EditorFor(model => model.IncidentItem.OralWarningDate, "LabelDateAlign")
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsWrittenWarning)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsWrittenWarning, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsWrittenWarning) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsWrittenWarning, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsWrittenWarning) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsWrittenWarning)
+                        </div>
+                    </div> 
+                    @if (Model.IncidentItem.IsOralWarning.HasValue && Model.IncidentItem.IsOralWarning.Value == true)
+                    {
+                        @Html.Raw("<div id='WrittenWarningDateSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='WrittenWarningDateSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    @Html.EditorFor(model => model.IncidentItem.WrittenWarningDate, "LabelDateAlign")
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsAssailantInterviewed)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsAssailantInterviewed, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsAssailantInterviewed) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsAssailantInterviewed, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsAssailantInterviewed) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsAssailantInterviewed)
+                        </div>
+                    </div>
+                    @if (Model.IncidentItem.IsAssailantInterviewed.HasValue && Model.IncidentItem.IsAssailantInterviewed.Value == true)
+                    {
+                        @Html.Raw("<div id='AssailantInterviewedDateSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='AssailantInterviewedDateSection' class = 'removestuff fullwidth clearfix'>")
+                    } 
+                    @Html.EditorFor(model => model.IncidentItem.AssailantInterviewedDate, "LabelDateAlign")
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsSolicitorLetter)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsSolicitorLetter, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsSolicitorLetter) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsSolicitorLetter, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsSolicitorLetter) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsSolicitorLetter)
+                        </div>
+                    </div>
+                    @if (Model.IncidentItem.IsSolicitorLetter.HasValue && Model.IncidentItem.IsSolicitorLetter.Value == true)
+                    {
+                        @Html.Raw("<div id='SolicitorDateSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='SolicitorDateSection' class = 'removestuff fullwidth clearfix'>")
+                    } 
+                    @Html.EditorFor(model => model.IncidentItem.SolicitorLetterDate, "LabelDateAlign")
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsBanningOrder)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsBanningOrder, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsBanningOrder) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsBanningOrder, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsBanningOrder) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsBanningOrder)
+                        </div>
+                    </div>
+                    @if (Model.IncidentItem.IsBanningOrder.HasValue && Model.IncidentItem.IsBanningOrder.Value == true)
+                    {
+                        @Html.Raw("<div id='BanningOrderDateSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='BanningOrderDateSection' class = 'removestuff fullwidth clearfix'>")
+                    } 
+                    @Html.EditorFor(model => model.IncidentItem.BanningOrderRequestedDate, "LabelDateAlign")
+                    @Html.Raw("</div>")
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.IncidentItem.ContingencyArrangementCodes)
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ContingencyArrangementCodes)'>
+                            @Html.ListBoxFor(model => model.IncidentItem.ContingencyArrangementCodes, Model.ContingencyArrangementList, new { @class = "notdropdown dropdownchecklist" })
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.ContingencyArrangementCodes)
+                        </div>
+                    </div>
+                    
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.FurtherInfoNarrativeItem.NarrativeDescription, Resources.LABEL_INCIDENT_FURTHERINFONARRATIVECODE)
+                        </div>
+                        <div class="editor-field right-60" title='@Resources.TOOLTIP_INCIDENT_FURTHERINFONARRATIVECODE'>
+                            @Html.TextAreaFor(model => model.FurtherInfoNarrativeItem.NarrativeDescription)
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.FurtherInfoNarrativeItem.NarrativeDescription)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsDeficienciesInProcess)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsDeficienciesInProcess, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsDeficienciesInProcess) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsDeficienciesInProcess, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsDeficienciesInProcess) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsDeficienciesInProcess)
+                        </div>
+                    </div>
+                    @if (Model.IncidentItem.IsDeficienciesInProcess.HasValue && Model.IncidentItem.IsDeficienciesInProcess.Value == true)
+                    {
+                        @Html.Raw("<div id='DeficienciesNarrativeSection' class = 'fullwidth clearfix'>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<div id='DeficienciesNarrativeSection' class = 'removestuff fullwidth clearfix'>")
+                    }
+                    <div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.DeficienciesNarrativeItem.NarrativeDescription, Resources.LABEL_INCIDENT_DEFICIENCIESNARRATIVECODE)
+                        </div>
+                        <div class="editor-field right-60" title='@Resources.TOOLTIP_INCIDENT_DEFICIENCIESNARRATIVECODE'>
+                            @Html.TextAreaFor(model => model.DeficienciesNarrativeItem.NarrativeDescription)
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.DeficienciesNarrativeItem.NarrativeDescription)
+                        </div>
+                    </div>
+                    @Html.Raw("</div>")
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsImplementControlMeasures)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsImplementControlMeasures, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsImplementControlMeasures), })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsImplementControlMeasures, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsImplementControlMeasures) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsImplementControlMeasures)
+                        </div>
+                    </div>
+                    <div id="ControlMeasuresSection">
+                        <div class="full-width clearfix">
+                            <div class="editor-label warningmessage">@Resources.INCIDENT_CONTROLMEASURE_WARNING</div> 
+                        </div> 
+                        <div class="full-width clearfix">
+                            <div class="editor-label left-40">
+                                @Html.LabelFor(model => model.IncidentItem.ControlMeasureCodes)
+                            </div>
+                            <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.ControlMeasureCodes)'>
+                                @Html.ListBoxFor(model => model.IncidentItem.ControlMeasureCodes, Model.ControlMeasureList, new { @class = "notdropdown dropdownchecklistcontrolmeasure" })
+                            </div>
+                            <div class="full-width clearfix">
+                                @Html.ValidationMessageFor(model => model.IncidentItem.ControlMeasureCodes)
+                            </div>
+                        </div>
+
+                        <div id="ControlMeasuresOfficerSection">
+                            @Html.EditorFor(model => model.IncidentItem.NamedOfficer, "LabelFieldAlign")
+                            @Html.EditorFor(model => model.IncidentItem.TelephoneContactNumber, "LabelFieldAlign")
+                        </div> 
+
+                        <div class="full-width clearfix">
+                            <div class="editor-label notemessage">@Resources.INCIDENT_CONTROLMEASURE_NOTE</div> 
+                        </div> 
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsITMarkersSet)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsITMarkersSet, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsITMarkersSet) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsITMarkersSet, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsITMarkersSet) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsITMarkersSet)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix" id="SystemsMarkedSection">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.IncidentItem.SystemMarkedCodes)
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.SystemMarkedCodes)'>
+                            @Html.ListBoxFor(model => model.IncidentItem.SystemMarkedCodes, Model.SystemMarkedList, new { @class = "notdropdown dropdownchecklist" })
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.SystemMarkedCodes)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsPapersMarked)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPapersMarked, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPapersMarked) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPapersMarked, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPapersMarked) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsPapersMarked)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsNotifiedParties)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNotifiedParties, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNotifiedParties) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsNotifiedParties, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsNotifiedParties) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsNotifiedParties)
+                        </div>
+                    </div>
+                    <div class="full-width clearfix" id="InterestedPartiesSection">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.IncidentItem.InterestedPartyCodes)
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.InterestedPartyCodes)'>
+                            @Html.ListBoxFor(model => model.IncidentItem.InterestedPartyCodes, Model.InterestedPartyList, new { @class = "notdropdown dropdownchecklist" })
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.InterestedPartyCodes)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                    <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_REVIEWSECTION</legend>
+                    <div class="full-width clearfix">
+                            <div class="editor-label notemessage">@Resources.INCIDENT_NEWMANAGER_NOTE</div> 
+                    </div> 
+                    <div class = "full-width clearfix">
+                        @Html.DisplayFor(model => model.NominatedManager, "LabelFieldAlign")
+                        @Html.DisplayFor(model => model.DeputyNominatedManagers, "LabelFieldAlign")
+                        @Html.EditorFor(model => model.IncidentItem.ReviewDate, "LabelDateAlign")
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsPreviousEvidenceReviewed)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPreviousEvidenceReviewed, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPreviousEvidenceReviewed) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPreviousEvidenceReviewed, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPreviousEvidenceReviewed) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsPreviousEvidenceReviewed)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsPreviousPartiesNotified)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPreviousPartiesNotified, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPreviousPartiesNotified) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsPreviousPartiesNotified, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsPreviousPartiesNotified) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsPreviousPartiesNotified)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsRepeatBehaviour)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsRepeatBehaviour, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsRepeatBehaviour) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsRepeatBehaviour, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsRepeatBehaviour) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsRepeatBehaviour)
+                        </div>
+                    </div>
+                    <div class = "full-width clearfix">
+                        <div class="editor-field left-40">
+                            @Html.LabelFor(model => model.IncidentItem.IsControlMeasuresStillApply)
+                        </div>
+                        <div class="right-60">
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsControlMeasuresStillApply, true, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsControlMeasuresStillApply) })
+                            Yes
+                            @Html.RadioButtonFor(model => model.IncidentItem.IsControlMeasuresStillApply, false, new { @title = Html.ToolTipFor(model => model.IncidentItem.IsControlMeasuresStillApply) })
+                            No
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.IsControlMeasuresStillApply)
+                        </div>
+                    </div>
+
+                    @*<div class="full-width clearfix">
+                        <div class="editor-label left-40">
+                            @Html.LabelFor(model => model.IncidentItem.SiteCode)
+                        </div>
+                        <div class="editor-field right-60" title='@Html.ToolTipFor(model => model.IncidentItem.SiteCode)'>
+                            @Html.DropDownListFor(model => model.IncidentItem.SiteCode, new SelectList(Model.SiteList, "Code", "SiteName"), @String.Format(Resources.DDL_GENERIC, @Resources.ENTITYNAME_SITE))
+                        </div>
+                        <div class="full-width clearfix">
+                            @Html.ValidationMessageFor(model => model.IncidentItem.SiteCode)
+                        </div>
+                    </div>
+                    @Html.EditorFor(model => model.IncidentItem.NumberOfRecords, "LabelRadioButtonAlign")*@
+                </fieldset>
+            }
+            <div class="full-width clearfix" style="text-align: center">
+                @if (User.IsInRole(AppRoles.NOMINATED_MANAGER))
+                {
+                    <div>
+                        @if (Model.IncidentItem.IncidentStatus == IncidentStatus.Submitted || Model.IncidentItem.IncidentStatus == IncidentStatus.New)
+                        {    
+                            <input id='AchiveButton' type='submit' name='Edit::ArchiveIncident' value='@Resources.LABEL_ARCHIVEBUTTON' title='@Resources.TOOLTIP_ARCHIVEBUTTON @Resources.ENTITYNAME_INCIDENT'/>
+                            <input id='PublishButton' type='submit' name='Edit::PublishIncident' value='@Resources.LABEL_PUBLISHBUTTON' title='@Resources.TOOLTIP_PUBLISHBUTTON @Resources.ENTITYNAME_INCIDENT'/>
+                            
+                        }
+                        <input id='SaveButton' type='submit' name='Edit::SaveIncident' value='@Resources.LABEL_SAVEBUTTON' title='@Resources.TOOLTIP_SAVEBUTTON @Resources.ENTITYNAME_INCIDENT'/>
+                        <input id='TransferButton' type='submit' name='Edit::TransferIncident' value='@Resources.LABEL_TRANSFERBUTTON' title='@Resources.TOOLTIP_TRANSFERBUTTON'/>
+                        <input id='DeleteButton' class='cancel' type='submit' name='Edit::DeleteIncident' value='@Resources.LABEL_DELETEBUTTON' title='@Resources.TOOLTIP_DELETEBUTTON @Resources.ENTITYNAME_INCIDENT'/>
+                        <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitIncident' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>
+                    </div>     
+                }
+                else if (Model.IncidentItem.IncidentStatus == IncidentStatus.Creation || Model.IncidentItem.IncidentStatus == IncidentStatus.New)
+                {
+                    <div>
+                        <input id='SubmitButton' type='submit' name='Edit::SubmitIncident' value='@Resources.LABEL_SUBMITREPORT' title='@Resources.TOOLTIP_CREATEBUTTON @Resources.ENTITYNAME_INCIDENT' />
+                    </div>
+                }
+            
+                <div>
+                    <a href="mailto:@Model.AdminEmailAddress? cc=@Model.DeputyAdminEmailAddress&subject=@Resources.EMAIL_COMMENTSONFORM&body=@Resources.EMAIL_TELLUSDETAILS">
+                        Please email us if you have any problems with this form XX</a>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}

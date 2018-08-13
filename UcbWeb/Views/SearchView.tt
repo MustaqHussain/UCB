@@ -1,0 +1,261 @@
+﻿<#
+//*********************************************************
+//
+//    Copyright (c) Microsoft. All rights reserved.
+//    This code is licensed under the Microsoft Public License.
+//    THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+//    ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+//    IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+//    PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+#>
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ include file="..\..\Dwp.Adep.Ucb.DataServices\Models\Global.t4"#><#@ 
+ output extension=".cshtml"#><#
+
+// List of entities not to generate code for
+string ignoreList = globalIgnoreList + ",Incident,Audit,ADRoleLookup,Application,ApplicationAttribute,ApplicationOrganisationTypeGroup,Attachment,AttachmentData,Confirmation,CintingencyArrangement,ControlMeasure,Customer,CustomerContingencyArrangement,CustomerControlMeasure,IncidentUpdateEvent,Narrative,OrganisationHierarchy,OrganisationType,OrganisationTypeGroup,Role,SiteStaff,StaffAttributes,StaffOrganisation,";
+ignoreList = ignoreList + "IncidentLink,";
+ignoreList = ignoreList + "Organisation,";
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"..\..\Dwp.Adep.Ucb.DataServices\Models\Model1.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	// Do not generate code for entities in the ignore list
+	if (ignoreList.Contains("," + entity.Name + ",")) continue;
+
+	string outputDir = Path.Combine(Path.GetDirectoryName(Host.TemplateFile), entity.Name);
+
+	if(!Directory.Exists(outputDir))
+	{
+		Directory.CreateDirectory(outputDir);
+	}
+	string fileName = "Search";
+	fileManager.StartNewFile(outputDir + @"\" + fileName + ".cshtml");
+    bool entityHasNullableFKs = entity.NavigationProperties.Any(np => np.GetDependentProperties().Any(p=>ef.IsNullable(p)));
+#>
+@model UcbWeb.ViewModels.<#=entity.Name#>SearchVM
+
+@{
+    ViewBag.Title = Resources.ENTITYNAME_<#=entity.Name.ToUpper()#> + " " + Resources.LABEL_LISTNAME;
+}
+<h2>
+    @Resources.ENTITYNAME_<#=entity.Name.ToUpper()#> @Resources.LABEL_LISTNAME</h2><br/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function updateGrid(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var grid = $(this).parents('.ajaxGrid');
+            var id = grid.attr('id');
+            grid.load(url + ' #' + id, function (response, status, xhr) {
+                jQueryUIStyling();
+            })
+        }
+        $('.ajaxGrid table thead tr a').live('click', updateGrid);
+        $('.ajaxGrid table tfoot tr a').live('click', updateGrid);
+
+
+    });
+
+</script>
+
+@using (Html.BeginForm("Search", "<#=entity.Name#>", FormMethod.Post, new { @id = "mainForm" }))
+{
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+
+    <div class="webgrid-wrapper">
+        <div class="webgrid-title">
+            @Resources.LABEL_GRIDTITLE</div>
+        <div id="grid" class='ajaxGrid'>
+            @{
+                var grid = new WebGrid(null, canPage: true, rowsPerPage: Model.PageSize, defaultSort: "Code", canSort: false);
+                grid.Bind(Model.MatchList, rowCount: Model.TotalRows, autoSortAndPage: false);
+           
+                string gridHtml = grid.GetHtml(
+                    tableStyle: "webgrid",
+                    headerStyle: "webgrid-header",
+                    footerStyle: "webgrid-footer",
+                    mode: WebGridPagerModes.All, firstText: Resources.PAGING_FIRSTPAGE, previousText: Resources.PAGING_PREVIOUS, nextText: Resources.PAGING_NEXT, lastText: Resources.PAGING_LASTPAGE, numericLinksCount: 5,
+                    alternatingRowStyle: "webgrid-alternating-rows",
+                    columns: grid.Columns(
+                    grid.Column("Code", header: "", format: @<text>@Html.Raw("<input id='SelectButton_")@item.Code@Html.Raw("' type='submit' name='Search::SearchPost_")@item.Code@Html.Raw("' value='")@Html.Raw(Resources.LABEL_SELECTBUTTON)@Html.Raw("' title='")@Resources.TOOLTIP_SELECTTOEDITBUTTON @Html.Raw("' />")</text>)
+<#
+	foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+    {
+		if (edmProperty.Name == "SecurityLabel" || edmProperty.Name == "Code" || edmProperty.Name == "RowIdentifier") continue;
+		
+		bool isForeignKey = entity.NavigationProperties.Any(np=>np.GetDependentProperties().Contains(edmProperty));
+		if (isForeignKey) continue;
+#>
+                    ,grid.Column("<#=edmProperty.Name.Replace("Code", "")#>", header: @Resources.LABEL_<#=entity.Name.ToUpper()#>_<#=edmProperty.Name.ToUpper()#>)
+<#
+	}
+#>
+                    )
+                    
+                ).ToString();
+				var pager = grid.Pager().ToString();
+    var newPager = System.Text.RegularExpressions.Regex.Replace(pager, "(\\d+) ", "<span class='ui-state-highlight'>$1</span>");
+    newPager = System.Text.RegularExpressions.Regex.Replace(newPager, "<a[^>]*? href=\"([^\"]+)\"[^>]*?>(.*?)</a>", "<a href=\"$1\" title=\"Page $2\">$2</a>");
+    newPager = newPager.Replace("Page &gt;", "Next page");
+    newPager = newPager.Replace("Page &lt;", "Previous page");
+    
+    gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "(<tfoot>\\s*<tr[^>]*>\\s*<td[^>]*>)([^<]*|<[^/]*|</[^t]*)*(</tfoot>)", "$1" + newPager + "</td></tr>$3");
+    gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "<caption>(.*?)</caption>", "<caption><span class='accessible'>$1</span></caption>"); //add a span (with accessible css class) to the caption so that it can be hidden in IE6 and IE7. Without the span, caption only hidden in > IE8.
+    
+    System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"<td(.*?)RowHeaderColumn(.*?)>(.*?)</td>");
+    gridHtml = r.Replace(gridHtml, "<th scope=\"row\" $1$2>$3</th>"); 
+     
+                                @(new HtmlString(gridHtml))
+                        }
+                        Records Returned: @grid.TotalRowCount
+        </div>
+		<input id='NewButton' type='submit' name='Search::New<#=entity.Name#>' value="@Resources.LABEL_NEWBUTTON" title='@Resources.LABEL_NEWBUTTON @Resources.ENTITYNAME_<#=entity.Name.ToUpper()#>' />
+    </div>
+}
+<#
+}
+fileManager.Process();
+
+#>
+<#+
+void WriteHeader(EntityFrameworkTemplateFileManager thisFileManager, params string[] extraUsings)
+{
+    thisFileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated from a template.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+<#=String.Join(String.Empty, extraUsings.Select(u => "using " + u + ";" + Environment.NewLine).ToArray())#>
+<#+
+    thisFileManager.EndBlock();
+}
+
+void BeginNamespace(string namespaceName, CodeGenerationTools code)
+{
+    CodeRegion region = new CodeRegion(this);
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+#>
+namespace <#=code.EscapeNamespace(namespaceName)#>
+{
+<#+
+        PushIndent(CodeRegion.GetIndent(1));
+    }
+}
+
+
+void EndNamespace(string namespaceName)
+{
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+bool IsReadWriteAccessibleProperty(EdmMember member)
+{
+    string setter = Accessibility.ForWriteOnlyProperty(member);
+    string getter = Accessibility.ForReadOnlyProperty(member);
+
+    return getter != "private" && getter != "protected" && setter != "private" && setter != "protected";
+}
+
+string PropertyVirtualModifier(string accessibility)
+{
+    return accessibility + (accessibility != "private" ? " virtual" : "");
+}
+
+void WriteCustomObservableCollection()
+{
+#>
+// An System.Collections.ObjectModel.ObservableCollection that raises
+// individual item removal notifications on clear and prevents adding duplicates.
+public class FixupCollection<T> : ObservableCollection<T>
+{
+    protected override void ClearItems()
+    {
+        new List<T>(this).ForEach(t => Remove(t));
+    }
+
+    protected override void InsertItem(int index, T item)
+    {
+        if (!this.Contains(item))
+        {
+            base.InsertItem(index, item);
+        }
+    }
+}
+<#+
+}
+
+bool VerifyTypesAreCaseInsensitiveUnique(EdmItemCollection itemCollection)
+{
+    Dictionary<string, bool> alreadySeen = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    foreach(StructuralType type in itemCollection.GetItems<StructuralType>())
+    {
+        if (!(type is EntityType || type is ComplexType))
+        {
+            continue;
+        }
+
+        if (alreadySeen.ContainsKey(type.FullName))
+        {
+            Error(String.Format(CultureInfo.CurrentCulture, "This template does not support types that differ only by case, the types {0} are not supported", type.FullName));
+            return false;
+        }
+        else
+        {
+            alreadySeen.Add(type.FullName, true);
+        }
+
+    }
+
+    return true;
+
+}
+
+private bool IsNullable(TypeUsage usage)
+{
+	return (bool)usage.Facets.First(facet => facet.Name == "Nullable").Value;
+}
+
+private bool HasMaxLength(TypeUsage usage)
+{
+	return usage.Facets.Any(facet => facet.Name == "MaxLength");
+}
+
+private string MaxLength(TypeUsage usage)
+{
+	return (string)usage.Facets.First(facet => facet.Name == "MaxLength").Value.ToString();
+}
+
+#>

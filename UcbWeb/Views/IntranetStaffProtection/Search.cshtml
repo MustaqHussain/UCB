@@ -1,0 +1,98 @@
+﻿@model UcbWeb.ViewModels.IntranetStaffProtectionVM    
+@{
+    ViewBag.Title = Resources.ENTITYNAME_Search;
+}
+
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    //Convert NINO to uppercase
+    $(document).ready(function () {
+
+        $("#NINO").keyup(function (e) {
+            $(this).val($(this).val().toUpperCase());
+        })
+
+        $('#intranetStaffProtectionSearchButton').click(function (e) {
+            $('#ControlMeasures').empty();
+            $('#FirstName').empty();
+            $('#BannedOffice').empty();
+            $('#NamedOfficer').empty();
+            $('#Rlationship').empty();
+        })
+
+    });
+    
+</script>
+@using (Html.BeginForm("Search", "IntranetStaffProtection", FormMethod.Post, new { @id = "mainForm" }))
+{
+@*    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+*@
+
+
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+    <fieldset>
+        <legend>Control Measure Search</legend>
+        <div class="row">
+            <div class="w50">
+                @Html.Raw(Resources.LABEL_ISP_Nino)<br />
+                @Html.Raw(Resources.LABEL_ISP_Nino_Other)
+            </div>
+            <div class="w50">
+                @Html.TextBoxFor(model => model.NINO, new { @title = Html.ToolTipFor(model => model.NINO) })<br />
+                @Html.ValidationMessageFor(model => model.NINO)
+                <div class='message'>@Model.Message</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w50"><br />
+                @Html.Raw(Resources.LABEL_ISP_ControlMeasures):
+            </div>
+            <div class="w50"><br />
+                <div id="ControlMeasures">@Model.StaffProtectionList.ControlMeasures</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w50"><br />
+                @Html.Raw(Resources.LABEL_ISP_FirstName):
+            </div>
+            <div class="w50"><br />
+                <div id="FirstName">@Model.StaffProtectionList.FirstName</div>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="w50"><br />
+                @Html.Raw(Resources.LABEL_ISP_BannedOfficeOfficeEndDate):
+            </div>
+            <div class="w50"><br />
+                <div id="BannedOffice">@Model.StaffProtectionList.BannedOfficeOfficeEndDate</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="w50"><br />
+                @Html.Raw(Resources.LABEL_ISP_NamedOfficerNameContact):
+            </div>
+            <div class="w50"><br />
+                <div id="NamedOfficer">@Model.StaffProtectionList.NamedOfficerNameContact</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w50"><br />
+                @Html.Raw(Resources.LABEL_ISP_Relationship):
+            </div>
+            <div class="w50"><br />
+                <div id="Rlationship">@Model.StaffProtectionList.RelationShip</div>
+            </div>
+        </div>
+        <div class="row"><br />
+            <div>
+                <input id ='intranetStaffProtectionSearchButton' type='submit' name='Edit::Search' value='@Html.Raw(Resources.LABEL_ISP_SearchButton)' />
+            </div>
+        </div>
+    </fieldset>
+
+
+}

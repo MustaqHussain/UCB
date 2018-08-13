@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+  <xs:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" />
+  <xs:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="UploadAttachmentRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/Message" name="DocumentBody" type="q1:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" name="Attachment" nillable="true" type="q2:AttachmentDC" />
+  <xs:element name="UserID" nillable="true" type="xs:string" />
+  <xs:element name="UploadAttachmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q3:ArrayOfstring" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dwp.Adep.Ucb.WebServices.DataContracts" minOccurs="0" name="Attachment" nillable="true" type="q4:AttachmentDC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadAttachmentRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="AttachmentCode" type="q5:guid" />
+        <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadAttachmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/Message" name="DocumentBody" type="q6:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="Messages" nillable="true" type="q7:ArrayOfstring" />
+  <xs:element name="Result" type="xs:boolean" />
+</xs:schema>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="AdepUcbDS">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=10.21.37.168;Initial Catalog=AdepUcb</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>0a446e08-f721-4f36-9ee4-76ea18f4f610</DataSourceID>
+</RptDataSource>

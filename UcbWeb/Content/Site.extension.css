@@ -1,0 +1,221 @@
+﻿.removeButton {
+    width: 16px;
+    height: 16px;
+    background: url('~/Content/images/delete_icon.jpg');
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+ .ui-autocomplete
+    {
+        position: absolute;
+        cursor: default;
+        height: 200px;
+        overflow-y: scroll;
+    }
+    
+    .ui-combobox
+    {
+        position: relative;
+        display: inline-block;
+        height: 22px;
+        margin: 2px;
+    }
+    .ui-combobox-input
+    {
+        vertical-align: middle;
+        height: 24px;
+        margin-left: 10px;
+        margin-top: 1px;
+    }
+    .ui-combobox-link
+    {
+        vertical-align: middle;
+        height: 24px;
+    }
+    
+    .Uppercase
+    {
+        text-transform: uppercase;
+    }
+    
+.ui-multiselect span
+{
+    _display:block;
+    _float:left;  
+}
+
+.full-hide
+{
+    visibility:hidden;
+    display:none;
+}
+
+.inline-radios input {
+    vertical-align: middle;
+}
+
+.red-text 
+{
+    /* Straight Red does not comply with colour contrast rules */
+    color: #EF0000;
+}
+
+.blue-text {
+    color: blue;
+}
+
+
+
+.alternate-headers h1{font-size:2em;}
+.alternate-headers h2{font-size:1.7em;}
+.alternate-headers h3{font-size:1.05em;text-decoration: underline;}
+.alternate-headers .info{font-size:1.15em;font-weight: bold;padding-top: 20px;}
+
+dd.right-60 {
+    float: none;
+    clear: none;
+}
+
+.right-60 {
+    _float:right !important;
+    _clear: right  !important;
+}
+
+.width-350 {
+    width: 350px !important;
+}
+
+#comboBoxHolder span.ui-selectmenu-dropdown { width: 350px !important; }
+#comboBoxHolder input { width: 313px !important; }
+#comboBoxHolder span.ui-selectmenu-dropdown:hover { background: none repeat scroll 0% 0% rgb(0, 112, 204); }
+#comboBoxHolder span:not.ui-icon-triangle-1-s:hover { background: none repeat scroll 0% 0% rgb(0, 112, 204); }
+#comboBoxHolder span:hover input { background: none repeat scroll 0% 0% rgb(0, 112, 204); }
+#comboBoxHolder span:hover a { background: none repeat scroll 0% 0% rgb(0, 112, 204); }
+#comboBoxHolder .ui-button-icon-only { width:1.4em; }
+
+.padding5 { padding: 5px 0 5px 0; }
+
+/*remove space around remove linked image*/
+.refineImageSize 
+{
+    margin-top: 16px !important;
+    padding-right: 0px !important; 
+    padding-left: 17px !important;
+    height: 17px !important;
+}
+
+
+.legendImage, .narrativeImage
+{
+    padding: 0 3px 3px 2px;
+    height:100%;
+    vertical-align:middle;
+    margin-left:auto;
+    margin-right:auto;
+    border:none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.narrative-textbox textarea {width:95% !important;}
+.max-narrative-textbox textarea {height:25em !important; width:95% !important;}
+
+
+#timeoutCounterHolder {
+    position: fixed;
+    right: 10%;
+    top: 0px;
+    margin: 0 auto;
+    z-index:10000;
+    background: rgba(0,93,179,0.7);
+    color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -moz-border-radius:10px;
+    border: 0 solid #666;
+    padding: 4px 10px 8px 10px;
+    display:none;
+    font-size: 2em;
+}
+#timeout-timer {
+    font-weight: bold;
+}
+.timeoutCritical {
+    background: rgba(255,30,30,0.7) !important;
+}
+
+/* Start of styling for for loading indicator */
+.loadingHolder {
+    display:none;
+    position:fixed; /* top of browser */
+    z-index:1000;
+    /* To cover whole screen */
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    /* To cover whole screen */    
+    background-color: rgba(255,255,255, 0.0);
+    text-align:center;
+    vertical-align:middle;
+    font-size: 3em;
+    font-weight: bold;
+    color:Blue;
+    line-height:1000px;
+}
+
+.loadingDotsHolder {
+    display: inline-block;
+    width:100px;
+    height:20px;
+    font-size: 1.6em;
+    color:Blue;
+    text-align:left;
+}
+
+body.loading 
+{
+    overflow:hidden;
+}
+
+body.loading .loadingHolder
+{
+   display:block;
+}
+/* End of styling for for loading indicator */
+
+.margin-10Percent
+{
+    margin-left: 10%;
+}
+
+.width-1EM
+{
+    width: 1em !important;
+}
+
+/* Start of styling for for sidemenu */
+#sidemenu {
+    position: fixed;
+    right: -9.5em;
+    top: 42%;
+    width: 8em;
+    margin: -2.5em 0 0 0;
+    z-index: 5;
+    background: rgba(0,112,204,1.0);
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    padding: 0.5em 0.5em 0.5em 2.5em;
+    box-shadow: 0 1px 3px black;
+    border-radius: 2em 0.0em 0.0em 2.0em;
+    transition: margin-right 4s ease-in;
+}
+#sidemenu:hover{ right:0em; }
+#sidemenu li { margin: 0; }
+#sidemenu a { color: inherit; }
+/* End of styling for for sidemenu */
+

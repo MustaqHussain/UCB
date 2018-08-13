@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Dwp.Adep.Ucb.Reporting", "Dwp.Adep.Ucb.Reporting.rptproj", "{C05A89C8-069E-405E-81E1-D2A85FC654B1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://adep-adv-tfs:8080/tfs/DWP_AD_WEB
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Dwp.Adep.Ucb.Reporting.rptproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Debug|Default.ActiveCfg = Debug
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Debug|Default.Build.0 = DebugLocal
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Debug|Default.Deploy.0 = DebugLocal
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.DebugLocal|Default.Build.0 = DebugLocal
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Release|Default.ActiveCfg = Release
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Release|Default.Build.0 = Release
+		{C05A89C8-069E-405E-81E1-D2A85FC654B1}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

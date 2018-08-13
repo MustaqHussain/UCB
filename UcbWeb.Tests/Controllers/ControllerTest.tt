@@ -1,0 +1,580 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using UcbWeb.ViewModels;
+using UcbWeb.Models;
+using UcbWeb.Helpers;
+using UcbWeb.UcbService;
+<#
+//*********************************************************
+//
+//    Copyright (c) Microsoft. All rights reserved.
+//    This code is licensed under the Microsoft Public License.
+//    THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+//    ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+//    IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+//    PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+#>
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ include file="..\..\Dwp.Adep.Ucb.DataServices\Models\Global.t4"#><#@ 
+ output extension=".cs"#><#
+
+// List of entities not to generate code for
+string ignoreList = globalIgnoreList + ",OrganisationHierarchy,Incident,";
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"..\..\Dwp.Adep.Ucb.DataServices\Models\Model1.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+// Write out support code to primary template output file
+WriteHeader(fileManager, "System.Web.Mvc", "System.ServiceModel", "UcbWeb", "UcbWeb.Helpers", "Dwp.Adep.Ucb.ResourceLibrary", "UcbWeb.ViewModels", "UcbWeb.Models", "UcbWeb.Controllers", "UcbWeb.UcbService", "Microsoft.VisualStudio.TestTools.UnitTesting", "Moq");
+
+BeginNamespace(namespaceName, code);
+EndNamespace(namespaceName);
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+
+
+
+
+	continue;
+
+
+
+
+	// Do not generate code for entities in the ignore list
+	if (ignoreList.Contains("," + entity.Name + ",")) continue;
+
+	fileManager.StartNewFile(entity.Name + "Controller.cs");
+	bool hasIsActiveField = entity.Properties.Any(p => p.Name == "IsActive");
+    bool entityHasNullableFKs = entity.NavigationProperties.Any(np => np.GetDependentProperties().Any(p=>ef.IsNullable(p)));
+#>
+
+    [TestClass]
+    public class <#=entity.Name#>ControllerTest
+    {
+        [TestInitialize]
+        public void CreateAutoMapperMappings()
+        {
+            TypeMappings.DefineTypeMappings();
+        }
+		
+		private void SetControllerContext(Controller controller, string userName, bool isAuthenticated)
+        {
+            var context = new Mock<ControllerContext>();
+            context.SetupGet(p => p.HttpContext.User.Identity.Name).Returns(userName);
+            context.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(isAuthenticated);
+            context.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(isAuthenticated);
+            controller.ControllerContext = context.Object;
+        }
+		
+		[TestMethod]
+        public void Edit_ShouldRetrieveListsFromCacheIf<#=entity.Name#>CodeNotInSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+            bool wasListOf<#=entity.Name#>sRetrievedFromCache = false;
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(String.Empty);
+            mockCacheManager.Setup(x => x.<#=entity.Name#>ListCache).Callback(() => wasListOf<#=entity.Name#>sRetrievedFromCache = true);
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasListOf<#=entity.Name#>sRetrievedFromCache,"Lists not retrieved from Cache");
+        }
+		
+		[TestMethod]
+        public void Edit_ShouldReturnANewActive<#=entity.Name#>If<#=entity.Name#>CodeNotInSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(String.Empty);
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+
+            //Assert
+            Assert.IsTrue(<#=entity.Name#>VM.<#=entity.Name#>Item.IsActive, "<#=entity.Name#>Model does not have a default of 'Active'");
+            Assert.IsInstanceOfType(<#=entity.Name#>VM.<#=entity.Name#>Item, typeof(<#=entity.Name#>Model),"Object is not an instance of type <#=entity.Name#>Model");
+        }
+
+        [TestMethod]
+        public void Edit_ShouldCloseTheServiceCommunication()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+            bool wasServiceCommunicationClosed = false;
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(Guid.NewGuid().ToString);
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockUcbService.Setup(x => x.Get<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>" });
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close()).Callback(() => wasServiceCommunicationClosed = true);
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasServiceCommunicationClosed,"Service communication not closed");
+        }
+
+        [TestMethod]
+        public void Edit_ShouldSetTheAccessContextToCreateIf<#=entity.Name#>CodeNotInSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(String.Empty);
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+
+            //Assert
+            Assert.IsTrue(<#=entity.Name#>VM.AccessContext == <#=entity.Name#>AccessContext.Create,"Access context not set to 'Create'");
+        }
+
+        [TestMethod]
+        public void Edit_ShouldSetTheAccessContextToUpdateIf<#=entity.Name#>CodeIsInSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(Guid.NewGuid().ToString());
+
+            mockUcbService.Setup(x => x.Get<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>", <#=entity.Name#>Item = new <#=entity.Name#>DC {Code=Guid.NewGuid() } });
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+
+            //Assert
+            Assert.IsTrue(<#=entity.Name#>VM.AccessContext == <#=entity.Name#>AccessContext.Edit, "Access context not set to 'Edit'");
+        }
+
+        [TestMethod]
+        public void Edit_ShouldStoreCurrent<#=entity.Name#>InSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(String.Empty);
+            mockSessionManager.SetupProperty(x => x.Current<#=entity.Name#>); //allow this property to be set in the mockSessionManager
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+
+            //Assert
+            Assert.IsTrue(mockSessionManager.Object.Current<#=entity.Name#> == <#=entity.Name#>VM.<#=entity.Name#>Item);
+        }
+
+        [TestMethod]
+        public void Edit_ShouldReturnAView()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(String.Empty);
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        [TestMethod]
+        public void Edit_ShouldCallServiceGet<#=entity.Name#>If<#=entity.Name#>CodeNotInSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+            bool wasGet<#=entity.Name#>Called = false;
+
+            mockSessionManager.Setup(x => x.<#=entity.Name#>Code).Returns(Guid.NewGuid().ToString);
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockUcbService.Setup(x => x.Get<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new <#=entity.Name#>VMDC {Message="Test <#=entity.Name#>" })
+                .Callback(() => wasGet<#=entity.Name#>Called = true);
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            ViewResult result = controller.Edit() as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasGet<#=entity.Name#>Called);
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldCallServiceCreate<#=entity.Name#>If<#=entity.Name#>CodeIsEmpty()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+           
+            bool wasCreate<#=entity.Name#>Called = false;
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.Setup(x => x.Current<#=entity.Name#>).Returns(new <#=entity.Name#>Model { Code=Guid.Empty });
+
+            mockUcbService.Setup(x => x.Create<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>" })
+                .Callback(() => wasCreate<#=entity.Name#>Called = true);
+
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+
+            SetControllerContext(controller, "Test", true);
+            ViewResult result = controller.Create<#=entity.Name#>(fc) as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasCreate<#=entity.Name#>Called);
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldCallServiceUpdate<#=entity.Name#>If<#=entity.Name#>CodeIsNotEmpty()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            bool wasUpdate<#=entity.Name#>Called = false;
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.Setup(x => x.Current<#=entity.Name#>).Returns(new <#=entity.Name#>Model { Code=Guid.NewGuid() });
+
+            mockUcbService.Setup(x => x.Update<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>" })
+                .Callback(() => wasUpdate<#=entity.Name#>Called = true);
+
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+
+            SetControllerContext(controller, "Test", true);
+            ViewResult result = controller.Save<#=entity.Name#>(fc) as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasUpdate<#=entity.Name#>Called);
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldCloseTheServiceCommunication()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            bool wasServiceCommunicationClosed = false;
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.Setup(x => x.Current<#=entity.Name#>).Returns(new <#=entity.Name#>Model { Code = Guid.NewGuid() });
+
+            mockUcbService.Setup(x => x.Update<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>" });
+
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close()).Callback(() => wasServiceCommunicationClosed = true); ;
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+
+            SetControllerContext(controller, "Test", true);
+            ViewResult result = controller.Save<#=entity.Name#>(fc) as ViewResult;
+
+            //Assert
+            Assert.IsTrue(wasServiceCommunicationClosed);
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldStoreUpdated<#=entity.Name#>InSession()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+
+            mockSessionManager.Object.UserID = "James";
+            //Allow these properties to be saved and retrieved
+            mockSessionManager.SetupProperty(x => x.Current<#=entity.Name#>).Object.Current<#=entity.Name#> = new <#=entity.Name#>Model { Code = Guid.NewGuid(), IsActive = true }; //create a <#=entity.Name#> that is going to be updated 
+            mockSessionManager.SetupProperty(x => x.<#=entity.Name#>ServiceVersion);
+
+            mockUcbService.Setup(x => x.Update<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>", <#=entity.Name#>Item = new <#=entity.Name#>DC { Code = Guid.NewGuid(), IsActive = false } }); //return amended <#=entity.Name#>
+
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close()); //close service
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+
+            SetControllerContext(controller, "Test", true);
+
+            ViewResult result = controller.Save<#=entity.Name#>(fc) as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+
+            //Assert
+            Assert.AreEqual(<#=entity.Name#>VM.<#=entity.Name#>Item, mockSessionManager.Object.Current<#=entity.Name#>);
+            Assert.AreEqual(<#=entity.Name#>VM.<#=entity.Name#>Item, mockSessionManager.Object.<#=entity.Name#>ServiceVersion);
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldReturnAView()
+        {
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.SetupGet(x => x.Current<#=entity.Name#>).Returns(new <#=entity.Name#>Model { Code = Guid.NewGuid() });
+
+            
+            mockSessionManager.SetupProperty(x => x.<#=entity.Name#>ServiceVersion);
+
+            mockUcbService.Setup(x => x.Update<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>", <#=entity.Name#>Item = new <#=entity.Name#>DC {Code=Guid.NewGuid() } });
+                
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+            SetControllerContext(controller, "Test", true);
+
+            ViewResult result = controller.Save<#=entity.Name#>(fc) as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+            //Assert
+            Assert.IsInstanceOfType(result,typeof(ActionResult));
+        }
+
+        [TestMethod]
+        public void Update<#=entity.Name#>_ShouldDisplayConfirmationMessage()
+        {
+           
+            // Arrange
+            var mockUcbService = new Mock<IUcbService>();
+            var mockSessionManager = new Mock<ISessionManager>();
+            var mockCacheManager = new Mock<ICacheManager>();
+
+            mockSessionManager.Setup(x => x.UserID).Returns("TestUser");
+            mockSessionManager.SetupGet(x => x.Current<#=entity.Name#>).Returns(new <#=entity.Name#>Model { Code = Guid.NewGuid() });
+
+
+            mockSessionManager.SetupProperty(x => x.<#=entity.Name#>ServiceVersion);
+
+            mockUcbService.Setup(x => x.Update<#=entity.Name#>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<<#=entity.Name#>DC>()))
+                .Returns(new <#=entity.Name#>VMDC { Message = "Test <#=entity.Name#>", <#=entity.Name#>Item = new <#=entity.Name#>DC { Code = Guid.NewGuid() } });
+
+            mockUcbService.As<ICommunicationObject>().Setup(x => x.Close());
+
+            //Act
+            <#=entity.Name#>Controller controller = new <#=entity.Name#>Controller(mockUcbService.Object, mockSessionManager.Object, mockCacheManager.Object);
+            var fc = new FormCollection();
+            controller.ValueProvider = fc.ToValueProvider();
+            SetControllerContext(controller, "Test", true);
+
+            ViewResult result = controller.Save<#=entity.Name#>(fc) as ViewResult;
+            var <#=entity.Name#>VM = result.Model as <#=entity.Name#>VM;
+            //Assert
+            Assert.AreEqual(<#=entity.Name#>VM.Message, Resources.MESSAGE_UPDATE_SUCCEEDED);
+
+        }
+	}
+
+<#
+}
+
+fileManager.Process();
+#>
+
+<#+
+void WriteHeader(EntityFrameworkTemplateFileManager thisFileManager, params string[] extraUsings)
+{
+    thisFileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated from a template.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+<#=String.Join(String.Empty, extraUsings.Select(u => "using " + u + ";" + Environment.NewLine).ToArray())#>
+<#+
+    thisFileManager.EndBlock();
+}
+
+void BeginNamespace(string namespaceName, CodeGenerationTools code)
+{
+    CodeRegion region = new CodeRegion(this);
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+#>
+namespace <#=code.EscapeNamespace(namespaceName)#>
+{
+<#+
+        PushIndent(CodeRegion.GetIndent(1));
+    }
+}
+
+
+void EndNamespace(string namespaceName)
+{
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+bool IsReadWriteAccessibleProperty(EdmMember member)
+{
+    string setter = Accessibility.ForWriteOnlyProperty(member);
+    string getter = Accessibility.ForReadOnlyProperty(member);
+
+    return getter != "private" && getter != "protected" && setter != "private" && setter != "protected";
+}
+
+string PropertyVirtualModifier(string accessibility)
+{
+    return accessibility + (accessibility != "private" ? " virtual" : "");
+}
+
+void WriteCustomObservableCollection()
+{
+#>
+// An System.Collections.ObjectModel.ObservableCollection that raises
+// individual item removal notifications on clear and prevents adding duplicates.
+public class FixupCollection<T> : ObservableCollection<T>
+{
+    protected override void ClearItems()
+    {
+        new List<T>(this).ForEach(t => Remove(t));
+    }
+
+    protected override void InsertItem(int index, T item)
+    {
+        if (!this.Contains(item))
+        {
+            base.InsertItem(index, item);
+        }
+    }
+}
+<#+
+}
+
+bool VerifyTypesAreCaseInsensitiveUnique(EdmItemCollection itemCollection)
+{
+    Dictionary<string, bool> alreadySeen = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    foreach(StructuralType type in itemCollection.GetItems<StructuralType>())
+    {
+        if (!(type is EntityType || type is ComplexType))
+        {
+            continue;
+        }
+
+        if (alreadySeen.ContainsKey(type.FullName))
+        {
+            Error(String.Format(CultureInfo.CurrentCulture, "This template does not support types that differ only by case, the types {0} are not supported", type.FullName));
+            return false;
+        }
+        else
+        {
+            alreadySeen.Add(type.FullName, true);
+        }
+
+    }
+
+    return true;
+
+}
+
+private bool IsNullable(TypeUsage usage)
+{
+	return (bool)usage.Facets.First(facet => facet.Name == "Nullable").Value;
+}
+
+private bool HasMaxLength(TypeUsage usage)
+{
+	return usage.Facets.Any(facet => facet.Name == "MaxLength");
+}
+
+private string MaxLength(TypeUsage usage)
+{
+	return (string)usage.Facets.First(facet => facet.Name == "MaxLength").Value.ToString();
+}
+
+#>

@@ -1,0 +1,88 @@
+﻿@model UcbWeb.ViewModels.OrganisationSearchVM
+
+@{
+    ViewBag.Title = Resources.ENTITYNAME_SITE + " " + Resources.ENTITYNAME_ORGANISATION + " " + Resources.LABEL_LISTNAME;
+}
+<h2>
+    @Resources.ENTITYNAME_ORGANISATION @Resources.LABEL_LISTNAME</h2><br/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function updateGrid(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var grid = $(this).parents('.ajaxGrid');
+            var id = grid.attr('id');
+            grid.load(url + ' #' + id, function (response, status, xhr) {
+                jQueryUIStyling();
+            })
+        }
+        $('.ajaxGrid table thead tr a').live('click', updateGrid);
+        $('.ajaxGrid table tfoot tr a').live('click', updateGrid);
+
+
+    });
+
+</script>
+
+@using (Html.BeginForm("SiteOrganisationSearch", "Organisation", FormMethod.Post, new { @id = "mainForm" }))
+{
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+
+    <fieldset class="ui-widget ui-widget-content">
+        <legend class="ui-widget-header ui-corner-all">@Resources.LEGEND_SITE_ORGANISATION_SEARCH</legend>
+        <div class="full-width clearfix">
+            <div class="left-90">
+            </div>
+            <div class="right-10">
+                <a id='SearchOrganisationHelp' class='ui-button' title='Help'>?</a>
+            </div>
+        </div>
+        <div class="full-width clearfix">
+            <div class="left-50">
+                <div class="full-width clearfix">
+                    <div class="editor-label left-40">
+                        @Html.LabelFor(model => model.SearchCriteria.Name)
+                    </div>
+                    <div class="editor-field right-60">
+                        @Html.EditorFor(model => model.SearchCriteria.Name)
+                    </div>
+                    <div class="full-width clearfix">
+                        @Html.ValidationMessageFor(model => model.SearchCriteria.Name)
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="full-width clearfix">
+            @Html.Raw("<input id='SiteOrganisationSearchButton' type='submit' name='Search::SiteOrganisationSearchCriteriaPost' value='")@Html.Raw(Resources.LABEL_SITE_ORGANISATION_SEARCH)@Html.Raw("' />")
+        </div>
+    </fieldset>
+    
+    <fieldset title='@Resources.LABEL_RESULTS'>
+        <div class="webgrid-wrapper">
+            <div class="webgrid-title">
+                @Resources.LABEL_GRIDTITLE</div>
+            <div id="grid" class='ajaxGrid'>
+                @{
+                    var grid = new WebGrid(null, canPage: true, rowsPerPage: Model.PageSize, defaultSort: "Code", canSort: false);
+                    grid.Bind(Model.MatchList, rowCount: Model.TotalRows, autoSortAndPage: false);
+           
+                    @grid.GetHtml(
+                        tableStyle: "webgrid",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        mode: WebGridPagerModes.All, firstText: Resources.PAGING_FIRSTPAGE, previousText: Resources.PAGING_PREVIOUS, nextText: Resources.PAGING_NEXT, lastText: Resources.PAGING_LASTPAGE, numericLinksCount: 5,
+                        alternatingRowStyle: "webgrid-alternating-rows",
+                        columns: grid.Columns(
+                        grid.Column("Code", header: "", format: @<text>@Html.Raw("<input id='SelectButton_")@item.Code@Html.Raw("' type='submit' name='Search::SiteOrganisationSearchPost_")@item.Code@Html.Raw("' value='")@Html.Raw(Resources.LABEL_SELECTBUTTON)@Html.Raw("' title='")@Resources.TOOLTIP_SELECTTOEDITBUTTON @Html.Raw("' />")</text>)
+                        , grid.Column("ID", header: @Resources.LABEL_ORGANISATION_ID)
+                        , grid.Column("Name", header: @Resources.LABEL_ORGANISATION_NAME)
+                        , grid.Column("IsActive", header: @Resources.LABEL_ORGANISATION_ISACTIVE)
+                        )
+
+                    )
+                }
+                Records Returned: @grid.TotalRowCount
+            </div>
+        </div>
+    </fieldset>
+}

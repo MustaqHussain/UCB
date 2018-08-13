@@ -1,0 +1,124 @@
+@model UcbWeb.ViewModels.SystemParameterVM
+@{
+    ViewBag.Title = Resources.ENTITYNAME_SYSTEMPARAMETER;
+}
+<h2>Maintain @Resources.ENTITYNAME_SYSTEMPARAMETER</h2>
+<script type="text/javascript">
+    /// <reference path="jquery-1.7.1.js" />
+    /// <reference path="jquery-ui.js" />
+    $(document).ready(function () {
+
+        var isDirty = @(Model.IsViewDirty?Html.Raw("true"):Html.Raw("false"));
+
+        $(':input').change(function () {
+            if (!isDirty) {
+                isDirty = true;
+            }
+        });
+		//;
+		var $myDialogDelete = $('<div id=\'delete_dialog_fw\'></div>')
+        .html('Are you sure you want to delete?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsDeleteConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::DeleteSystemParameter").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+		
+		var $myDialogExit = $('<div id=\'exit_dialog_fw\'></div>')
+        .html('Are you sure you want to exit?<br/>Click OK to confirm.  Click Cancel to stop this action.')
+        .dialog({
+            autoOpen: false,
+            modal: true,
+            title: 'Confirmation Required',
+            buttons: {
+                "OK": function () {
+                    $(this).dialog("close");
+                    if ($('#IsExitConfirmed').val() == "True") {
+                        var form = $('#mainForm')
+                        var input = $("<input>").attr("type", "hidden").attr("name", "Edit::ExitSystemParameter").val("");
+                        form.append($(input));
+                        $('#mainForm')[0].submit();
+                        return true;
+                    }
+                }
+                , "Cancel": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+
+        });
+
+        $('#mainForm').submit(function (e) {
+
+            if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::DeleteSystemParameter') {
+                e.preventDefault();
+                $('#IsDeleteConfirmed').val("True");
+                var returnValue = $myDialogDelete.dialog('open');  //replace the div id with the id of the button/form
+                return returnValue;
+            }
+            else if ($('#mainForm').find('input[type="submit"]:focus').attr('name') == 'Edit::ExitSystemParameter') {
+                if (isDirty == true) {
+                    e.preventDefault();
+                    $('#IsExitConfirmed').val("True");
+                    var returnValue = $myDialogExit.dialog('open');  //replace the div id with the id of the button/form
+                    return returnValue;
+                }
+                else {
+                    $('#IsExitConfirmed').val("True");
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+	});
+	
+</script>
+@using (Html.BeginForm("Edit", "SystemParameter", FormMethod.Post, new { @id = "mainForm" }))
+{
+    
+    <div class='message'>@Model.Message</div>
+    @Html.ValidationSummary(false, @Resources.ERROR_SUMMARY_TITLE, new { id = "validation_errors" })
+    @Html.HiddenFor(model => model.SystemParameterItem.Code)
+    <input type='hidden' id='IsDeleteConfirmed' name='IsDeleteConfirmed' value='@Model.IsDeleteConfirmed' />
+    <input type='hidden' id='IsExitConfirmed' name='IsExitConfirmed' value='@Model.IsExitConfirmed' />
+    <div class="full-width clearfix">
+		    <fieldset class="ui-widget ui-widget-content ui-corner-all">
+                <legend class="ui-widget-header ui-corner-all">@Resources.ENTITYNAME_SYSTEMPARAMETER</legend>
+				@Html.DisplayFor(model => model.SystemParameterItem.Name, "LabelFieldAlign")
+				@Html.EditorFor(model => model.SystemParameterItem.Description, "LabelMultiLineTextAlign")
+				@Html.EditorFor(model => model.SystemParameterItem.ParameterValue, "LabelMultiLineTextAlign")
+				@Html.EditorFor(model => model.SystemParameterItem.IsSecure, "LabelCheckBoxAlign")
+				<div class="full-width clearfix">
+		            @if (Model.AccessContext == UcbWeb.ViewModels.SystemParameterAccessContext.Create)
+              {
+		                <input id='CreateButton' type='submit' name='Edit::CreateSystemParameter' value='@Resources.LABEL_CREATEBUTTON' title='@Resources.TOOLTIP_CREATEBUTTON @Resources.ENTITYNAME_SYSTEMPARAMETER' />
+              }
+              else
+              {
+		                <input id='SaveButton' type='submit' name='Edit::SaveSystemParameter' value='@Resources.LABEL_SAVEBUTTON' title='@Resources.TOOLTIP_SAVEBUTTON @Resources.ENTITYNAME_SYSTEMPARAMETER'/>
+              }    
+		            <input id='ExitButton' class='cancel' type='submit' name='Edit::ExitSystemParameter' value='@Resources.LABEL_EXITBUTTON' title='@Resources.TOOLTIP_EXITBUTTON'/>
+		        </div>
+			</fieldset>
+	</div>
+}

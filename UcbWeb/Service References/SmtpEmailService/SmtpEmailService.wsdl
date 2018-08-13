@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SmtpEmailService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" />
+      <xsd:import schemaLocation="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISmtpEmailService_SendEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmail_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q1:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmailWithAttachments_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithAttachments" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmailWithAttachments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithAttachmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmailWithAttachments_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q2:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:message name="EmailRequest">
+    <wsdl:part name="parameters" element="tns:EmailRequest" />
+  </wsdl:message>
+  <wsdl:message name="EmailRequest_Headers">
+    <wsdl:part name="AttachmentFilename" element="tns:AttachmentFilename" />
+    <wsdl:part name="CcEmail" element="tns:CcEmail" />
+    <wsdl:part name="EmailBody" element="tns:EmailBody" />
+    <wsdl:part name="EmailSubject" element="tns:EmailSubject" />
+    <wsdl:part name="FromEmail" element="tns:FromEmail" />
+    <wsdl:part name="ToEmail" element="tns:ToEmail" />
+  </wsdl:message>
+  <wsdl:message name="ISmtpEmailService_SendEmailWithAttachment_OutputMessage" />
+  <wsdl:message name="ISmtpEmailService_SendEmailWithAttachment_ServiceErrorFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Dwp.Adep.Framework.Resources.FaultContracts" name="detail" element="q3:ServiceErrorFault" />
+  </wsdl:message>
+  <wsdl:portType name="ISmtpEmailService">
+    <wsdl:operation name="SendEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmail" message="tns:ISmtpEmailService_SendEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailResponse" message="tns:ISmtpEmailService_SendEmail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:ISmtpEmailService_SendEmail_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithAttachments">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachments" message="tns:ISmtpEmailService_SendEmailWithAttachments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachmentsResponse" message="tns:ISmtpEmailService_SendEmailWithAttachments_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachmentsServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:ISmtpEmailService_SendEmailWithAttachments_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithAttachment">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachment" name="EmailRequest" message="tns:EmailRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachmentResponse" message="tns:ISmtpEmailService_SendEmailWithAttachment_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachmentServiceErrorFaultFault" name="ServiceErrorFaultFault" message="tns:ISmtpEmailService_SendEmailWithAttachment_ServiceErrorFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ISmtpEmailService" type="tns:ISmtpEmailService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="http://tempuri.org/ISmtpEmailService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithAttachments">
+      <soap:operation soapAction="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithAttachment">
+      <soap:operation soapAction="http://tempuri.org/ISmtpEmailService/SendEmailWithAttachment" style="document" />
+      <wsdl:input name="EmailRequest">
+        <soap:header message="tns:EmailRequest_Headers" part="AttachmentFilename" use="literal" />
+        <soap:header message="tns:EmailRequest_Headers" part="CcEmail" use="literal" />
+        <soap:header message="tns:EmailRequest_Headers" part="EmailBody" use="literal" />
+        <soap:header message="tns:EmailRequest_Headers" part="EmailSubject" use="literal" />
+        <soap:header message="tns:EmailRequest_Headers" part="FromEmail" use="literal" />
+        <soap:header message="tns:EmailRequest_Headers" part="ToEmail" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFaultFault">
+        <soap:fault use="literal" name="ServiceErrorFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SmtpEmailService">
+    <wsdl:port name="BasicHttpBinding_ISmtpEmailService" binding="tns:BasicHttpBinding_ISmtpEmailService">
+      <soap:address location="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

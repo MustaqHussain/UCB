@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Web Browser Timed Out";
+}
+
+<div class="ui-widget">
+<h2>Sorry the Web Browser has timed out</h2>
+<div class="ui-widget-content">
+	<p>The Web Browser has timed out waiting for an answer/reply to your request from the Application Servers or Database. The Application Servers or Database may be busy processing other requests.</p>
+	<p>Please try again.</p>
+	<p>You will need to start the application again by clicking the following link: @Html.ActionLink("Restart Application", "", "Home")</p>
+</div>
+</div>

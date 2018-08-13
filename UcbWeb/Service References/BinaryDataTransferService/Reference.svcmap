@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fd896b4d-775b-43d1-9332-c8a715dc62e4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BinaryDataTransferService.disco" MetadataType="Disco" ID="d7337345-ed0a-485d-9085-1d8b073c0779" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?disco" />
+    <MetadataFile FileName="BinaryDataTransferService.wsdl" MetadataType="Wsdl" ID="e050239e-b6a6-4b27-a024-b3b13de5a337" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?wsdl" />
+    <MetadataFile FileName="BinaryDataTransferService.xsd" MetadataType="Schema" ID="daaa9a66-da9b-45e5-a5b3-99d408c9f83e" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd4" />
+    <MetadataFile FileName="BinaryDataTransferService1.xsd" MetadataType="Schema" ID="1e0917bd-9038-48cb-88ba-7922e547b142" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd3" />
+    <MetadataFile FileName="BinaryDataTransferService2.xsd" MetadataType="Schema" ID="ffd9b711-4818-4331-a42d-8dba2e9b0b3b" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BinaryDataTransferService3.xsd" MetadataType="Schema" ID="cb77a000-bb40-4b4b-8419-aad4fe89d17c" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BinaryDataTransferService4.xsd" MetadataType="Schema" ID="ca0fbccc-88a8-435d-b3ec-89768c0504c1" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BinaryDataTransferService5.xsd" MetadataType="Schema" ID="106e4544-6185-4a78-b2eb-d0aedd1bc731" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/BinaryDataTransferService.svc?xsd=xsd5" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

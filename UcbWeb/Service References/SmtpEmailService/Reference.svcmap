@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="96cc43fb-e048-41a2-891d-ba062fea6acb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SmtpEmailService.wsdl" MetadataType="Wsdl" ID="6523e460-bcd8-45c8-95b6-c973aca832cd" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?wsdl" />
+    <MetadataFile FileName="SmtpEmailService.disco" MetadataType="Disco" ID="49291b6d-9777-45d1-a557-f259c8f12c9e" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?disco" />
+    <MetadataFile FileName="SmtpEmailService2.xsd" MetadataType="Schema" ID="6ed8236b-dd33-4f61-8ecb-820b2dd7726d" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SmtpEmailService3.xsd" MetadataType="Schema" ID="6163838f-2214-4efa-9338-875294f17da8" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SmtpEmailService1.xsd" MetadataType="Schema" ID="bdf89518-aa5c-4cb8-8adf-56a948b862d9" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SmtpEmailService.xsd" MetadataType="Schema" ID="dfa46d14-29fa-469c-aa70-0f147cebc1c9" SourceId="1" SourceUrl="http://10.21.34.170/FrameworkResources/ServiceContracts/Email/SmtpEmailService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

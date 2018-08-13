@@ -1,0 +1,37 @@
+﻿@model List<AttachmentModel>
+                        
+@if (Model.Count() > 0)
+{
+    <div class="left-60 margin-10Percent">
+        <div class="fieldset ui-widget-content" >
+            <h3 class="accessible">Attachments</h3>
+            <div id="workflowGrid" class="webgrid-wrapper gridHeight gridWidth">            
+                @{
+                    var grid = new WebGrid(canPage: false, canSort: false); //null, canPage: true, rowsPerPage: 100, defaultSort: "NINO", canSort: false);
+                    grid.Bind(Model); //, rowCount: 100, autoSortAndPage: false);
+
+                    string gridHtml = grid.GetHtml(
+                        tableStyle: "webgrid",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        htmlAttributes: new { id = "search-results-content" },
+                        rowStyle: "webgrid-row-style",
+                        displayHeader: true,
+                        alternatingRowStyle: "webgrid-alternetrow-style",
+                        columns: grid.Columns(
+                            grid.Column(style: "width-1EM", header: "Open", format: @<text> @Html.Raw("<a href='")@Url.Action("DownloadAttachment", "Incident", new { @Code = @item.Code, @FileName = @item.Name.Substring(item.Name.LastIndexOf('\\') + 1) })@Html.Raw("' title='Open Attachment") @item.Name.Substring(item.Name.LastIndexOf('\\') + 1) @Html.Raw("' ><img style='display:block;margin-left:auto;margin-right:auto; border:none;' src='")@Html.Raw(Url.Content("../Content/images/attachment_flat_24.png"))@Html.Raw("' /></a>")</text>),
+                            grid.Column("File", header: "File", format: (item) => item.Name.Substring(item.Name.LastIndexOf('\\') + 1)),
+                            grid.Column("Attached", header: "Loaded", format: (item) => item.LoadedDate.ToString("dd/MM/yyyy HH:mm")),
+                            grid.Column(style: "width-1EM", header: "Delete", format: @<text>@Html.Raw("<input id='Edit::RemoveAttachment_" + item.Code + "' title='Delete Attachment ")@item.Name.Substring(item.Name.LastIndexOf('\\') + 1)@Html.Raw("' class='cancel IgnoreJQueryStyling' style='vertical-align:middle;border:none;background-color: #FFF;background-image:url(../Content/images/delete_flat_24.png);background-repeat: no-repeat; padding-right: 0em; padding-left: 1.4em; display: block; margin-right: auto; margin-left: auto; background-size: 1.4em 1.4em;' type='submit' value='' name='Edit::RemoveAttachment_" + item.Code + "' /> ")</text>)
+                        )
+                    ).ToString();
+                    gridHtml = System.Text.RegularExpressions.Regex.Replace(gridHtml, "<caption>(.*?)</caption>", "<caption><span class='accessible'>$1</span></caption>"); //add a span (with accessible css class) to the caption so that it can be hidden in IE6 and IE7. Without the span, caption only hidden in > IE8.
+                    System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"<td(.*?)RowHeaderColumn(.*?)>(.*?)</td>");
+                    gridHtml = r.Replace(gridHtml, "<th scope=\"row\" $1$2>$3</th>");
+                    @(new HtmlString(gridHtml))
+                }
+                Number of Attachments: @Model.Count
+            </div>
+        </div>
+    </div>
+}

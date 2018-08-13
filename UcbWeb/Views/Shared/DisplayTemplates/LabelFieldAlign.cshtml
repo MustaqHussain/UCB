@@ -1,0 +1,10 @@
+﻿@model object
+
+<div class="full-width clearfix">
+    <div class="editor-label left-40">
+        @Html.Label("")
+    </div>
+    <div class="editor-field right-60">
+        @(Model == null?"":Model.ToString())
+    </div>
+</div>

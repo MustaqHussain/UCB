@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="49a15b43-ff0a-48cc-888a-11ed9450c82d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:27000/ServiceContracts/UcbService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UcbService.xsd" MetadataType="Schema" ID="8ab0204b-9a2f-44eb-acb3-3766eb17d638" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UcbService.disco" MetadataType="Disco" ID="bbd066cd-55d6-4ba0-b6b2-b7cef6ececd2" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?disco" />
+    <MetadataFile FileName="UcbService1.xsd" MetadataType="Schema" ID="df43011b-a6ca-4067-953a-c640506d362a" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UcbService2.xsd" MetadataType="Schema" ID="a989db74-9c32-4515-a51a-891697035277" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?xsd=xsd4" />
+    <MetadataFile FileName="UcbService3.xsd" MetadataType="Schema" ID="bc5cc63c-3726-460e-9a49-e2dfbd28ab29" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UcbService4.xsd" MetadataType="Schema" ID="aff4e5cf-b96c-41a0-95a8-aaf6f637bf11" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UcbService.wsdl" MetadataType="Wsdl" ID="5e18da0c-589f-4cee-ae25-538e4baba4cb" SourceId="1" SourceUrl="http://localhost:27000/ServiceContracts/UcbService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

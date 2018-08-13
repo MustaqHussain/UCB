@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Invalid Operation Exception";
+}
+
+<div class="ui-widget">
+<h2>Sorry record may be inconsistent</h2>
+<div class="ui-widget-content">
+	<p>This record may be in an inconsistent state so cannot be processed.</p>
+	<p>Please try again. It may require a technical data fix if this inconsistency persists.</p>
+	<p>You will need to start the application again by clicking the following link: @Html.ActionLink("Restart Application", "", "Home")</p>
+</div>
+</div>
